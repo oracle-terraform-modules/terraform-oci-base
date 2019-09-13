@@ -1,0 +1,178 @@
+= Instructions
+
+:idprefix:
+:idseparator: -
+:sectlinks:
+:sectnums:
+
+:uri-repo: https://github.com/oracle-terraform-modules/terraform-oci-oke
+
+:uri-rel-file-base: link:{uri-repo}/blob/v12
+:uri-rel-tree-base: link:{uri-repo}/tree/v12
+
+:uri-docs: {uri-rel-file-base}/docs
+
+:uri-topology: {uri-docs}/topology.adoc
+:uri-changelog: {uri-rel-file-base}/CHANGELOG.adoc
+:uri-contribute: {uri-rel-file-base}/CONTRIBUTING.adoc
+:uri-contributors: {uri-rel-file-base}/CONTRIBUTORS.adoc
+
+:uri-configuration: {uri-docs}/configuration.adoc
+:uri-license: {uri-rel-file-base}/LICENSE.txt
+:uri-kubernetes: https://kubernetes.io/
+:uri-networks-subnets-cidr: https://erikberg.com/notes/networks.html
+:uri-oci: https://cloud.oracle.com/cloud-infrastructure
+:uri-oci-documentation: https://docs.cloud.oracle.com/iaas/Content/home.htm
+:uri-oci-ocir: https://docs.cloud.oracle.com/iaas/Content/Registry/Concepts/registryoverview.htm
+:uri-oke: https://docs.cloud.oracle.com/iaas/Content/ContEng/Concepts/contengoverview.htm
+:uri-oracle: https://www.oracle.com
+:uri-prereqs: {uri-docs}/prerequisites.adoc
+:uri-quickstart: {uri-docs}/quickstart.adoc
+
+:uri-terraform: https://www.terraform.io
+:uri-terraform-cidrsubnet-desconstructed: http://blog.itsjustcode.net/blog/2017/11/18/terraform-cidrsubnet-deconstructed/
+:uri-terraform-oci: https://www.terraform.io/docs/providers/oci/index.html
+:uri-terraform-oke-sample: https://github.com/terraform-providers/terraform-provider-oci/tree/master/examples/container_engine
+:uri-terraform-options: {uri-docs}/terraformoptions.adoc
+:uri-install-kubectl: https://kubernetes.io/docs/tasks/tools/install-kubectl/
+:uri-helm: https://helm.sh/
+:uri-metricserver: https://kubernetes.io/docs/tasks/debug-application-cluster/resource-metrics-pipeline/#metrics-server
+:uri-k8s-dashboard: http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+
+. link:#assumptions[Assumptions]
+. link:#creating-the-oke-cluster[Creating the OKE Cluster]
+. link:#adding-the-bastion-host[Adding the bastion host]
+. link:#using-the-bastion-host[Using the bastion host]
+. link:#interacting-with-the-oke-cluster-locally[Interacting with the OKE Cluster locally]
+. link:#creating-an-auth-token-for-ocir[Creating an auth token for OCIR]
+. link:#installing-helm[Installing helm]
+. link:#installing-calico[Installing Calico]
+. link:#installing-kubernetes-metrics-server[Installing Kubernetes Metrics Server]
+. link:#scaling-the-number-of-worker-nodes[Scaling the number of worker nodes]
+. link:#scaling-the-number-of-node-pools[Scaling the number of node pools]
+. link:#accessing-the-kubernetes-dashboard[Accessing the Kubernetes dashboard]
+. link:#destroying-the-cluster[Destroying the cluster]
+
+=== Assumptions
+
+This section assumes you have completed the following:
+
+. all the {uri-prereqs}[pre-requisites]
+. all the required {uri-configuration}[configuration]
+
+=== Creating the OKE Cluster
+
+Initialize a working directory containing Terraform configuration files:
+
+----
+terraform init
+----
+
+Run the plan and apply commands to create OKE cluster and other components.
+----
+terraform plan
+terraform apply
+----
+
+You can create a Kubernetes cluster with the latest version of Kubernetes available in OKE using this terraform script. By default the kubernetes_version parameter in terraform.tfvars.example is set as "LATEST". Refer to {uri-terraform-options}#oke[Terraform Options] for other available parameters for OKE.
+
+Use the parameter *cluster_name* to change the name of the cluster as per your needs.
+
+
+=== Adding the bastion host
+
+If you want to use bastion host, set the parameter *create_bastion* to *true* in terraform.tfvars. Refer to {uri-terraform-options}#bastion-host[Bastion Host] for other available bastion related parameters.
+
+==== package_update and package_upgrade
+
+There are 2 additional parameters for the bastion:
+
+* bastion_package_update
+* bastion_package_upgrade
+
+_bastion_package_update_ will update the apt database *if* you choose Ubuntu as the Linux distribution for the bastion host.
+
+_bastion_package_upgrade_ will upgrade the bastion compute instance on first boot. If you choose Ubuntu for bastion host and you set _bastion_package_upgrade_ to *true*, you should also set the _bastion_package_update_ to *true*.
+
+****
+N.B. It is good and recommended practice to upgrade your bastion host to the latest packages to minimize the possibility of vulnerabilities. However, it will also take slightly longer before the bastion host is available.
+****
+
+=== Using the bastion host
+
+****
+*Assumption: you have set the create_bastion parameter to true in terraform.tfvars*
+****
+
+Once the terraform apply is successful you will get the bastion_public_ip as output and also a ssh command .You can also run the below command to get the output:
+
+----
+terraform output
+----
+
+A utility script is also generated that contains the command to ssh to the bastion. You can run it directly:
+
+----
+scripts/tesseract.sh
+----
+
+=== Interacting with the OKE Cluster locally
+
+kubectl installed in bastion host by default and the kubeconfig file is set in the default location (~/.kube/config) so you don't need to set the KUBECONFIG environment variable every time you log in to the bastion. An alias "*k*" will be created for kubectl on the bastion host. 
+
+If you would like to use kubectl locally, {uri-install-kubectl}[install kubectl]. Then, set the KUBECONFIG to the config file path. The kubeconfig file will be saved generated locally under the folder *generated*:
+
+----
+export KUBECONFIG=generated/kubeconfig
+----
+
+****
+*Ensure you install the same kubectl version as the OKE Kubernetes version for compatibility.*
+****
+
+=== Creating an auth token for OCIR
+
+{uri-oci-ocir}[Oracle Cloud Infrastructure Registry] is a highly available private container registry service for storing and sharing container images within the same regions as the OKE Cluster. To pull images from OCIR, set the parameter *create_auth_token = true* in terraform.tfvars. Refer to {uri-terraform-options}#ocir[OCIR parameters] for other parameters to be set.
+
+=== Installing helm
+
+{uri-helm}[Helm] is a package manager for kubernetes.If you want to install helm, set the parameter *install_helm = true* in terraform.tfvars. By default, it is set to true. An alias "*h*" will be created for helm on the bastion host. For other available parameters, refer to {uri-terraform-options}#helm[Helm parameters].
+
+=== Installing Calico 
+
+Calico enables network policy in Kubernetes clusters across the cloud. To install calico set the parameter *install_calico = true* in terraform.tfvars. By default its set to false. Refer to {uri-terraform-options}#calico[Calico parameters] for other available parameters.
+
+=== Installing Kubernetes Metrics Server
+
+{uri-metricserver}[Kubernetes Metrics Server] can be installed by setting the parameter *install_metricserver = true* in terraform.tfvars. By default, the latest version is installed in kube-system namespace. This is required if you need to use Horizontal Pod Autoscaling.
+
+=== Scaling the node pools
+
+There are 2 ways you can scale the node pools:
+
+* add more node pools
+* increase the number of workers in a subnet per node pool.
+
+Set the parameter *node_pools* to the desired quantities to scale the node pools accordingly. Refer to {uri-topology}#node-pools[Nodepool].
+
+=== Accessing the Kubernetes dashboard
+
+In a terminal window, run the command:
+
+----
+kubectl proxy
+----
+
+Open a browser and go to {uri-k8s-dashboard}[Kubernetes Dashboard] to display the Kubernetes Dashboard.
+
+=== Destroying the cluster
+
+Run the below command to destroy the infrastructure created by terraform:
+
+----
+terraform destroy
+----
+
+****
+*Only infrastructure created by terraform will get destroyed.*
+****

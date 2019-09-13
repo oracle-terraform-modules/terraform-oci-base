@@ -1,0 +1,80 @@
+= Terraform Base for Oracle Cloud Infrastructure
+
+:idprefix:
+:idseparator: -
+
+:uri-repo: https://github.com/oracle/terraform-oci-base
+
+:uri-rel-file-base: link:{uri-repo}/blob/master
+:uri-rel-tree-base: link:{uri-repo}/tree/master
+
+:uri-docs: {uri-rel-file-base}/docs
+
+:uri-changelog: {uri-rel-file-base}/CHANGELOG.adoc
+:uri-configuration: {uri-docs}/configuration.adoc
+
+:uri-contribute: {uri-rel-file-base}/CONTRIBUTING.adoc
+:uri-contributors: {uri-rel-file-base}/CONTRIBUTORS.adoc
+
+:uri-instructions: {uri-docs}/instructions.adoc
+:uri-license: {uri-rel-file-base}/LICENSE.txt
+:uri-networks-subnets-cidr: https://erikberg.com/notes/networks.html
+:uri-oci: https://cloud.oracle.com/cloud-infrastructure
+:uri-oci-documentation: https://docs.cloud.oracle.com/iaas/Content/home.htm
+:uri-oracle: https://www.oracle.com
+:uri-prereqs: {uri-docs}/prerequisites.adoc
+:uri-quickstart: {uri-docs}/quickstart.adoc
+
+:uri-terraform: https://www.terraform.io
+:uri-terraform-cidrsubnet-deconstructed: http://blog.itsjustcode.net/blog/2017/11/18/terraform-cidrsubnet-deconstructed/
+:uri-terraform-oci: https://www.terraform.io/docs/providers/oci/index.html
+:uri-terraform-options: {uri-docs}/terraformoptions.adoc
+:uri-terraform-oci-examples: https://github.com/terraform-providers/terraform-provider-oci/tree/master/examples
+:uri-terraform-hashircorp-examples: https://github.com/hashicorp/terraform-guides/tree/master/infrastructure-as-code/terraform-0.12-examples
+
+
+The {uri-repo}[Terraform OCI Base module] for {uri-oci}[Oracle Cloud Infrastructure] provides a reusable Terraform module that provisions a minimal infrastructure on OCI.
+
+It creates the following resources:
+
+* A VCN, along with optional NAT and service gateways
+* Optional bastion host
+
+
+== {uri-docs}[Documentation]
+
+* {uri-prereqs}[Pre-requisites]
+
+* {uri-quickstart}[Quick Start]
+
+* {uri-configuration}[Configuration]
+
+* {uri-instructions}[Instructions]
+** Provisioning a basic infrastructure
+** Reusing as a Terraform module
+
+* {uri-terraform-options}[Terraform Options]
+
+== Related Documentation, Blog
+* {uri-oci-documentation}[Oracle Cloud Infrastructure Documentation]
+* {uri-terraform-oci}[Terraform OCI Provider Documentation]
+* {uri-networks-subnets-cidr}[Erik Berg on Networks, Subnets and CIDR]
+* {uri-terraform-cidrsubnet-deconstructed}[Lisa Hagemann on Terraform cidrsubnet Deconstructed]
+
+== License
+
+{uri-license}[LICENSE.txt]
+
+== Changelog
+
+View the {uri-changelog}[CHANGELOG].
+
+== Acknowledgement
+
+Code derived and adapted from {uri-terraform-oci-examples}[Terraform OCI Examples] and Hashicorp's {uri-terraform-hashircorp-examples}[Terraform 0.12 examples]
+
+== Contributors
+
+{uri-contributors}[Folks who contributed with explanations, code, feedback, ideas, testing etc.]
+
+Learn how to {uri-contribute}[contribute].

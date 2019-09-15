@@ -3,11 +3,11 @@
 :idprefix:
 :idseparator: -
 :sectlinks:
-:sectnums:
-:uri-repo: https://github.com/oracle-terraform-modules/terraform-oci-oke
 
-:uri-rel-file-base: link:{uri-repo}/blob/v12
-:uri-rel-tree-base: link:{uri-repo}/tree/v12
+:uri-repo: https://github.com/oracle/terraform-oci-base
+
+:uri-rel-file-base: link:{uri-repo}/blob/master
+:uri-rel-tree-base: link:{uri-repo}/tree/master
 
 :uri-docs: {uri-rel-file-base}/docs
 
@@ -19,7 +19,6 @@
 :uri-oci-documentation: https://docs.cloud.oracle.com/iaas/Content/home.htm
 :uri-oci-keys: https://docs.cloud.oracle.com/iaas/Content/API/Concepts/apisigningkey.htm#two
 :uri-oci-keys-upload: https://docs.cloud.oracle.com/iaas/Content/API/Concepts/apisigningkey.htm#two
-:uri-oci-oke-policy: https://docs.cloud.oracle.com/iaas/Content/ContEng/Concepts/contengpolicyconfig.htm#PolicyPrerequisitesService
 
 :uri-terraform: https://www.terraform.io
 :uri-terraform-download: https://www.terraform.io/downloads.html
@@ -29,11 +28,11 @@ This section will guide you through the pre-requisites before you can use this p
 You can proceed to {uri-instructions}[creating the cluster] if you have already done these.
 
 . link:#install-terraform[Install Terraform]
-. link:#generate-api-keys[Generate API Keys]
-. link:#upload-your-api-keys[Upload API Keys]
+. link:#oci-api-keys[OCI API Keys]
+.. link:#generate-api-keys[Generate API Keys]
+.. link:#upload-your-api-keys[Upload API Keys]
 . link:#create-an-oci-compartment[Create an OCI Compartment]
 . link:#obtain-the-necessary-ocids[Obtain the necessary OCIDs]
-. link:#configure-oci-policy-for-oke[Configure OCI Policy for OKE]
 
 == Install Terraform
 
@@ -49,12 +48,11 @@ Start by installing Terraform and configuring your path.
 
 === Configure path on Linux/macOS
 
-1. Open a terminal and type the following:
+Open a terminal and type the following:
 
-+
 [source,bash]
 ----
-$ sudo mv /path/to/terraform /usr/local/bin
+sudo mv /path/to/terraform /usr/local/bin
 ----
 
 === Configure path on Windows
@@ -64,25 +62,25 @@ Follow the steps below to configure your path on Windows:
 . Select System > Advanced System Settings > Environment Variables
 . Select System variables > PATH and click 'Edit'
 . Click New and paste the location of the directory where you have extracted the terraform.exe
-. Close all open windows by clicking OK
+. Close all open windows by clicking 'OK'
 . Open a new terminal and verify terraform has been properly installed
 
 === Testing Terraform installation
 
-1. Open a terminal and test:
+Open a terminal and test:
 
-+
 [source,bash]
 ----
 terraform -v
 Terraform v0.12.8
 ----
 
-== Generate API keys
+== OCI API Keys
+=== Generate API keys
 
 Follow the documentation for generating keys on {uri-oci-keys}[OCI Documentation].
 
-== Upload your API keys
+=== Upload your API keys
 
 Follow the documentation for uploading your keys on {uri-oci-keys-upload}[OCI Documentation].
 

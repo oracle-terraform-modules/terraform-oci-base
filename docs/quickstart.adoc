@@ -44,7 +44,7 @@ cd tfbase
 cp terraform.tfvars.example terraform.tfvars
 ----
 
-2. Set mandatory parameters:
+2. Set mandatory parameters in terraform.tfvars:
 
 * api_fingerprint
 * api_private_key_path
@@ -65,6 +65,19 @@ cp terraform.tfvars.example terraform.tfvars
 * create_bastion
 * cluster_name
 * worker_mode
+
+5. Create a provider.tf file and add the following:
+
+----
+provider "oci" {
+  tenancy_ocid         = var.oci_base_identity.tenancy_ocid
+  user_ocid            = var.oci_base_identity.user_ocid
+  fingerprint          = var.oci_base_identity.api_fingerprint
+  private_key_path     = var.oci_base_identity.api_private_key_path
+  region               = var.oci_base_general.region
+  disable_auto_retries = var.oci_base_general.disable_auto_retries
+}
+----
 
 === Related documentation:
 

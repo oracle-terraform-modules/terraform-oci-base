@@ -42,8 +42,8 @@ variable "oci_bastion" {
     image_ocid                     = string
     image_operating_system         = string
     image_operating_system_version = string
-    package_update                 = bool
-    package_upgrade                = bool
+    bastion_package_update                 = bool
+    bastion_package_upgrade                = bool
   })
 }
 

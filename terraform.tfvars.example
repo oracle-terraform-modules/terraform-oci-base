@@ -1,0 +1,55 @@
+# Identity and access parameters
+
+oci_base_identity = {
+  api_fingerprint      = ""
+  api_fingerprint      = ""
+  api_private_key_path = ""
+  compartment_name     = ""
+  compartment_ocid     = ""
+  tenancy_ocid         = ""
+  user_ocid            = ""
+
+}
+
+# ssh keys
+oci_base_ssh_keys = {
+  ssh_private_key_path = ""
+  ssh_public_key_path  = ""
+}
+
+oci_base_general = {
+  disable_auto_retries = false
+  label_prefix         = "base"
+  region               = "us-phoenix-1"
+}
+
+# networking
+
+oci_base_vcn = {
+  vcn_cidr               = "10.0.0.0/16"
+  vcn_dns_label          = "base"
+  vcn_name               = "vcn"
+  create_nat_gateway     = true
+  nat_gateway_name       = "nat"
+  create_service_gateway = true
+  service_gateway_name   = "sg"
+}
+
+# bastion
+
+oci_base_bastion = {
+  newbits                        = 13
+  subnets                        = 32
+  bastion_shape                  = "VM.Standard.E2.1"
+  create_bastion                 = false
+  bastion_access                 = "ANYWHERE"
+  enable_instance_principal      = false
+  image_ocid                     = ""
+  image_operating_system         = "Oracle Linux"
+  image_operating_system_version = "7.7"
+
+  # availability_domains
+  availability_domains    = 1
+  bastion_package_update  = false
+  bastion_package_upgrade = true
+}

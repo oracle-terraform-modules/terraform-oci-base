@@ -11,21 +11,19 @@
 
 :uri-docs: {uri-rel-file-base}/docs
 
-:uri-instructions: {uri-docs}/instructions.adoc
-
 :uri-oci: https://cloud.oracle.com/cloud-infrastructure
 :uri-oci-compartment: https://docs.cloud.oracle.com/iaas/Content/Identity/Tasks/managingcompartments.htm#two
 :uri-oci-ocids: https://docs.cloud.oracle.com/iaas/Content/API/Concepts/apisigningkey.htm#five
 :uri-oci-documentation: https://docs.cloud.oracle.com/iaas/Content/home.htm
 :uri-oci-keys: https://docs.cloud.oracle.com/iaas/Content/API/Concepts/apisigningkey.htm#two
 :uri-oci-keys-upload: https://docs.cloud.oracle.com/iaas/Content/API/Concepts/apisigningkey.htm#two
-
+:uri-quickstart: {uri-docs}/quickstart.adoc
 :uri-terraform: https://www.terraform.io
 :uri-terraform-download: https://www.terraform.io/downloads.html
 
 This section will guide you through the pre-requisites before you can use this project.
 
-You can proceed to {uri-instructions}[creating the cluster] if you have already done these.
+You can proceed to the {uri-quickstart}[Quick Start guide] if you have already done these.
 
 . link:#install-terraform[Install Terraform]
 . link:#oci-api-keys[OCI API Keys]

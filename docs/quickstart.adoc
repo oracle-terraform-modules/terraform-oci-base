@@ -9,10 +9,9 @@
 :uri-rel-file-base: link:{uri-repo}/blob/master
 :uri-rel-tree-base: link:{uri-repo}/tree/master
 :uri-docs: {uri-rel-file-base}/docs
-:uri-instructions: {uri-docs}/instructions.adoc
+:uri-reusing: {uri-docs}/reusing.adoc
 :uri-oci-keys: https://docs.cloud.oracle.com/iaas/Content/API/Concepts/apisigningkey.htm
 :uri-oci-ocids: https://docs.cloud.oracle.com/iaas/Content/API/Concepts/apisigningkey.htm#five
-:uri-oci-okepolicy: https://docs.cloud.oracle.com/iaas/Content/ContEng/Concepts/contengpolicyconfig.htm#PolicyPrerequisitesService
 :uri-terraform: https://www.terraform.io
 :uri-terraform-oci: https://www.terraform.io/docs/providers/oci/index.html
 :uri-terraform-options: {uri-docs}/terraformoptions.adoc
@@ -34,6 +33,8 @@
 3. Terraform 0.12.8+ is installed
 
 === Instructions
+
+The instructions on this page allows you to create the base infrastructure which you can then extend manually in the OCI console.
 
 1. Clone the repo:
 
@@ -60,7 +61,7 @@ cp terraform.tfvars.example terraform.tfvars
 4. Optional parameters to override:
 * ssh_private_key_path
 * ssh_public_key_path
-* vcn_dns_name
+* vcn_dns_label
 * vcn_name
 * create_bastion
 * cluster_name
@@ -81,6 +82,6 @@ provider "oci" {
 
 === Related documentation:
 
-* {uri-instructions}[Detailed Instructions]
+* {uri-reusing}[Reusing as a module]
 
 * {uri-terraform-options}[All Terraform configuration options] for {uri-repo}[this project]

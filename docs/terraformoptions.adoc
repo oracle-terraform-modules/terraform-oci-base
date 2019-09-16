@@ -125,7 +125,7 @@ Configuration Terraform Options:
 |
 |10.0.0.0/16
 
-|vcn_dns_name
+|vcn_dns_label
 |The internal DNS domain for resources created and prepended to "oraclevcn.com" which is the VCN-internal domain name.
 |
 |base
@@ -248,7 +248,7 @@ availability_domains = {
 |true
 
 |bastion_package_upgrade
-|Whether to upgrade the instance on first boot. If you choose Ubuntu for the bastion and you set this to true, also set the package_update to true as well.
+|Whether to upgrade the instance on first boot. If you choose Ubuntu for the bastion and you set this to true, also set the bastion_package_update to true as well.
 |true/false
 |true
 

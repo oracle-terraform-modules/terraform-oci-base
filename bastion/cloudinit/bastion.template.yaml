@@ -2,8 +2,8 @@
 # Licensed under the Universal Permissive License v 1.0 as shown at http://oss.oracle.com/licenses/upl
 
 #cloud-config
-package_update: ${package_update}
-package_upgrade: ${package_upgrade}
+bastion_package_update: ${bastion_package_update}
+bastion_package_upgrade: ${bastion_package_upgrade}
 packages:
   - ntp 
   - python-pip

@@ -1,0 +1,18 @@
+#  Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# .tfvars files
+*.tfvars
+
+# provider file for testing - should be manually added
+provider.tf
+
+generated/**
+scripts/tesseract.sh
+
+# visual code
+ **/.vscode/*

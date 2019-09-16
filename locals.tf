@@ -10,7 +10,7 @@ locals {
     create_service_gateway = var.oci_base_vcn.create_service_gateway
     service_gateway_name   = var.oci_base_vcn.service_gateway_name
     vcn_cidr               = var.oci_base_vcn.vcn_cidr
-    vcn_dns_name           = var.oci_base_vcn.vcn_dns_name
+    vcn_dns_label          = var.oci_base_vcn.vcn_dns_label
     vcn_name               = var.oci_base_vcn.vcn_name
   }
 
@@ -38,7 +38,7 @@ locals {
     image_ocid                     = var.oci_base_bastion.image_ocid
     image_operating_system         = var.oci_base_bastion.image_operating_system
     image_operating_system_version = var.oci_base_bastion.image_operating_system_version
-    package_update                 = var.oci_base_bastion.package_update
-    package_upgrade                = var.oci_base_bastion.package_upgrade
+    bastion_package_update         = var.oci_base_bastion.bastion_package_update
+    bastion_package_upgrade        = var.oci_base_bastion.bastion_package_upgrade
   }
 }

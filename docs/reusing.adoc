@@ -183,7 +183,7 @@ variable "subnets" {
 
   default = {
     bastion = 32
-    pub_lb  = 16
+    lb  = 16
     gitlab = 1
   }
 }
@@ -319,3 +319,386 @@ module "base" {
   oci_base_bastion = local.oci_base_bastion
 }
 ----
+
+=== Add your own Terraform modules
+
+==== Add the gitlab module
+
+. Create a directory called gitlab under the modules directory
+
++
+----
+cd modules
+mkdir gitlab
+----
+
+. Add a variables.tf in the gitlab module:
+
++
+----
+variable "gitlab_identity" {
+  type = object({
+    compartment_ocid = string
+    tenancy_ocid        = string
+  })
+}
+
+variable "gitlab_ssh_keys" {
+  type = object({
+    ssh_private_key_path = string
+    ssh_public_key_path  = string
+  })
+}
+
+variable "gitlab_oci_general" {
+  type = object({
+    ad_names     = list(string)
+    label_prefix = string
+    region       = string
+  })
+}
+
+variable "gitlab_bastion" {
+  type = object({
+    bastion_public_ip         = string
+    create_bastion            = bool
+    image_operating_system    = string
+  })
+}
+
+variable "gitlab_network" {
+  type = object({
+    ig_route_id                = string
+    is_service_gateway_enabled = bool
+    nat_route_id               = string
+    newbits                    = map(number)
+    subnets                    = map(number)
+    vcn_cidr                   = string
+    vcn_id                     = string
+  })
+}
+
+variable "gitlab_config" {
+  type = object({
+    gitlab_shape         = string
+    gitlab_url           = string
+  })
+}
+----
+
+. Update the root variables.tf and add gitlab's parameters:
+
++
+----
+variable "gitlab_shape" {
+  description = "compute shape of gitlab instance"
+  default     = "VM.Standard2.4"
+}
+
+variable gitlab_url {
+  description = "url of gitlab"
+  default     = "gitlab.oraclevcn.com"
+}
+----
+
+. Initilize the gitlab variables in the locals.tf
+
++
+----
+gitlab_identity = {
+    compartment_ocid = var.compartment_ocid
+    tenancy_ocid     = var.tenancy_ocid
+}
+
+gitlab_bastion = {
+    bastion_public_ip         = module.base.bastion_public_ip
+    create_bastion            = var.create_bastion
+    image_operating_system    = var.image_operating_system
+}
+
+gitlab_network = {
+    ig_route_id                = module.base.ig_route_id
+    is_service_gateway_enabled = var.create_service_gateway
+    nat_route_id               = module.base.nat_gateway_id
+    newbits                    = var.newbits
+    subnets                    = var.subnets
+    vcn_cidr                   = var.vcn_cidr
+    vcn_id                     = module.base.vcn_id
+}
+
+gitlab_config = {
+    gitlab_shape         = var.gitlab_shape
+    gitlab_url           = var.gitlab_url
+}
+----
+
+. Define the gitlab module in root main.tf
+
++
+----
+module "gitlab" {
+  source               = "./modules/gitlab"
+
+  gitlab_identity      = local.gitlab_identity
+
+  # since they have the same signature, we can reuse that
+  gitlab_ssh_keys      = local.oci_base_ssh_keys
+
+  gitlab_oci_general   = local.oci_base_general
+  
+  gitlab_bastion   = local.gitlab_bastion
+
+  gitlab_network   = local.gitlab_network
+
+  gitlab_config    = local.gitlab_config
+}
+----
+
+. Create a security list for the gitlab subnet in a file called security.tf in the gitlab module
+
++
+----
+#  Copyright 2017, 2019 Oracle Corporation and/or affiliates.  All rights reserved.
+
+locals {
+  icmp_protocol = "1"
+  tcp_protocol  = "6"
+  all_protocols = "all"
+
+  anywhere = "0.0.0.0/0"
+
+  http_port = "80"
+
+  https_port = "443"
+
+  health_check_port = "8060"
+  ssh_port          = "22"
+}
+
+# gitlab security checklist
+resource "oci_core_security_list" "gitlab" {
+  compartment_id = var.gitlab_identity.compartment_ocid
+  display_name   = "${var.gitlab_oci_general.label_prefix}-gitlab"
+  vcn_id         = var.gitlab_network.vcn_id
+
+  egress_security_rules {
+      protocol    = local.all_protocols
+      destination = local.anywhere
+    }
+
+  ingress_security_rules {
+      # ssh
+      protocol = local.tcp_protocol
+      source   = var.gitlab_network.vcn_cidr
+
+      tcp_options {
+        min = local.ssh_port
+        max = local.ssh_port
+      }
+    }
+    ingress_security_rules {
+      # http port
+      protocol = local.tcp_protocol
+      source   = var.gitlab_network.vcn_cidr
+
+      tcp_options {
+        min = local.http_port
+        max = local.http_port
+      }
+    }
+    ingress_security_rules {
+      # https port
+      protocol = local.tcp_protocol
+      source   = var.gitlab_network.vcn_cidr
+
+      tcp_options {
+        min = local.https_port
+        max = local.https_port
+      }
+    }
+    ingress_security_rules {
+      # health check port for lb
+      protocol = local.tcp_protocol
+      source   = var.gitlab_network.vcn_cidr
+
+      tcp_options {
+        min = local.health_check_port
+        max = local.health_check_port
+      }
+    }
+}
+----
+
+. Create a private regional subnet for gitlab in a file called subnet.tf in the gitlab module.
+
++
+----
+resource "oci_core_subnet" "gitlab" {
+  cidr_block                 = cidrsubnet(var.gitlab_network.vcn_cidr,var.gitlab_network.newbits["gitlab"],var.gitlab_network.subnets["gitlab"])}"
+  display_name               = "${var.gitlab_oci_general.label_prefix}-gitlab"
+  compartment_id             = var.gitlab_identity.compartment_ocid
+  vcn_id                     = var.gitlab_network.vcn_id
+  route_table_id             = var.gitlab_network.nat_route_id
+  security_list_ids          = [oci_core_security_list.gitlab.id]
+  dns_label                  = "gitlab"
+  prohibit_public_ip_on_vnic = true
+}
+----
+
+. Create a file called datasources.tf in the gitlab module
+
++
+----
+
+# Gets the partner image listing
+data "oci_core_app_catalog_listings" "bitnami_app_catalog_listings" {
+  filter {
+    name   = "display_name"
+    values = ["GitLab CE Certified by Bitnami"]
+  }
+}
+
+data "oci_core_app_catalog_listing_resource_versions" "bitnami_app_catalog_listing_resource_versions" {
+  #Required
+  listing_id = lookup(data.oci_core_app_catalog_listings.bitnami_app_catalog_listings.app_catalog_listings[0],"listing_id")
+}
+
+# Gets the partner image
+data "oci_core_app_catalog_subscriptions" "bitnami_app_catalog_subscriptions" {
+  #Required
+  compartment_id = var.gitlab_identity.compartment_ocid
+
+  #Optional
+  listing_id = lookup(data.oci_core_app_catalog_listing_resource_versions.bitnami_app_catalog_listing_resource_versions.app_catalog_listing_resource_versions[0],"listing_id")
+}
+
+data "oci_core_vnic" "gitlab_vnic" {
+  vnic_id = lookup(data.oci_core_vnic_attachments.gitlab_vnic.vnic_attachments[0],"vnic_id")
+}
+
+data "oci_core_vnic_attachments" "gitlab_vnic" {
+  compartment_id      = var.gitlab_identity.compartment_ocid
+  availability_domain = element(var.ad_names, 0)
+  instance_id         = oci_core_instance.gitlab.id
+}
+
+# Escape the / on the subnet mask so sed can work
+data "template_file" "reconfigure_gitlab" {
+  template = file("${path.module}/scripts/reconfigure_gitlab.template.sh")
+
+  vars = {
+    gitlab_url  = var.gitlab_config.gitlab_url
+    lb_cidr     = replace(cidrsubnet(var.gitlab_network.vcn_cidr,var.gitlab_network.newbits["lb"],var.gitlab_network.subnets["lb"]),"/","\\/")
+  }
+}
+----
+
+. Create a directory called scripts in the terraform module and a file called reconfigure_gitlab.template.sh in it
+
++
+----
+mkdir scripts
+touch reconfigure_gitlab.template.sh
+----
+
+. Edit the reconfigure_gitlab.template.sh and add the following:
+
++
+----
+#  Copyright 2017, 2019 Oracle Corporation and/or affiliates.  All rights reserved.
+
+sudo sh -c 'while [ ! -f /opt/gitlab/embedded/service/gitlab-rails/log/production.log ]; do echo "sleeping for 10s"; sleep 10;done'
+
+# backup original
+echo "backing up gitlab.rb and nginx config files"
+sudo cp /etc/gitlab/gitlab.rb /etc/gitlab/gitlab.rb.orig
+sudo cp /var/opt/gitlab/nginx/conf/nginx-status.conf /var/opt/gitlab/nginx/conf/nginx-status.conf.orig
+sudo cp /var/opt/gitlab/nginx/conf/gitlab-http.conf /var/opt/gitlab/nginx/conf/gitlab-http.conf.orig
+
+# set the url
+echo "setting the url in gitlab.rb"
+sudo sed -i -e 's/https:\/\/[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}/https:\/\/${gitlab_url}/g' /etc/gitlab/gitlab.rb
+
+# allow access to the gitlab app from lb subnet
+echo "setting trusted proxies in gitlab.rb"
+sudo sed -i -e "s/#\sgitlab_rails\['trusted_proxies'\]\s=\s\[\]/gitlab_rails['trusted_proxies'] = ['${lb_cidr}']/" /etc/gitlab/gitlab.rb
+
+# run reconfigure
+echo "reconfiguring gitlab"
+yes yes | sudo gitlab-ctl reconfigure
+
+# do not use default nginx health check 
+echo "removing default nginx health check"
+sudo sed -i -e "s/\s\sinclude\s\/var\/opt\/gitlab\/nginx\/conf\/nginx-status.conf;/# include \/var\/opt\/gitlab\/nginx\/conf\/nginx-status.conf;/g" /var/opt/gitlab/nginx/conf/nginx.conf
+
+# insert health check location so load balancer can use https instead
+echo "inserting new nginx health check"
+sudo sed -i -e '133i \ \ location \/nginx_status {\n    stub_status on;\n    server_tokens off;\n    access_log on;\n    allow 127.0.0.1;\n    allow ${lb_cidr};\n deny all;\n  }\n' /var/opt/gitlab/nginx/conf/gitlab-http.conf
+
+echo "restarting gitlab"
+sudo gitlab-ctl restart
+----
+
+. Create a file called compute.tf in the gitlab module
+
++
+----
+resource "oci_core_instance" "gitlab" {
+  availability_domain = element(var.ad_names, 0)
+  compartment_id      = var.gitlab_identity.compartment_ocid
+  display_name        = "${var.gitlab_oci_general.label_prefix}-gitlab"
+
+  source_details {
+    source_type = "image"
+    source_id   = lookup(data.oci_core_app_catalog_subscriptions.bitnami_app_catalog_subscriptions.app_catalog_subscriptions[0],"listing_resource_id")
+  }
+
+  shape = var.gitlab_config.gitlab_shape
+
+  create_vnic_details {
+    subnet_id        = oci_core_subnet.gitlab.id
+    display_name     = "gitlab_vnic"
+    # avoid git in hostname as per bitnami doc: https://docs.bitnami.com/oci/apps/gitlab/configuration/change-default-address/
+    hostname_label   = "gl-ad1"
+    assign_public_ip = "false"
+  }
+
+  extended_metadata {
+    ssh_authorized_keys = file(var.gitlab_ssh_keys.ssh_public_key_path)
+  }
+
+  timeouts {
+    create = "60m"
+  }
+}
+
+resource null_resource "configure_gitlab" {
+  depends_on = ["oci_core_instance.gitlab"]
+
+  connection {
+    type        = "ssh"
+    host        = data.oci_core_vnic.gitlab_vnic.private_ip_address
+    user        = "bitnami"
+    private_key = file(var.gitlab_ssh_keys.ssh_private_key_path)
+    timeout     = "40m"
+
+    bastion_host        = element(compact(values(var.bastion_ips)),0)
+    bastion_user        = "opc"
+    bastion_private_key = file(var.gitlab_ssh_keys.ssh_private_key_path)
+  }
+
+  provisioner "file" {
+    content     = data.template_file.reconfigure_gitlab.rendered
+    destination = "~/reconfigure_gitlab.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x ~/reconfigure_gitlab.sh",
+      "~/reconfigure_gitlab.sh",
+    ]
+  }
+}
+----
+
+==== Add a load balancer module

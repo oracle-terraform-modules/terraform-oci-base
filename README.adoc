@@ -45,7 +45,7 @@ The module can be reused to create more advanced infrastructure on {uri-oci}[OCI
 
 * {uri-prereqs}[Pre-requisites]
 
-* {uri-instructions}[Instructions]
+* Instructions
 ** {uri-quickstart}[Provisioning a basic infrastructure (Quickstart)]
 ** {uri-reuse-module}[Reusing as a Terraform module]
 

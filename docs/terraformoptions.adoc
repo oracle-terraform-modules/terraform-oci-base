@@ -118,7 +118,7 @@ Configuration Terraform Options:
 |vcn_name
 |The name of the VCN that will be appended to the label_prefix.
 |
-|base vcn
+|vcn
 
 |vcn_cidr
 |The VCN's CIDR block.
@@ -152,37 +152,26 @@ Configuration Terraform Options:
 
 |newbits
 |The difference between the VCN's netmask and the desired subnets' masks specified in the form of a map. The values of the map are used as the newbits parameter in the {uri-terraform-cidrsubnet}[cidrsubnet] Terraform function to calculate each subnet's mask.
-|e.g.
-[source]
+|[source]
 ----
-newbits = {
-    "bastion" = 13
-}
+13
 ----
 |
 [source]
 ----
-newbits = {
-    "bastion" = 13
-}
-
+13
 ----
 
 |subnets
 |0-based index of the subnets when the VCN's CIDR is masked with the corresponding newbit value and specified in the form of a map. Used to define the boundaries of the subnets. The values of the map are used as the netnum parameter in the {uri-terraform-cidrsubnet}[cidrsubnet] Terraform function.
-|e.g.
-[source]
+|[source]
 ----
-subnets = {
-  "bastion"     = 32
-}
+32
 ----
 |
 [source]
 ----
-subnets = {
-  "bastion"     = 32
-}
+32
 ----
 
 
@@ -229,17 +218,14 @@ subnets = {
 
 |availability_domains
 |The Availability Domain where to provision non-OKE resources e.g. bastion host. This is specified in the form of a map.
-| e.g.
-[source]
+|[source]
 ----
-availability_domains = {
-  "bastion"     = 1
-}
+1
 ----
 |
 [source]
 ----
-  "bastion"     = 1
+1
 ----
 
 |bastion_package_update

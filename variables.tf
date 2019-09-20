@@ -8,10 +8,11 @@ variable "oci_base_identity" {
     api_fingerprint      = string
     api_private_key_path = string
     compartment_name     = string
-    compartment_ocid     = string
-    tenancy_ocid         = string
-    user_ocid            = string
+    compartment_id       = string
+    tenancy_id           = string
+    user_id              = string
   })
+  description = "identity and provider parameters"
 }
 
 # ssh keys
@@ -21,6 +22,7 @@ variable "oci_base_ssh_keys" {
     ssh_private_key_path = string
     ssh_public_key_path  = string
   })
+  description = "ssh keys for bastion"
 }
 
 # general oci parameters
@@ -31,6 +33,7 @@ variable "oci_base_general" {
     label_prefix         = string
     region               = string
   })
+  description = "general oci parameters"
 }
 
 # networking parameters
@@ -45,6 +48,7 @@ variable "oci_base_vcn" {
     create_service_gateway = bool
     service_gateway_name   = string
   })
+  description = "VCN basic parameters"
 }
 
 # bastion
@@ -57,11 +61,12 @@ variable "oci_base_bastion" {
     create_bastion                 = bool
     bastion_access                 = string
     enable_instance_principal      = bool
-    image_ocid                     = string
+    image_id                       = string
     image_operating_system         = string
     image_operating_system_version = string
     availability_domains           = number
     bastion_package_update         = bool
     bastion_package_upgrade        = bool
   })
+  description = "bastion host parameters"
 }

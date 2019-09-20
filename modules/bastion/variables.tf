@@ -7,11 +7,12 @@ variable "oci_base_identity" {
   type = object({
     api_fingerprint      = string
     api_private_key_path = string
-    compartment_ocid     = string
+    compartment_id       = string
     compartment_name     = string
-    tenancy_ocid         = string
-    user_ocid            = string
+    tenancy_id           = string
+    user_id              = string
   })
+  description = "parameters related to oci identity"
 }
 
 variable "oci_bastion_general" {
@@ -20,6 +21,7 @@ variable "oci_bastion_general" {
     home_region  = string
     region       = string
   })
+  description = "general oci parameters"
 }
 
 # ssh
@@ -29,6 +31,7 @@ variable "oci_base_ssh_keys" {
     ssh_private_key_path = string
     ssh_public_key_path  = string
   })
+  description = "ssh keys for the bastion"
 }
 
 # bastion
@@ -39,12 +42,13 @@ variable "oci_bastion" {
     create_bastion                 = bool
     bastion_access                 = string
     enable_instance_principal      = bool
-    image_ocid                     = string
+    image_id                       = string
     image_operating_system         = string
     image_operating_system_version = string
-    bastion_package_update                 = bool
-    bastion_package_upgrade                = bool
+    bastion_package_update         = bool
+    bastion_package_upgrade        = bool
   })
+  description = "bastion host parameters"
 }
 
 variable "oci_bastion_infra" {
@@ -57,4 +61,5 @@ variable "oci_bastion_infra" {
     subnets              = number
     availability_domains = number
   })
+  description = "bastion host networking parameters"
 }

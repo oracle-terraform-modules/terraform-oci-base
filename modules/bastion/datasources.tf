@@ -2,7 +2,7 @@
 # Licensed under the Universal Permissive License v 1.0 as shown at http://oss.oracle.com/licenses/upl
 
 data "oci_core_images" "bastion_images" {
-  compartment_id           = var.oci_base_identity.compartment_ocid
+  compartment_id           = var.oci_base_identity.compartment_id
   operating_system         = var.oci_bastion.image_operating_system
   operating_system_version = var.oci_bastion.image_operating_system_version
   shape                    = var.oci_bastion.bastion_shape
@@ -57,7 +57,7 @@ data "template_file" "tesseract_template" {
 # Gets a list of VNIC attachments on the bastion instance
 data "oci_core_vnic_attachments" "bastion_vnics_attachments" {
   availability_domain = element(var.oci_bastion_infra.ad_names, (var.oci_bastion_infra.availability_domains - 1))
-  compartment_id      = var.oci_base_identity.compartment_ocid
+  compartment_id      = var.oci_base_identity.compartment_id
   instance_id         = oci_core_instance.bastion[0].id
   count               = var.oci_bastion.create_bastion == true ? 1 : 0
 }

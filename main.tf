@@ -2,12 +2,12 @@
 # Licensed under the Universal Permissive License v 1.0 as shown at http://oss.oracle.com/licenses/upl
 
 module "vcn" {
-  source       = "./vcn"
+  source       = "./modules/vcn"
   oci_base_vcn = local.oci_base_vcn
 }
 
 module "bastion" {
-  source              = "./bastion"
+  source              = "./modules/bastion"
   oci_base_identity   = var.oci_base_identity
   oci_bastion_general = local.oci_bastion_general
   oci_bastion_infra   = local.oci_bastion_infra

@@ -1,0 +1,91 @@
+# Copyright 2017, 2019, Oracle Corporation and/or affiliates.  All rights reserved.
+# Licensed under the Universal Permissive License v 1.0 as shown at http://oss.oracle.com/licenses/upl
+
+# Keep root variables flat to make it easy for users to fill in
+
+# Identity and access parameters
+api_fingerprint = ""
+
+api_private_key_path = ""
+
+compartment_name = ""
+
+compartment_id = ""
+
+tenancy_id = ""
+
+user_id = ""
+
+# ssh keys
+ssh_private_key_path = ""
+
+ssh_public_key_path = ""
+
+# general oci parameters
+disable_auto_retries = true
+
+label_prefix = "gitlab"
+
+region = "us-phoenix-1"
+
+# networking parameters
+newbits =  {
+    "bastion" = 13
+    "lb"      = 11
+    "gitlab" = 2
+}
+
+vcn_cidr = "10.0.0.0/16"
+
+vcn_dns_label = "gitlab"
+
+vcn_name = "gitlab vcn"
+
+# nat
+create_nat_gateway = true
+
+nat_gateway_name = "nat"
+
+# service gateway
+create_service_gateway     = true
+
+service_gateway_name     = "sg"
+
+subnets ={
+    bastion = 32
+    lb  = 16
+    gitlab = 1
+}
+
+# bastion
+bastion_shape = "VM.Standard.E2.1"
+
+create_bastion  = true
+
+bastion_access  = "ANYWHERE"
+
+enable_instance_principal = false
+
+image_id = "NONE"
+
+image_operating_system =     = "Oracle Linux"
+
+image_operating_system_version = "7.7"
+
+# availability domains
+availability_domains = {
+    "bastion" = 1
+    "gitlab"  = 1
+}
+
+# bastion packages
+bastion_package_update     = true
+
+bastion_package_upgrade     = true
+
+
+# gitlab
+
+gitlab_shape     = "VM.Standard2.4"
+
+gitlab_url = "gitlab.oraclevcn.com"

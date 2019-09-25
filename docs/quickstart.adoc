@@ -49,7 +49,7 @@ cp terraform.tfvars.example terraform.tfvars
 
 * api_fingerprint
 * api_private_key_path
-* compartment_ocid
+* compartment_id
 * compartment_name
 * tenancy_ocid
 * user_ocid
@@ -71,8 +71,8 @@ cp terraform.tfvars.example terraform.tfvars
 
 ----
 provider "oci" {
-  tenancy_ocid         = var.oci_base_identity.tenancy_ocid
-  user_ocid            = var.oci_base_identity.user_ocid
+  tenancy_ocid         = var.oci_base_identity.tenancy_id
+  user_ocid            = var.oci_base_identity.user_id
   fingerprint          = var.oci_base_identity.api_fingerprint
   private_key_path     = var.oci_base_identity.api_private_key_path
   region               = var.oci_base_general.region

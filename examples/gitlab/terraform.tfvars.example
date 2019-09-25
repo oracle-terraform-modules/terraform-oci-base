@@ -68,7 +68,7 @@ enable_instance_principal = false
 
 image_id = "NONE"
 
-image_operating_system =     = "Oracle Linux"
+image_operating_system =  "Oracle Linux"
 
 image_operating_system_version = "7.7"
 

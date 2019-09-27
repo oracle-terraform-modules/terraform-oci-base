@@ -6,3 +6,12 @@
 All notable changes to this project are documented in this file.
 
 The format is based on {uri-changelog}[Keep a Changelog].
+
+== 1.0.0 (Sep 27 2019)
+
+=== Improvements
+
+* Examples documentation
+
+=== Changes
+- All variables with _ocid renamed to _id

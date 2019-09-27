@@ -51,12 +51,12 @@ Configuration Terraform Options:
 |None
 
 |tenancy_ocid
-|Tenancy ocid of the user. *Required*
+|Tenancy id of the user. *Required*
 |
 |None
 
 |user_ocid
-|User's ocid. *Required*
+|User's id. *Required*
 |
 |None
 

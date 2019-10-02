@@ -15,6 +15,7 @@
 :uri-oci-compartment: https://docs.cloud.oracle.com/iaas/Content/Identity/Tasks/managingcompartments.htm#two
 :uri-oci-ocids: https://docs.cloud.oracle.com/iaas/Content/API/Concepts/apisigningkey.htm#five
 :uri-oci-documentation: https://docs.cloud.oracle.com/iaas/Content/home.htm
+:uri-oci-instance-principal: https://docs.cloud.oracle.com/iaas/Content/Identity/Tasks/callingservicesfrominstances.htm
 :uri-oci-keys: https://docs.cloud.oracle.com/iaas/Content/API/Concepts/apisigningkey.htm#two
 :uri-oci-keys-upload: https://docs.cloud.oracle.com/iaas/Content/API/Concepts/apisigningkey.htm#two
 :uri-quickstart: {uri-docs}/quickstart.adoc
@@ -26,17 +27,27 @@ This section will guide you through the pre-requisites before you can use this p
 You can proceed to the {uri-quickstart}[Quick Start guide] if you have already done these.
 
 . link:#install-terraform[Install Terraform]
+.. link:#download-terraform[Download Terraform]
+.. link:#configure-path-on-linuxmacos[Configure path on Linux/macOS]
+.. link:#configure-path-on-windows[Configure path on Windows]
+.. link:#testing-terraform-installation[Testing Terraform installation]
 . link:#oci-api-keys[OCI API Keys]
 .. link:#generate-api-keys[Generate API Keys]
 .. link:#upload-your-api-keys[Upload API Keys]
 . link:#create-an-oci-compartment[Create an OCI Compartment]
 . link:#obtain-the-necessary-ocids[Obtain the necessary OCIDs]
+. link:#identity-and-access-management-rights[Identity and Access Management Rights]
+. link:#using-instance_principals[Using instance_principal]
+.. link:#enabling-instance_principal-on-the-bastion-host[Enabling instance_principal on the bastion host]
+.. link:#disabling-instance_principal-on-the-bastion-host[Disabling instance_principal on the bastion host]
+.. link:#recommendations-for-using-instance_principal[Recommendations for using instance_principal]
+. link:#using-autonomous-linux[Using Autonomous Linux]
 
-== Install Terraform
+=== Install Terraform
 
 Start by installing Terraform and configuring your path.
 
-=== Download Terraform
+==== Download Terraform
 
 1. Open your browser and navigate to the {uri-terraform-download}[Terraform download page]. You need version 0.12.8+.
 
@@ -44,7 +55,7 @@ Start by installing Terraform and configuring your path.
 
 3. Extract the the contents of compressed file and copy the terraform binary to a location that is in your path (see next section below).
 
-=== Configure path on Linux/macOS
+==== Configure path on Linux/macOS
 
 Open a terminal and type the following:
 
@@ -53,7 +64,7 @@ Open a terminal and type the following:
 sudo mv /path/to/terraform /usr/local/bin
 ----
 
-=== Configure path on Windows
+==== Configure path on Windows
 Follow the steps below to configure your path on Windows:
 
 . Click on 'Start', type 'Control Panel' and open it
@@ -63,7 +74,7 @@ Follow the steps below to configure your path on Windows:
 . Close all open windows by clicking 'OK'
 . Open a new terminal and verify terraform has been properly installed
 
-=== Testing Terraform installation
+==== Testing Terraform installation
 
 Open a terminal and test:
 
@@ -73,22 +84,22 @@ terraform -v
 Terraform v0.12.8
 ----
 
-== OCI API Keys
-=== Generate API keys
+=== OCI API Keys
+==== Generate API keys
 
 Follow the documentation for generating keys on {uri-oci-keys}[OCI Documentation].
 
-=== Upload your API keys
+==== Upload your API keys
 
 Follow the documentation for uploading your keys on {uri-oci-keys-upload}[OCI Documentation].
 
 Note the fingerprint.
 
-== Create an OCI compartment
+=== Create an OCI compartment
 
 Follow the documentation for {uri-oci-compartment}[creating a compartment].
 
-== Obtain the necessary OCIDs
+=== Obtain the necessary OCIDs
 
 The following OCIDs are required:
 
@@ -103,3 +114,59 @@ To obtain the compartment OCID:
 1. Navigate to Identity > Compartments
 2. Click on your Compartment
 3. Locate OCID on the page and click on 'Copy'
+
+=== Identity and Access Management Rights
+
+If you are enabling notifications and instance_principal for the bastion, the Terraform user must have the rights to manage dynamic groups.
+
+
+=== Using instance_principal
+
+==== Enabling instance_principal on the bastion host
+{uri-oci-instance-principal}[instance_principal] is an IAM service feature that enables instances to be authorized actors (or principals) to perform actions on service resources. Each compute instance has its own identity, and it authenticates using the certificates that are added to it. These certificates are automatically created, assigned to instances and rotated, preventing the need for you to distribute credentials to your hosts and rotate them.
+
+Any user who has access to the instance (who can SSH to the instance), automatically inherits the privileges granted to the instance. Before you enable this feature, ensure that you know who can access it, and that they should be authorized with the permissions you are granting to the instance.
+
+By default, this feature is *_disabled_*.
+
+When you enable this feature, by default, the bastion has privileges to all resources in the compartment. 
+
+You can also turn on and off the feature at any time without impact on the bastion.
+
+To enable, set enable_instance_principal to true:
+
+----
+enable_instance_principal = "true"
+----
+
+and verify:
+
+----
+oci network vcn list --compartment-id <compartment-ocid>
+----
+
+==== Disabling instance_principal on the bastion host
+
+. Set enable_instance_principal to false in terraform.tfvars
+
++
+----
+enable_instance_principal = false
+----
+
+. Run terraform apply again:
+
++
+----
+terraform apply
+----
+
+==== Recommendations for using instance_principal
+
+. Do not enable instance_principal if you are not using it
+. Enable instance_principal *_if and only if_* you are using the bastion host to execute oci commands e.g. modifying dynamic groups, changing policies
+. Disable instance_principal once the oci operation is done
+
+=== Using Autonomous Linux
+
+Install only packages in the Autonomous Linux yum repo

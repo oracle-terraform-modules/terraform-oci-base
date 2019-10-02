@@ -15,15 +15,15 @@ resource "oci_core_instance" "bastion" {
 
   extended_metadata = {
     ssh_authorized_keys = file(var.oci_base_ssh_keys.ssh_public_key_path)
-    user_data           = data.template_cloudinit_config.bastion[0].rendered
     subnet_id           = oci_core_subnet.bastion[0].id
+    user_data           = data.template_cloudinit_config.bastion[0].rendered
   }
 
   shape = var.oci_bastion.bastion_shape
 
   source_details {
     source_type = "image"
-    source_id   = var.oci_bastion.image_id == "NONE" ? data.oci_core_images.bastion_images.images.0.id : var.oci_bastion.image_id
+    source_id   = lookup(data.oci_core_app_catalog_subscriptions.autonomous_linux.app_catalog_subscriptions[0], "listing_resource_id")
   }
 
   timeouts {

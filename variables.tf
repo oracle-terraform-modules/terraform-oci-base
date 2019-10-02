@@ -34,6 +34,11 @@ variable "oci_base_general" {
     region               = string
   })
   description = "general oci parameters"
+  default = {
+    disable_auto_retries = false
+    label_prefix         = "base"
+    region               = "us-phoenix-1"
+  }
 }
 
 # networking parameters
@@ -49,24 +54,47 @@ variable "oci_base_vcn" {
     service_gateway_name   = string
   })
   description = "VCN basic parameters"
+  default = {
+    vcn_cidr               = "10.0.0.0/16"
+    vcn_dns_label          = "base"
+    vcn_name               = "base"
+    create_nat_gateway     = false
+    nat_gateway_name       = "nat"
+    create_service_gateway = false
+    service_gateway_name   = "sg"
+  }
 }
 
 # bastion
 
 variable "oci_base_bastion" {
   type = object({
-    newbits                        = number
-    subnets                        = number
-    bastion_shape                  = string
-    create_bastion                 = bool
-    bastion_access                 = string
-    enable_instance_principal      = bool
-    image_id                       = string
-    image_operating_system         = string
-    image_operating_system_version = string
-    availability_domains           = number
-    bastion_package_update         = bool
-    bastion_package_upgrade        = bool
+    newbits                   = number
+    subnets                   = number
+    bastion_shape             = string
+    create_bastion            = bool
+    timezone                  = string
+    bastion_access            = string
+    enable_instance_principal = bool
+    availability_domains      = number
+    enable_notification       = bool
+    notification_endpoint     = string
+    notification_protocol     = string
+    notification_topic        = string
   })
   description = "bastion host parameters"
+  default = {
+    newbits                   = 13
+    subnets                   = 32
+    bastion_shape             = "VM.Standard.E2.1"
+    create_bastion            = false
+    timezone                  = ""
+    bastion_access            = "ANYWHERE"
+    enable_instance_principal = false
+    availability_domains      = 1
+    enable_notification       = false
+    notification_endpoint     = ""
+    notification_protocol     = "EMAIL"
+    notification_topic        = "bastion"
+  }
 }

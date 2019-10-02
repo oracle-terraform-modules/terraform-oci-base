@@ -40,13 +40,9 @@ variable "oci_bastion" {
   type = object({
     bastion_shape                  = string
     create_bastion                 = bool
+    timezone                       = string
     bastion_access                 = string
     enable_instance_principal      = bool
-    image_id                       = string
-    image_operating_system         = string
-    image_operating_system_version = string
-    bastion_package_update         = bool
-    bastion_package_upgrade        = bool
   })
   description = "bastion host parameters"
 }
@@ -62,4 +58,14 @@ variable "oci_bastion_infra" {
     availability_domains = number
   })
   description = "bastion host networking parameters"
+}
+
+variable "oci_bastion_notification" {
+  type = object({
+    enable_notification   = bool
+    notification_endpoint = string
+    notification_protocol = string
+    notification_topic    = string
+  })
+  description = "OCI notification parameters for bastion"
 }

@@ -31,14 +31,17 @@ locals {
   }
 
   oci_bastion = {
-    bastion_shape                  = var.oci_base_bastion.bastion_shape
-    create_bastion                 = var.oci_base_bastion.create_bastion
-    bastion_access                 = var.oci_base_bastion.bastion_access
-    enable_instance_principal      = var.oci_base_bastion.enable_instance_principal
-    image_id                       = var.oci_base_bastion.image_id
-    image_operating_system         = var.oci_base_bastion.image_operating_system
-    image_operating_system_version = var.oci_base_bastion.image_operating_system_version
-    bastion_package_update         = var.oci_base_bastion.bastion_package_update
-    bastion_package_upgrade        = var.oci_base_bastion.bastion_package_upgrade
+    bastion_shape             = var.oci_base_bastion.bastion_shape
+    create_bastion            = var.oci_base_bastion.create_bastion
+    timezone                  = var.oci_base_bastion.timezone
+    bastion_access            = var.oci_base_bastion.bastion_access
+    enable_instance_principal = var.oci_base_bastion.enable_instance_principal
+  }
+
+  oci_bastion_notification = {
+    enable_notification   = var.oci_base_bastion.enable_notification
+    notification_endpoint = var.oci_base_bastion.notification_endpoint
+    notification_protocol = var.oci_base_bastion.notification_protocol
+    notification_topic    = var.oci_base_bastion.notification_topic
   }
 }

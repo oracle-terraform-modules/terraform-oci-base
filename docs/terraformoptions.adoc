@@ -49,7 +49,7 @@ Configuration Terraform Options:
 |None
 
 |compartment_id
-|Compartment name where the VCN and other resources will be provisioned. Value must match with the OCID of the compartment_name provided above. *Required*
+|Compartment id where the VCN and other resources will be provisioned. Value must match with the OCID of the compartment_name provided above. *Required*
 |
 |None
 

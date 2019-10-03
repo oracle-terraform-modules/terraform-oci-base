@@ -9,7 +9,7 @@
 :uri-rel-file-base: link:{uri-repo}/blob/master
 :uri-rel-tree-base: link:{uri-repo}/tree/master
 :uri-docs: {uri-rel-file-base}/docs
-:uri-reusing: {uri-docs}/reusing.adoc
+:uri-reusing: {uri-rel-tree-base}/examples/gitlab
 :uri-oci-keys: https://docs.cloud.oracle.com/iaas/Content/API/Concepts/apisigningkey.htm
 :uri-oci-ocids: https://docs.cloud.oracle.com/iaas/Content/API/Concepts/apisigningkey.htm#five
 :uri-terraform: https://www.terraform.io

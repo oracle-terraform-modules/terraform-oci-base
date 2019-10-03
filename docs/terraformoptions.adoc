@@ -8,7 +8,7 @@
 :uri-rel-file-base: link:{uri-repo}/blob/master
 :uri-rel-tree-base: link:{uri-repo}/tree/master
 :uri-docs: {uri-rel-file-base}/docs
-:uri-instance-principal-note: {uri-docs}/prerequisites.adoc#note-on-instance_principal
+:uri-instance-principal-note: {uri-docs}/prerequisites.adoc#using-instance_principal
 :uri-oci-images: https://docs.cloud.oracle.com/iaas/images/
 :uri-oci-region: https://docs.cloud.oracle.com/iaas/Content/General/Concepts/regions.htm
 :uri-terraform-cidrsubnet: https://www.terraform.io/docs/configuration/functions/cidrsubnet.html
@@ -22,6 +22,7 @@ Configuration Terraform Options:
 . link:#general-oci[General OCI]
 . link:#oci-networking[OCI Networking]
 . link:#bastion-host[Bastion Host]
+. link:#notification[Notification]
 
 === Identity and access
 

@@ -42,5 +42,5 @@ output "home_region" {
 
 output "ssh_to_bastion" {
   description = "convenient output of terraform to ssh to the bastion host"
-  value       = "ssh -i ${var.oci_base_ssh_keys.ssh_private_key_path} opc@${module.bastion.bastion_public_ip}"
+  value       = "ssh -i </path/to/private_key> opc@${module.bastion.bastion_public_ip}"
 }

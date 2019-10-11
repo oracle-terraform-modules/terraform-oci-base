@@ -28,7 +28,6 @@ variable "oci_bastion_general" {
 
 variable "oci_base_ssh_keys" {
   type = object({
-    ssh_private_key_path = string
     ssh_public_key_path  = string
   })
   description = "ssh keys for the bastion"

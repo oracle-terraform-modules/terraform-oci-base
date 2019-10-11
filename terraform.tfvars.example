@@ -47,6 +47,7 @@ oci_base_bastion = {
   notification_endpoint          = ""
   notification_protocol          = "EMAIL"
   notification_topic             = "bastion"
+  timezone                       = "America/Los_Angeles"
   
   # availability_domains
   availability_domains    = 1

@@ -7,7 +7,6 @@ variable "oci_base_identity" {
   type = object({
     api_fingerprint      = string
     api_private_key_path = string
-    compartment_name     = string
     compartment_id       = string
     tenancy_id           = string
     user_id              = string

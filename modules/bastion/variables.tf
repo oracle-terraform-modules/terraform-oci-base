@@ -8,7 +8,6 @@ variable "oci_base_identity" {
     api_fingerprint      = string
     api_private_key_path = string
     compartment_id       = string
-    compartment_name     = string
     tenancy_id           = string
     user_id              = string
   })
@@ -28,8 +27,8 @@ variable "oci_bastion_general" {
 
 variable "oci_base_ssh_keys" {
   type = object({
-    ssh_private_key_path = string
     ssh_public_key_path  = string
+    ssh_private_key_path = string
   })
   description = "ssh keys for the bastion"
 }

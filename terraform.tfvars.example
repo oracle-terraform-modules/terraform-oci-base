@@ -3,7 +3,6 @@
 oci_base_identity = {
   api_fingerprint      = ""
   api_private_key_path = ""
-  compartment_name     = ""
   compartment_id       = ""
   tenancy_id           = ""
   user_id              = ""
@@ -47,6 +46,7 @@ oci_base_bastion = {
   notification_endpoint          = ""
   notification_protocol          = "EMAIL"
   notification_topic             = "bastion"
+  timezone                       = "America/Los_Angeles"
   
   # availability_domains
   availability_domains    = 1

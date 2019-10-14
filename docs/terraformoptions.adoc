@@ -138,20 +138,10 @@ Configuration Terraform Options:
 |true/false
 |false
 
-|nat_gateway_name
-|The NAT gateway name. Appended to the label_prefix.
-| 
-|nat
-
 |create_service_gateway
 |Whether to create a Service Gateway to use Oracle Services.
 |true/false
 |false
-
-|service_gateway_name
-|The Service gateway name. Appended to the label_prefix
-| 
-|sg
 
 |newbits
 |The difference between the VCN's netmask and the desired subnets' masks specified in the form of a map. The values of the map are used as the newbits parameter in the {uri-terraform-cidrsubnet}[cidrsubnet] Terraform function to calculate each subnet's mask.

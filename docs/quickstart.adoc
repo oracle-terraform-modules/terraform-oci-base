@@ -73,8 +73,16 @@ provider "oci" {
   fingerprint          = var.oci_base_identity.api_fingerprint
   private_key_path     = var.oci_base_identity.api_private_key_path
   region               = var.oci_base_general.region
-  disable_auto_retries = var.oci_base_general.disable_auto_retries
+  disable_auto_retries = false
 }
+----
+
+6. Run terraform init, plan and apply:
+
+----
+terraform init
+terraform plan
+terraform apply
 ----
 
 === Related documentation:

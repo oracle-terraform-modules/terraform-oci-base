@@ -32,7 +32,7 @@ provider "oci" {
   fingerprint          = var.api_fingerprint
   private_key_path     = var.api_private_key_path
   region               = var.region
-  disable_auto_retries = var.disable_auto_retries
+  disable_auto_retries = false
 }
 ```
 

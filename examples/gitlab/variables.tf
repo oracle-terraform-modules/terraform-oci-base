@@ -10,11 +10,6 @@ variable "api_private_key_path" {
   description = "path to oci api private key"
 }
 
-variable "compartment_name" {
-  type        = "string"
-  description = "compartment name"
-}
-
 variable "compartment_id" {
   type        = "string"
   description = "compartment id"
@@ -40,10 +35,6 @@ variable "ssh_public_key_path" {
 }
 
 # general oci parameters
-variable "disable_auto_retries" {
-  default = true
-}
-
 variable "label_prefix" {
   type    = "string"
   default = "gitlab"
@@ -90,20 +81,10 @@ variable "create_nat_gateway" {
   default     = true
 }
 
-variable "nat_gateway_name" {
-  description = "display name of the nat gateway"
-  default     = "nat"
-}
-
 # service gateway
 variable "create_service_gateway" {
   description = "whether to create a service gateway"
   default     = true
-}
-
-variable "service_gateway_name" {
-  description = "name of service gateway"
-  default     = "sg"
 }
 
 variable "subnets" {
@@ -141,18 +122,6 @@ variable "image_id" {
   default = "NONE"
 }
 
-variable "image_operating_system" {
-  # values = Oracle Linux, CentOS, Canonical Ubuntu
-  default     = "Oracle Linux"
-  description = "operating system to use for the bastion"
-}
-
-variable "image_operating_system_version" {
-  # Versions of available operating systems can be found here: https://docs.cloud.oracle.com/iaas/images/
-  default     = "7.7"
-  description = "version of selected operating system"
-}
-
 # availability domains
 variable "availability_domains" {
   description = "ADs where to provision compute resources"
@@ -162,18 +131,6 @@ variable "availability_domains" {
     bastion = 1
     gitlab  = 1
   }
-}
-
-# bastion packages
-variable "bastion_package_update" {
-  description = "Update apt database on first boot if bastion host uses Ubuntu as Linux distribution"
-  type        = bool
-  default     = true
-}
-variable "bastion_package_upgrade" {
-  description = "Upgrade the instance on first boot"
-  type        = bool
-  default     = true
 }
 
 # gitlab

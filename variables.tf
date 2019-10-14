@@ -28,15 +28,13 @@ variable "oci_base_ssh_keys" {
 
 variable "oci_base_general" {
   type = object({
-    disable_auto_retries = bool
-    label_prefix         = string
-    region               = string
+    label_prefix = string
+    region       = string
   })
   description = "general oci parameters"
   default = {
-    disable_auto_retries = false
-    label_prefix         = "base"
-    region               = "us-phoenix-1"
+    label_prefix = "base"
+    region       = ""
   }
 }
 
@@ -48,9 +46,7 @@ variable "oci_base_vcn" {
     vcn_dns_label          = string
     vcn_name               = string
     create_nat_gateway     = bool
-    nat_gateway_name       = string
     create_service_gateway = bool
-    service_gateway_name   = string
   })
   description = "VCN basic parameters"
   default = {
@@ -58,9 +54,7 @@ variable "oci_base_vcn" {
     vcn_dns_label          = "base"
     vcn_name               = "base"
     create_nat_gateway     = false
-    nat_gateway_name       = "nat"
     create_service_gateway = false
-    service_gateway_name   = "sg"
   }
 }
 

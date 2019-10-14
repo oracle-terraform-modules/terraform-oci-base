@@ -12,7 +12,7 @@ data "oci_core_services" "all_oci_services" {
 
 resource "oci_core_service_gateway" "service_gateway" {
   compartment_id = var.oci_base_vcn.compartment_id
-  display_name   = "${var.oci_base_vcn.label_prefix}-${var.oci_base_vcn.service_gateway_name}-gw"
+  display_name   = "${var.oci_base_vcn.label_prefix}-sg-gw"
   depends_on     = ["oci_core_nat_gateway.nat_gateway"]
 
   services {

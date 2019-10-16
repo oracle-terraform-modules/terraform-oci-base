@@ -8,8 +8,6 @@ api_fingerprint = ""
 
 api_private_key_path = ""
 
-compartment_name = ""
-
 compartment_id = ""
 
 tenancy_id = ""
@@ -22,8 +20,6 @@ ssh_private_key_path = ""
 ssh_public_key_path = ""
 
 # general oci parameters
-disable_auto_retries = true
-
 label_prefix = "gitlab"
 
 region = "us-phoenix-1"
@@ -44,12 +40,8 @@ vcn_name = "gitlab vcn"
 # nat
 create_nat_gateway = true
 
-nat_gateway_name = "nat"
-
 # service gateway
 create_service_gateway     = true
-
-service_gateway_name     = "sg"
 
 subnets ={
     bastion = 32
@@ -68,21 +60,11 @@ enable_instance_principal = false
 
 image_id = "NONE"
 
-image_operating_system =  "Oracle Linux"
-
-image_operating_system_version = "7.7"
-
 # availability domains
 availability_domains = {
     "bastion" = 1
     "gitlab"  = 1
 }
-
-# bastion packages
-bastion_package_update     = true
-
-bastion_package_upgrade     = true
-
 
 # gitlab
 

@@ -3,7 +3,7 @@
 
 resource "oci_core_nat_gateway" "nat_gateway" {
   compartment_id = var.oci_base_vcn.compartment_id
-  display_name   = "${var.oci_base_vcn.label_prefix}-${var.oci_base_vcn.nat_gateway_name}-gw"
+  display_name   = "${var.oci_base_vcn.label_prefix}-nat-gw"
   vcn_id         = oci_core_vcn.vcn.id
   count          = var.oci_base_vcn.create_nat_gateway == true ? 1 : 0
 }

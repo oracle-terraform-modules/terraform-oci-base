@@ -24,8 +24,8 @@ data "template_file" "tesseract_template" {
 
   vars = {
     bastion_ip       = join(",", data.oci_core_vnic.bastion_vnic.*.public_ip_address)
-    user             = "opc"
     private_key_path = var.oci_base_ssh_keys.ssh_private_key_path
+    user             = "opc"
   }
 
   depends_on = ["oci_core_instance.bastion"]

@@ -34,7 +34,7 @@ oci_base_vcn = {
 
 oci_base_bastion = {
   newbits                        = 13
-  subnets                        = 32
+  netnum                         = 32
   bastion_shape                  = "VM.Standard.E2.1"
   create_bastion                 = false
   bastion_access                 = "ANYWHERE"

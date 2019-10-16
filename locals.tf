@@ -24,7 +24,7 @@ locals {
     vcn_id               = module.vcn.vcn_id
     ad_names             = data.template_file.ad_names.*.rendered
     newbits              = var.oci_base_bastion.newbits
-    subnets              = var.oci_base_bastion.subnets
+    netnum              = var.oci_base_bastion.netnum
     availability_domains = var.oci_base_bastion.availability_domains
   }
 

@@ -150,8 +150,8 @@ Configuration Terraform Options:
 13
 ----
 
-|subnets
-|0-based index of the subnets when the VCN's CIDR is masked with the corresponding newbit value and specified in the form of a map. Used to define the boundaries of the subnets. The values of the map are used as the netnum parameter in the {uri-terraform-cidrsubnet}[cidrsubnet] Terraform function.
+|netnum
+|0-based index of the subnet when the VCN's CIDR is masked with the corresponding newbit value and specified in the form of a map. Used to define the boundaries of the subnet. The values of the map are used as the netnum parameter in the {uri-terraform-cidrsubnet}[cidrsubnet] Terraform function.
 |[source]
 ----
 32

@@ -91,11 +91,6 @@ Configuration Terraform Options:
 |Values
 |Default
 
-|disable_auto_retries
-|
-|true/false
-|false
-
 |label_prefix
 |a string to be prepended to the name of resources.
 |

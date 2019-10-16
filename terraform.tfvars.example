@@ -16,7 +16,6 @@ oci_base_ssh_keys = {
 }
 
 oci_base_general = {
-  disable_auto_retries = false
   label_prefix         = "base"
   region               = "us-phoenix-1"
 }

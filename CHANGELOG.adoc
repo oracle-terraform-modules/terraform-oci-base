@@ -7,12 +7,12 @@ All notable changes to this project are documented in this file.
 
 The format is based on {uri-changelog}[Keep a Changelog].
 
-== 1.0.1 (October 2 2019)
+== 0.0.1 (October 2 2019)
 
 * Changed bastion image to Autonomous Linux
 * Added optional ONS notification for bastion host
 
-== 1.0.0 (Sep 27 2019)
+== 0.0.1 (Sep 27 2019)
 
 === Improvements
 

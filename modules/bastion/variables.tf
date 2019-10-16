@@ -53,7 +53,7 @@ variable "oci_bastion_infra" {
     vcn_id               = string
     ad_names             = list(string)
     newbits              = number
-    subnets              = number
+    netnum               = number
     availability_domains = number
   })
   description = "bastion host networking parameters"

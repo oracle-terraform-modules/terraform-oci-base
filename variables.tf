@@ -63,7 +63,7 @@ variable "oci_base_vcn" {
 variable "oci_base_bastion" {
   type = object({
     newbits                   = number
-    subnets                   = number
+    netnum                    = number
     bastion_shape             = string
     create_bastion            = bool
     timezone                  = string
@@ -78,7 +78,7 @@ variable "oci_base_bastion" {
   description = "bastion host parameters"
   default = {
     newbits                   = 13
-    subnets                   = 32
+    netnum                    = 32
     bastion_shape             = "VM.Standard.E2.1"
     create_bastion            = false
     timezone                  = ""

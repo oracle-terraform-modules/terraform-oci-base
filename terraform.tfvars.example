@@ -16,7 +16,6 @@ oci_base_ssh_keys = {
 }
 
 oci_base_general = {
-  disable_auto_retries = false
   label_prefix         = "base"
   region               = "us-phoenix-1"
 }
@@ -35,7 +34,7 @@ oci_base_vcn = {
 
 oci_base_bastion = {
   newbits                        = 13
-  subnets                        = 32
+  netnum                         = 32
   bastion_shape                  = "VM.Standard.E2.1"
   create_bastion                 = false
   bastion_access                 = "ANYWHERE"

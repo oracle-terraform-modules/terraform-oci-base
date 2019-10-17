@@ -3,48 +3,42 @@
 oci_base_identity = {
   api_fingerprint      = ""
   api_private_key_path = ""
+  compartment_name     = ""
   compartment_id       = ""
   tenancy_id           = ""
   user_id              = ""
-
-}
-
-# ssh keys
-oci_base_ssh_keys = {
-  ssh_private_key_path = ""
-  ssh_public_key_path  = ""
 }
 
 oci_base_general = {
-  label_prefix         = "base"
-  region               = "us-phoenix-1"
+  label_prefix = "base"
+  region       = "us-phoenix-1"
 }
 
 # networking
 
 oci_base_vcn = {
+  create_nat_gateway     = true
+  create_service_gateway = true
   vcn_cidr               = "10.0.0.0/16"
   vcn_dns_label          = "base"
-  vcn_name               = "base"
-  create_nat_gateway     = false
-  create_service_gateway = false
+  vcn_name               = "vcn"
 }
 
 # bastion
 
 oci_base_bastion = {
-  newbits                        = 13
-  netnum                         = 32
-  bastion_shape                  = "VM.Standard.E2.1"
-  create_bastion                 = false
-  bastion_access                 = "ANYWHERE"
-  enable_instance_principal      = false
-  enable_notification            = false
-  notification_endpoint          = ""
-  notification_protocol          = "EMAIL"
-  notification_topic             = "bastion"
-  timezone                       = "America/Los_Angeles"
-  
-  # availability_domains
-  availability_domains    = 1
+  availability_domains      = 1
+  bastion_access            = "ANYWHERE"
+  bastion_shape             = "VM.Standard.E2.1"
+  create_bastion            = true
+  enable_instance_principal = false
+  enable_notification       = false
+  newbits                   = 13
+  netnum                    = 32
+  notification_endpoint     = ""
+  notification_protocol     = "EMAIL"
+  notification_topic        = "bastion"
+  ssh_private_key_path      = ""
+  ssh_public_key_path       = ""
+  timezone                  = "Australia/Sydney"
 }

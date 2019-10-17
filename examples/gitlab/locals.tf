@@ -9,22 +9,18 @@ locals {
     tenancy_id           = var.tenancy_id
     user_id              = var.user_id
   }
-  oci_base_ssh_keys = {
-    ssh_private_key_path = var.ssh_private_key_path
-    ssh_public_key_path  = var.ssh_public_key_path
-  }
   oci_base_general = {
     label_prefix         = var.label_prefix
     region               = var.region
   }
   oci_base_vcn = {
+    create_nat_gateway     = var.create_nat_gateway
+    create_service_gateway = var.create_service_gateway
     vcn_cidr               = var.vcn_cidr
     vcn_dns_label          = var.vcn_dns_label
     vcn_name               = var.vcn_name
-    create_nat_gateway     = var.create_nat_gateway
-    create_service_gateway = var.create_service_gateway
   }
-  oci_base_bastion = {
+  oci_base_bastion = {    
     newbits                        = var.newbits["bastion"]
     subnets                        = var.subnets["bastion"]
     bastion_shape                  = var.bastion_shape

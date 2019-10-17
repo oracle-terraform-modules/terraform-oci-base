@@ -18,11 +18,9 @@
 Configuration Terraform Options:
 
 . link:#identity-and-access[Identity and Access]
-. link:#ssh-keys[SSH Keys]
 . link:#general-oci[General OCI]
 . link:#oci-networking[OCI Networking]
 . link:#bastion-host[Bastion Host]
-. link:#notification[Notification]
 
 === Identity and access
 
@@ -60,28 +58,6 @@ Configuration Terraform Options:
 
 |===
 
-=== SSH Keys
-
-[stripes=odd,cols="1d,4d,3a,3a", options=header,width="100%"] 
-|===
-|Parameter
-|Description
-|Values
-|Default
-
-|ssh_private_key_path
-|path to ssh private key. This ssh key is used to authenticate and log into the bastion host. Must be the private key of the public key provided below. *Required* if bastion is enabled.
-
-|
-|None
-
-|ssh_public_key_path
-|path to ssh public key. The ssh key is used when provisioning the bastion host. Must be the public key of the private key provided above. *Required* if bastion is enabled.
-|
-|None
-
-|===
-
 === General OCI
 
 [stripes=odd,cols="1d,4d,3a,3a", options=header,width="100%"] 
@@ -112,11 +88,15 @@ Configuration Terraform Options:
 |Values
 |Default
 
+|create_nat_gateway
+|Whether to create a NAT gateway. *Required* for private subnets.
+|true/false
+|false
 
-|vcn_name
-|The name of the VCN that will be appended to the label_prefix.
-|
-|base
+|create_service_gateway
+|Whether to create a Service Gateway to use Oracle Services.
+|true/false
+|false
 
 |vcn_cidr
 |The VCN's CIDR block.
@@ -128,13 +108,56 @@ Configuration Terraform Options:
 |
 |base
 
-|create_nat_gateway
-|Whether to create a NAT gateway. *Required* for private subnets.
+|vcn_name
+|The name of the VCN that will be appended to the label_prefix.
+|
+|base
+
+|===
+
+=== Bastion Host
+
+[stripes=odd,cols="1d,4d,3a,3a", options=header,width="100%"] 
+|===
+|Parameter
+|Description
+|Values
+|Default
+
+|availability_domains
+|The Availability Domain where to provision resources e.g. bastion host. This is specified in the form of a map.
+|[source]
+----
+1
+----
+|
+[source]
+----
+1
+----
+
+|bastion_access
+|CIDR block in the form of a string to which ssh access to the bastion must be restricted to. *_ANYWHERE_* is equivalent to 0.0.0.0/0 and allows ssh access from anywhere.
+|XXX.XXX.XXX.XXX/YY
+|ANYWHERE
+
+|bastion_shape
+|The shape of bastion instance.
+|
+|VM.Standard.E2.1
+
+|create_bastion
+|Whether to create the bastion host.
 |true/false
 |false
 
-|create_service_gateway
-|Whether to create a Service Gateway to use Oracle Services.
+|enable_instance_principal
+|Whether to enable instance_principal on the bastion. Refer to {uri-instance-principal-note}[instance_principal].
+|true/false
+|false
+
+|enable_notification
+|Whether to enable ONS notification for the bastion host.
 |true/false
 |false
 
@@ -162,71 +185,6 @@ Configuration Terraform Options:
 32
 ----
 
-
-|===
-
-=== Bastion Host
-
-[stripes=odd,cols="1d,4d,3a,3a", options=header,width="100%"] 
-|===
-|Parameter
-|Description
-|Values
-|Default
-
-|create_bastion
-|Whether to create the bastion host.
-|true/false
-|false
-
-|bastion_shape
-|The shape of bastion instance.
-|
-|VM.Standard.E2.1
-
-|bastion_access
-|CIDR block in the form of a string to which ssh access to the bastion must be restricted to. *_ANYWHERE_* is equivalent to 0.0.0.0/0 and allows ssh access from anywhere.
-|XXX.XXX.XXX.XXX/YY
-|ANYWHERE
-
-|timezone
-|The preferred timezone for the bastion host. {uri-timezones}[List of timezones]
-|
-|
-
-|enable_instance_principal
-|Whether to enable instance_principal on the bastion. Refer to {uri-instance-principal-note}[instance_principal].
-|true/false
-|false
-
-|availability_domains
-|The Availability Domain where to provision non-OKE resources e.g. bastion host. This is specified in the form of a map.
-|[source]
-----
-1
-----
-|
-[source]
-----
-1
-----
-
-|===
-
-=== Notification
-
-[stripes=odd,cols="1d,4d,3a,3a", options=header,width="100%"] 
-|===
-|Parameter
-|Description
-|Values
-|Default
-
-|enable_notification
-|Whether to enable ONS notification for the bastion host.
-|true/false
-|false
-
 |notification_endpoint
 |The subscription notification endpoint. Email address to be notified.
 |
@@ -241,5 +199,21 @@ Configuration Terraform Options:
 |The name of the notification topic
 |
 |bastion
+
+|ssh_private_key_path
+|path to ssh private key. This ssh key is used to authenticate and log into the bastion host. Must be the private key of the public key provided below. *Required* if bastion is enabled.
+
+|
+|None
+
+|ssh_public_key_path
+|path to ssh public key. The ssh key is used when provisioning the bastion host. Must be the public key of the private key provided above. *Required* if bastion is enabled.
+|
+|None
+
+|timezone
+|The preferred timezone for the bastion host. {uri-timezones}[List of timezones]
+|
+|
 
 |===

@@ -68,26 +68,21 @@ variable "oci_base_bastion" {
     ssh_private_key_path      = string
     ssh_public_key_path       = string
     timezone                  = string
-<<<<<<< HEAD
     use_autonomous            = bool
   })
   description = "bastion host parameters"
   default = {
-<<<<<<< HEAD
     availability_domains      = 1
     bastion_access            = "ANYWHERE"
     bastion_image_id          = "NONE"
-=======
     newbits                   = 13
     netnum                    = 32
->>>>>>> 3018ba6... Changed subnets to netnum
-=======
   })
   description = "bastion host parameters"
   default = {
     availability_domains      = 1
     bastion_access            = "ANYWHERE"
->>>>>>> 1127030... removed private ssh_key for bastion module, tesseract script, added explicit docs for instance_principal and ONS notification
+    bastion_image             = "Oracle"
     bastion_shape             = "VM.Standard.E2.1"
     bastion_upgrade           = true    
     create_bastion            = false
@@ -101,9 +96,6 @@ variable "oci_base_bastion" {
     ssh_private_key_path      = ""
     ssh_public_key_path       = ""
     timezone                  = ""
-<<<<<<< HEAD
     use_autonomous            = false
-=======
->>>>>>> 1127030... removed private ssh_key for bastion module, tesseract script, added explicit docs for instance_principal and ONS notification
   }
 }

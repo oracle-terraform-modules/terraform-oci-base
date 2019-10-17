@@ -9,6 +9,8 @@
 :uri-rel-file-base: link:{uri-repo}/blob/master
 :uri-rel-tree-base: link:{uri-repo}/tree/master
 :uri-docs: {uri-rel-file-base}/docs
+:uri-instance-principal: {uri-docs}/instanceprincipal.adoc
+:uri-ons: {uri-docs}/notifcations.adoc
 :uri-reusing: {uri-rel-tree-base}/examples/gitlab
 :uri-oci-keys: https://docs.cloud.oracle.com/iaas/Content/API/Concepts/apisigningkey.htm
 :uri-oci-ocids: https://docs.cloud.oracle.com/iaas/Content/API/Concepts/apisigningkey.htm#five
@@ -58,11 +60,11 @@ cp terraform.tfvars.example terraform.tfvars
 * region
 
 4. Optional parameters to override:
+* create_bastion
 * ssh_private_key_path
 * ssh_public_key_path
 * vcn_dns_label
 * vcn_name
-* create_bastion
 
 5. Create a provider.tf file and add the following:
 
@@ -90,3 +92,7 @@ terraform apply
 * {uri-reusing}[Reusing as a module]
 
 * {uri-terraform-options}[All Terraform configuration options] for {uri-repo}[this project]
+
+* {uri-instance-principal}[Enabling instance_principal]
+
+* {uri-ons}[Using ONS Notification]

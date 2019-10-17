@@ -7,6 +7,13 @@ All notable changes to this project are documented in this file.
 
 The format is based on {uri-changelog}[Keep a Changelog].
 
+== 0.0.2 (October 17 2019)
+
+* Changed subnets to netnums (thanks @kumar-dhanagopal)
+* Removed unused parameters from docs (thanks @ronabop)
+* Added timezone variable (thanks @kumar-dhanagopal)
+* Remove ssh_private_key_variable
+
 == 0.0.1 (October 2 2019)
 
 * Changed bastion image to Autonomous Linux

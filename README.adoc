@@ -15,10 +15,14 @@
 :uri-contribute: {uri-rel-file-base}/CONTRIBUTING.adoc
 :uri-contributors: {uri-rel-file-base}/CONTRIBUTORS.adoc
 
+:uri-instance-principal: {uri-docs}/instanceprincipal.adoc
+:uri-ons: {uri-docs}/notifcations.adoc
+
 :uri-license: {uri-rel-file-base}/LICENSE.txt
 :uri-networks-subnets-cidr: https://erikberg.com/notes/networks.html
 :uri-oci: https://cloud.oracle.com/cloud-infrastructure
 :uri-oci-documentation: https://docs.cloud.oracle.com/iaas/Content/home.htm
+
 :uri-oracle: https://www.oracle.com
 :uri-prereqs: {uri-docs}/prerequisites.adoc
 :uri-quickstart: {uri-docs}/quickstart.adoc
@@ -48,6 +52,8 @@ The module can be reused to create more advanced infrastructure on {uri-oci}[OCI
 * Instructions
 ** {uri-quickstart}[Provisioning a basic infrastructure (Quickstart)]
 ** {uri-reuse-module}[Reusing as a Terraform module]
+** {uri-instance-principal}[Enabling instance_principal]
+** {uri-ons}[Using ONS Notification]
 
 * {uri-terraform-options}[Terraform Options]
 

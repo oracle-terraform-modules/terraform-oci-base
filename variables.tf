@@ -54,6 +54,8 @@ variable "oci_base_bastion" {
   type = object({
     availability_domains      = number
     bastion_access            = string
+    bastion_image_id          = string
+    bastion_upgrade           = bool    
     bastion_shape             = string
     create_bastion            = bool
     enable_instance_principal = bool
@@ -66,12 +68,15 @@ variable "oci_base_bastion" {
     ssh_private_key_path      = string
     ssh_public_key_path       = string
     timezone                  = string
+    use_autonomous            = bool
   })
   description = "bastion host parameters"
   default = {
     availability_domains      = 1
     bastion_access            = "ANYWHERE"
+    bastion_image_id          = "NONE"
     bastion_shape             = "VM.Standard.E2.1"
+    bastion_upgrade           = true    
     create_bastion            = false
     enable_instance_principal = false
     enable_notification       = false
@@ -83,5 +88,6 @@ variable "oci_base_bastion" {
     ssh_private_key_path      = ""
     ssh_public_key_path       = ""
     timezone                  = ""
+    use_autonomous            = false
   }
 }

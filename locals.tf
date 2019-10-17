@@ -30,11 +30,14 @@ locals {
 
   oci_bastion = {
     bastion_access            = var.oci_base_bastion.bastion_access
+    bastion_image_id          = var.oci_base_bastion.bastion_image_id
     bastion_shape             = var.oci_base_bastion.bastion_shape
+    bastion_upgrade           = var.oci_base_bastion.bastion_upgrade    
     create_bastion            = var.oci_base_bastion.create_bastion
     enable_instance_principal = var.oci_base_bastion.enable_instance_principal
     ssh_public_key_path       = var.oci_base_bastion.ssh_public_key_path
     timezone                  = var.oci_base_bastion.timezone
+    use_autonomous            = var.oci_base_bastion.use_autonomous
   }
 
   oci_bastion_notification = {

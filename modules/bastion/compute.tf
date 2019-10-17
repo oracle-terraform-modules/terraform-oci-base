@@ -6,9 +6,10 @@ resource "oci_core_instance" "bastion" {
   compartment_id      = var.oci_base_identity.compartment_id
 
   create_vnic_details {
-    subnet_id      = oci_core_subnet.bastion[0].id
-    display_name   = "${var.oci_bastion_general.label_prefix}-bastion-vnic"
-    hostname_label = "bastion"
+    assign_public_ip = true
+    subnet_id        = oci_core_subnet.bastion[0].id
+    display_name     = "${var.oci_bastion_general.label_prefix}-bastion-vnic"
+    hostname_label   = "bastion"
   }
 
   display_name = "${var.oci_bastion_general.label_prefix}-bastion"
@@ -23,7 +24,7 @@ resource "oci_core_instance" "bastion" {
 
   source_details {
     source_type = "image"
-    source_id   = lookup(data.oci_core_app_catalog_subscriptions.autonomous_linux.app_catalog_subscriptions[0], "listing_resource_id")
+    source_id   = local.bastion_image_id
   }
 
   timeouts {

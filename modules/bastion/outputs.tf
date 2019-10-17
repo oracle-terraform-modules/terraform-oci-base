@@ -3,7 +3,7 @@
 
 output "bastion_public_ip" {
   description = "public IP address of bastion host"
-  value       = join(",", data.oci_core_vnic.bastion_vnic.*.public_ip_address)
+  value       = join(",", data.oci_core_vnic.bastion_vnic_1.*.public_ip_address)
 }
 
 output "bastion_instance_principal_group_name" {

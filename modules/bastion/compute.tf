@@ -14,7 +14,7 @@ resource "oci_core_instance" "bastion" {
   display_name = "${var.oci_bastion_general.label_prefix}-bastion"
 
   extended_metadata = {
-    ssh_authorized_keys = file(var.oci_base_ssh_keys.ssh_public_key_path)
+    ssh_authorized_keys = file(var.oci_bastion.ssh_public_key_path)
     subnet_id           = oci_core_subnet.bastion[0].id
     user_data           = data.template_cloudinit_config.bastion[0].rendered
   }
@@ -31,10 +31,4 @@ resource "oci_core_instance" "bastion" {
   }
 
   count = var.oci_bastion.create_bastion == true ? 1 : 0
-}
-
-resource "local_file" "tesseract" {
-  content  = data.template_file.tesseract_template[0].rendered
-  filename = "${path.root}/scripts/tesseract.sh"
-  count    = var.oci_bastion.create_bastion == true ? 1 : 0
 }

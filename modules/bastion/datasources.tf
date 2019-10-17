@@ -19,19 +19,6 @@ data "oci_core_app_catalog_subscriptions" "autonomous_linux" {
   listing_id = lookup(data.oci_core_app_catalog_listing_resource_versions.autonomous_linux.app_catalog_listing_resource_versions[0], "listing_id")
 }
 
-data "template_file" "tesseract_template" {
-  template = file("${path.module}/scripts/tesseract.template.sh")
-
-  vars = {
-    bastion_ip       = join(",", data.oci_core_vnic.bastion_vnic.*.public_ip_address)
-    private_key_path = var.oci_base_ssh_keys.ssh_private_key_path
-    user             = "opc"
-  }
-
-  depends_on = ["oci_core_instance.bastion"]
-  count      = var.oci_bastion.create_bastion == true ? 1 : 0
-}
-
 data "template_file" "bastion_template" {
   template = file("${path.module}/scripts/bastion.template.sh")
 

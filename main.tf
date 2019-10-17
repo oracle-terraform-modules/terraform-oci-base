@@ -12,6 +12,5 @@ module "bastion" {
   oci_bastion_general      = local.oci_bastion_general
   oci_bastion_infra        = local.oci_bastion_infra
   oci_bastion              = local.oci_bastion
-  oci_base_ssh_keys        = var.oci_base_ssh_keys
   oci_bastion_notification = local.oci_bastion_notification
 }

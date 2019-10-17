@@ -1,0 +1,76 @@
+= Pre-requisites
+
+:idprefix:
+:idseparator: -
+:sectlinks:
+
+:uri-repo: https://github.com/oracle/terraform-oci-base
+
+:uri-rel-file-base: link:{uri-repo}/blob/master
+:uri-rel-tree-base: link:{uri-repo}/tree/master
+
+:uri-docs: {uri-rel-file-base}/docs
+:uri-instance-principal: {uri-docs}/instanceprincipal.adoc
+:uri-ksplice: https://ksplice.oracle.com/
+
+:uri-oci: https://cloud.oracle.com/cloud-infrastructure
+:uri-oci-notifications: https://docs.cloud.oracle.com/iaas/Content/Notification/Concepts/notificationoverview.htm
+
+
+This section documents the use of {uri-oci-notifications}[ONS Notification] in the project.
+
+. link:#using-ons-notification[Using ONS Notification]
+.. link:#enabling-ons-notification-for-the-bastion-host[Enabling ONS Notification for the bastion host]
+.. link:#disabling-ons-notification-for-the-bastion-host[Disabling ONS Notification for the bastion host]
+
+=== Using ONS Notification
+
+The {uri-oci-notifications}[Oracle Cloud Infrastructure Notifications service] can be configured to receive status messages from your instance when updates have been applied or when a known exploit attempt has been detected by {uri-ksplice}[Ksplice].
+
+==== Enabling ONS Notification for the bastion host
+
+Set the following parameters in the terraform.tfvars in order to enable ONS Notification for the bastion host:
+
+----
+  enable_instance_principal = true
+  enable_notification        = true
+  notification_endpoint      = "email_address"
+  notification_protocol      = "EMAIL"
+  notification_topic         = "bastion"
+----
+
+If your bastion is already created, set the above parameters in the terraform.tfvars and run terraform apply again:
+
+----
+terraform apply
+----
+
+You'll then receive a notification email to confirm the subscription.
+
+Note that at the time of enabling ONS notification, instance_principal for the bastion must be enabled by setting *enable_instance_principal* to _true_. This can subsequently be disabled by setting it to _false_:
+
+----
+  enable_instance_principal = false
+----
+
+and running terraform apply again:
+
+----
+terraform apply
+----
+
+Read more on {uri-instance-principal}[instance_principal].
+
+==== Disabling ONS Notification for the bastion host
+
+Set the following parameters in the terraform.tfvars to disable ONS Notification:
+
+----
+  enable_notification        = false
+----
+
+and run terraform apply again:
+
+----
+terraform apply
+----

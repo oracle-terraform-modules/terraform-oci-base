@@ -28,7 +28,9 @@ oci_base_vcn = {
 oci_base_bastion = {
   availability_domains      = 1
   bastion_access            = "ANYWHERE"
+  bastion_image_id          = "NONE"
   bastion_shape             = "VM.Standard.E2.1"
+  bastion_upgrade           = true  
   create_bastion            = true
   enable_instance_principal = false
   enable_notification       = false
@@ -40,4 +42,5 @@ oci_base_bastion = {
   ssh_private_key_path      = ""
   ssh_public_key_path       = ""
   timezone                  = "Australia/Sydney"
+  use_autonomous            = false  
 }

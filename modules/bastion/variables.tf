@@ -41,11 +41,14 @@ variable "oci_bastion_infra" {
 variable "oci_bastion" {
   type = object({
     bastion_access            = string
+    bastion_image_id          = string
     bastion_shape             = string
+    bastion_upgrade           = bool    
     create_bastion            = bool
     enable_instance_principal = bool
     ssh_public_key_path       = string
     timezone                  = string
+    use_autonomous            = bool
   })
   description = "bastion host parameters"
 }

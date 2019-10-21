@@ -55,7 +55,6 @@ variable "oci_base_bastion" {
     availability_domains      = number
     bastion_access            = string
     bastion_image_id          = string
-    bastion_image             = string
     bastion_upgrade           = bool    
     bastion_shape             = string
     create_bastion            = bool
@@ -76,7 +75,6 @@ variable "oci_base_bastion" {
     availability_domains      = 1
     bastion_access            = "ANYWHERE"
     bastion_image_id          = "NONE"
-    bastion_image             = "Oracle"
     bastion_shape             = "VM.Standard.E2.1"
     bastion_upgrade           = true    
     create_bastion            = false

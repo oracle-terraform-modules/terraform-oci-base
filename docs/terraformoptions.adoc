@@ -152,7 +152,7 @@ Configuration Terraform Options:
 |VM.Standard.E2.1
 
 |bastion_upgrade
-|Whether to upgrade the bastion host after provisioning. It's useful to set this to false during development so the bastion is provisioned faster.
+|Whether to upgrade the bastion host packages after provisioning. It's useful to set this to false during development so the bastion is provisioned faster.
 |true/false
 |true
 

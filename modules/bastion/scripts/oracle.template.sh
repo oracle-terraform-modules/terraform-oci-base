@@ -3,6 +3,9 @@
 # Copyright 2017, 2019, Oracle Corporation and/or affiliates.  All rights reserved.
 # Licensed under the Universal Permissive License v 1.0 as shown at http://oss.oracle.com/licenses/upl
 
+# Hardening of the host based on https://www.cisecurity.org/benchmark/oracle_linux/
+# This script is used only if the Oracle Linux platform image is used to create the bastion
+
 yum update --security
 
 sed -i -e "s/autoinstall\s=\sno/# autoinstall = yes/g" /etc/uptrack/uptrack.conf

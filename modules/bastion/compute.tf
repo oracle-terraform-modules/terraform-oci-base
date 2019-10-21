@@ -9,7 +9,7 @@ resource "oci_core_instance" "bastion" {
     assign_public_ip = true
     subnet_id        = oci_core_subnet.bastion[0].id
     display_name     = "${var.oci_bastion_general.label_prefix}-bastion-vnic"
-    hostname_label   = "bastion-primary"
+    hostname_label   = "bastion"
   }
 
   display_name = "${var.oci_bastion_general.label_prefix}-bastion"

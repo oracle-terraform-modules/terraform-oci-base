@@ -5,6 +5,6 @@
 
 yum update --security
 
-sed -i -e "s/autoinstall\s=\sno/# autoinstall = yes/g" /etc/uptrack/uptrack.conf
+sed -i -e "s/autoinstall\s=\sno/autoinstall = yes/g" /etc/uptrack/uptrack.conf
 
 uptrack-upgrade

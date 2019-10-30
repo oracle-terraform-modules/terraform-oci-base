@@ -141,10 +141,20 @@ Configuration Terraform Options:
 |XXX.XXX.XXX.XXX/YY
 |ANYWHERE
 
+|bastion_image_id
+|Custom image id for the bastion host
+|image id or NONE. If the value is set to NONE, an Oracle Platform image will be used instead. Set use_autonomous to _false_ if you want to use your own image.
+|NONE
+
 |bastion_shape
 |The shape of bastion instance.
 |
 |VM.Standard.E2.1
+
+|bastion_upgrade
+|Whether to upgrade the bastion host packages after provisioning. It's useful to set this to false during development so the bastion is provisioned faster.
+|true/false
+|true
 
 |create_bastion
 |Whether to create the bastion host.
@@ -215,5 +225,10 @@ Configuration Terraform Options:
 |The preferred timezone for the bastion host. {uri-timezones}[List of timezones]
 |
 |
+
+|use_autonomous
+|Whether to use Autonomous Linux or an Oracle Linux Platform image or custom image. Set to false if you want to use your own image id or Oracle Linux Platform image.
+|true/false
+|false
 
 |===

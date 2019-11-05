@@ -18,7 +18,8 @@
 :uri-instance-principal: {uri-docs}/instanceprincipal.adoc
 
 
-:uri-license: {uri-rel-file-base}/LICENSE.txt
+:uri-license: {uri-rel-file-base}/LICENSE
+:uri-canonical-license: https://oss.oracle.com/licenses/upl/
 :uri-networks-subnets-cidr: https://erikberg.com/notes/networks.html
 :uri-oci: https://cloud.oracle.com/cloud-infrastructure
 :uri-oci-documentation: https://docs.cloud.oracle.com/iaas/Content/home.htm
@@ -68,7 +69,10 @@ The module can be reused to create more advanced infrastructure on {uri-oci}[OCI
 
 == License
 
-{uri-license}[LICENSE.txt]
+Copyright &copy; 2019 Oracle and/or its associates. All rights reserved.
+
+Licensed under the {uri-license}[Universal Permissive License 1.0] as shown at 
+{uri-canonical-license}[https://oss.oracle.com/licenses/upl].
 
 == Changelog
 

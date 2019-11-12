@@ -1,0 +1,105 @@
+# Copyright 2017, 2019, Oracle Corporation and/or affiliates.  All rights reserved.
+# Licensed under the Universal Permissive License v 1.0 as shown at http://oss.oracle.com/licenses/upl
+
+# Keep root variables flat to make it easy for users to fill in
+
+# Identity and access parameters
+api_fingerprint = ""
+
+api_private_key_path = ""
+
+compartment_id = ""
+
+tenancy_id = ""
+
+user_id = ""
+
+# ssh keys
+ssh_private_key_path = ""
+
+ssh_public_key_path = ""
+
+# general oci parameters
+label_prefix = "basedbexample"
+
+region = "us-phoenix-1"
+
+# networking parameters
+newbits = {
+  bastion = 13
+  db      = 11
+}
+
+vcn_cidr = "10.0.0.0/16"
+
+vcn_dns_label = "basedb"
+
+vcn_name = "db vcn"
+
+# nat
+create_nat_gateway = true
+
+# service gateway
+create_service_gateway = true
+
+subnets = {
+  bastion = 32
+  db      = 16
+}
+
+# bastion
+bastion_shape = "VM.Standard.E2.2"
+
+create_bastion = true
+
+bastion_access = "ANYWHERE"
+
+enable_instance_principal = false
+
+image_id = "NONE"
+
+# availability domains
+availability_domains = {
+  bastion = 1
+  db      = 1
+}
+
+# db
+
+db_system_shape = "VM.Standard2.8"
+
+cpu_core_count = 2
+
+db_edition = "ENTERPRISE_EDITION_EXTREME_PERFORMANCE"
+
+db_admin_password = "BEstrO0ng_#12"
+
+db_name = "basedb"
+
+db_home_db_name = "basedb2"
+
+db_version = "19.0.0.0"
+
+db_home_display_name = "basedbhome"
+
+db_disk_redundancy = "HIGH"
+
+db_system_display_name = "basedb_system"
+
+hostname = "myoracledb"
+
+n_character_set = "AL16UTF16"
+
+character_set = "AL32UTF8"
+
+db_workload = "OLTP"
+
+pdb_name = "pdb1"
+
+data_storage_size_in_gb = 256
+
+license_model = "LICENSE_INCLUDED"
+
+node_count = 2
+
+data_storage_percentage = 40

@@ -37,7 +37,7 @@ variable "ssh_public_key_path" {
 # general oci parameters
 variable "label_prefix" {
   type    = "string"
-  default = "gitlab"
+  default = "basedb"
 }
 
 variable "region" {
@@ -53,8 +53,7 @@ variable "newbits" {
 
   default = {
     bastion = 13
-    lb      = 11
-    gitlab = 2
+    db      = 11
   }
 }
 
@@ -66,13 +65,13 @@ variable "vcn_cidr" {
 
 variable "vcn_dns_label" {
   type    = "string"
-  default = "gitlab"
+  default = "basedb"
 }
 
 variable "vcn_name" {
   type        = "string"
   description = "name of vcn"
-  default     = "gitlab vcn"
+  default     = "basedb vcn"
 }
 
 # nat
@@ -93,8 +92,7 @@ variable "subnets" {
 
   default = {
     bastion = 32
-    lb  = 16
-    gitlab = 1
+    db  = 16
   }
 }
 
@@ -129,18 +127,85 @@ variable "availability_domains" {
 
   default = {
     bastion = 1
-    gitlab  = 1
+    db  = 1
   }
 }
 
-# gitlab
+# dbserver
 
-variable "gitlab_shape" {
-  description = "compute shape of gitlab instance"
-  default     = "VM.Standard2.4"
+variable "db_system_shape" {
+  description = "compute shape of db nodes"
+  default     = "VM.Standard2.8"
 }
 
-variable gitlab_url {
-  description = "url of gitlab"
-  default     = "gitlab.oraclevcn.com"
+variable "cpu_core_count" {
+  default = "2"
+}
+
+variable "db_edition" {
+  default = "ENTERPRISE_EDITION"
+}
+
+variable "db_admin_password" {
+  default = "BEstrO0ng_#12"
+}
+
+variable "db_name" {
+  default = "basedb"
+}
+
+variable "db_home_db_name" {
+  default = "basedb2"
+}
+
+variable "db_version" {
+  default = "19.0.0.0"
+}
+
+variable "db_home_display_name" {
+  default = "basedbhome"
+}
+
+variable "db_disk_redundancy" {
+  default = "HIGH"
+}
+
+variable "db_system_display_name" {
+  default = "basedb_system"
+}
+
+variable "hostname" {
+  default = "myoracledb"
+}
+
+variable "n_character_set" {
+  default = "AL16UTF16"
+}
+
+variable "character_set" {
+  default = "AL32UTF8"
+}
+
+variable "db_workload" {
+  default = "OLTP"
+}
+
+variable "pdb_name" {
+  default = "pdb1"
+}
+
+variable "data_storage_size_in_gb" {
+  default = "256"
+}
+
+variable "license_model" {
+  default = "LICENSE_INCLUDED"
+}
+
+variable "node_count" {
+  default = "1"
+}
+
+variable "data_storage_percentage" {
+  default = "40"
 }

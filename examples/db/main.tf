@@ -7,9 +7,6 @@ module "base" {
   # identity
   oci_base_identity = local.oci_base_identity
 
-  # ssh keys
-  oci_base_ssh_keys = local.oci_base_ssh_keys
-
   # general oci parameters
   oci_base_general = local.oci_base_general
 
@@ -20,19 +17,19 @@ module "base" {
   oci_base_bastion = local.oci_base_bastion
 }
 
-module "gitlab" {
-  source = "./modules/gitlab"
+module "db" {
+  source = "./modules/db"
 
-  gitlab_identity = local.gitlab_identity
+  db_identity = local.db_identity
 
   # since they have the same signature, we can reuse that
-  gitlab_ssh_keys = local.oci_base_ssh_keys
+  db_ssh_keys = local.oci_base_ssh_keys
 
-  gitlab_oci_general = local.oci_base_general
+  db_oci_general = local.db_oci_general
 
-  gitlab_bastion = local.gitlab_bastion
+  db_bastion = local.db_bastion
 
-  gitlab_network = local.gitlab_network
+  db_network = local.db_network
 
-  gitlab_config = local.gitlab_config
+  db_config = local.db_config
 }

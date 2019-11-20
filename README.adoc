@@ -80,7 +80,6 @@ Code derived and adapted from {uri-terraform-oci-examples}[Terraform OCI Example
 {uri-contributors}[Folks who contributed with explanations, code, feedback, ideas, testing etc.]
 
 Learn how to {uri-contribute}[contribute].
-<<<<<<< HEAD
 
 == License
 
@@ -88,5 +87,3 @@ Copyright &copy; 2019 Oracle and/or its associates. All rights reserved.
 
 Licensed under the {uri-license}[Universal Permissive License 1.0] as shown at 
 {uri-canonical-license}[https://oss.oracle.com/licenses/upl].
-=======
->>>>>>> 8a5b8e8... Fix for notification documentation broken link 

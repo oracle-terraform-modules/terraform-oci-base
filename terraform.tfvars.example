@@ -3,6 +3,7 @@
 oci_base_identity = {
   api_fingerprint      = ""
   api_private_key_path = ""
+  compartment_name     = ""
   compartment_id       = ""
   tenancy_id           = ""
   user_id              = ""

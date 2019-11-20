@@ -37,10 +37,6 @@ You can proceed to the {uri-quickstart}[Quick Start guide] if you have already d
 . link:#create-an-oci-compartment[Create an OCI Compartment]
 . link:#obtain-the-necessary-ocids[Obtain the necessary OCIDs]
 . link:#identity-and-access-management-rights[Identity and Access Management Rights]
-. link:#using-instance_principal[Using instance_principal]
-.. link:#enabling-instance_principal-on-the-bastion-host[Enabling instance_principal on the bastion host]
-.. link:#disabling-instance_principal-on-the-bastion-host[Disabling instance_principal on the bastion host]
-.. link:#recommendations-for-using-instance_principal[Recommendations for using instance_principal]
 . link:#using-autonomous-linux[Using Autonomous Linux]
 
 === Install Terraform

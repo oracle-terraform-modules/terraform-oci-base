@@ -21,7 +21,6 @@ Configuration Terraform Options:
 . link:#general-oci[General OCI]
 . link:#oci-networking[OCI Networking]
 . link:#bastion-host[Bastion Host]
-. link:#notification[Notification]
 
 === Identity and access
 
@@ -67,11 +66,6 @@ Configuration Terraform Options:
 |Description
 |Values
 |Default
-
-|disable_auto_retries
-|
-|true/false
-|false
 
 |label_prefix
 |a string to be prepended to the name of resources.

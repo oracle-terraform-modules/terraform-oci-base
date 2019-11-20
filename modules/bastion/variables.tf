@@ -1,5 +1,5 @@
 # Copyright 2017, 2019, Oracle Corporation and/or affiliates.  All rights reserved.
-# Licensed under the Universal Permissive License v 1.0 as shown at http://oss.oracle.com/licenses/upl
+# Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl/
 
 # general
 
@@ -51,6 +51,16 @@ variable "oci_bastion" {
     use_autonomous            = bool
   })
   description = "bastion host parameters"
+}
+
+variable "oci_bastion_notification" {
+  type = object({
+    enable_notification   = bool
+    notification_endpoint = string
+    notification_protocol = string
+    notification_topic    = string
+  })
+  description = "OCI notification parameters for bastion"
 }
 
 variable "oci_bastion_notification" {

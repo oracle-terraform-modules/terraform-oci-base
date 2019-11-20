@@ -10,11 +10,11 @@ timezone: ${timezone}
 
 write_files:
 # setup script
-  - path: "/root/bastion/bastion.sh"
+  - path: "/root/bastion/notification.sh"
     permissions: "0700"
     encoding: "gzip+base64"
     content: |
-      ${bastion_sh_content}
+      ${notification_sh_content}
 runcmd:
  - echo "Configuring bastion..." | tee /root/bastion/bastion.txt
  - bash /root/bastion/bastion.sh

@@ -62,27 +62,3 @@ variable "oci_bastion_notification" {
   })
   description = "OCI notification parameters for bastion"
 }
-
-variable "oci_bastion" {
-  type = object({
-    bastion_access            = string
-    bastion_shape             = string
-    bastion_upgrade           = bool    
-    create_bastion            = bool
-    enable_instance_principal = bool
-    ssh_public_key_path       = string
-    timezone                  = string
-    use_autonomous            = bool
-  })
-  description = "bastion host parameters"
-}
-
-variable "oci_bastion_notification" {
-  type = object({
-    enable_notification   = bool
-    notification_endpoint = string
-    notification_protocol = string
-    notification_topic    = string
-  })
-  description = "OCI notification parameters for bastion"
-}

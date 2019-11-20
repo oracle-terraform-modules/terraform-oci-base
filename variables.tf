@@ -55,8 +55,8 @@ variable "oci_base_bastion" {
     availability_domains      = number
     bastion_access            = string
     bastion_image_id          = string
-    bastion_upgrade           = bool    
     bastion_shape             = string
+    bastion_upgrade           = bool
     create_bastion            = bool
     enable_instance_principal = bool
     enable_notification       = bool
@@ -75,16 +75,8 @@ variable "oci_base_bastion" {
     availability_domains      = 1
     bastion_access            = "ANYWHERE"
     bastion_image_id          = "NONE"
-    newbits                   = 13
-    netnum                    = 32
-  })
-  description = "bastion host parameters"
-  default = {
-    availability_domains      = 1
-    bastion_access            = "ANYWHERE"
-    bastion_image             = "Oracle"
     bastion_shape             = "VM.Standard.E2.1"
-    bastion_upgrade           = true    
+    bastion_upgrade           = true
     create_bastion            = false
     enable_instance_principal = false
     enable_notification       = false

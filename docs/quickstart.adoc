@@ -11,7 +11,7 @@
 :uri-docs: {uri-rel-file-base}/docs
 :uri-instance-principal: {uri-docs}/instanceprincipal.adoc
 :uri-ons: {uri-docs}/notifcations.adoc
-:uri-reusing: {uri-rel-tree-base}/examples/gitlab
+:uri-reusing: {uri-rel-tree-base}/examples/db
 :uri-oci-keys: https://docs.cloud.oracle.com/iaas/Content/API/Concepts/apisigningkey.htm
 :uri-oci-ocids: https://docs.cloud.oracle.com/iaas/Content/API/Concepts/apisigningkey.htm#five
 :uri-terraform: https://www.terraform.io

@@ -32,16 +32,16 @@ This section documents the use of {uri-oci-instance-principal}[instance_principa
 
 === Using instance_principal
 
-==== Enabling instance_principal on the bastion host
+==== Enabling instance_principal on the admin host
 {uri-oci-instance-principal}[instance_principal] is an IAM service feature that enables instances to be authorized actors (or principals) to perform actions on service resources. Each compute instance has its own identity, and it authenticates using the certificates that are added to it. These certificates are automatically created, assigned to instances and rotated, preventing the need for you to distribute credentials to your hosts and rotate them.
 
 Any user who has access to the instance (who can SSH to the instance), automatically inherits the privileges granted to the instance. Before you enable this feature, ensure that you know who can access it, and that they should be authorized with the permissions you are granting to the instance.
 
-By default, this feature is *_disabled_*.
+By default, this feature is *_enabled_*.
 
-When you enable this feature, by default, the bastion has privileges to all resources in the compartment. 
+When you enable this feature, by default, the admin host has privileges to all resources in the compartment. 
 
-You can also turn on and off the feature at any time without impact on the bastion.
+You can also turn on and off the feature at any time without impact on the admin host.
 
 To enable, set enable_instance_principal to true:
 
@@ -55,7 +55,7 @@ and verify:
 oci network vcn list --compartment-id <compartment-ocid>
 ----
 
-==== Disabling instance_principal on the bastion host
+==== Disabling instance_principal on the admin host
 
 . Set enable_instance_principal to false in terraform.tfvars
 
@@ -74,5 +74,5 @@ terraform apply
 ==== Recommendations for using instance_principal
 
 . Do not enable instance_principal if you are not using it
-. Enable instance_principal *_if and only if_* you are using the bastion host to execute oci commands e.g. modifying dynamic groups, changing policies
+. Enable instance_principal *_if and only if_* you are using the admin host to execute oci commands e.g. modifying dynamic groups, changing policies
 . Disable instance_principal once the oci operation is done

@@ -16,31 +16,50 @@ oci_base_general = {
 # networking
 
 oci_base_vcn = {
-  create_nat_gateway     = true
-  create_service_gateway = true
-  vcn_cidr               = "10.0.0.0/16"
-  vcn_dns_label          = "base"
-  vcn_name               = "vcn"
+  nat_gateway_enabled     = true
+  service_gateway_enabled = true
+  vcn_cidr                = "10.0.0.0/16"
+  vcn_dns_label           = "base"
+  vcn_name                = "base"
 }
 
 # bastion
 
 oci_base_bastion = {
+  availability_domains  = 1
+  bastion_access        = "ANYWHERE"
+  bastion_enabled       = true
+  bastion_image_id      = "NONE"
+  bastion_shape         = "VM.Standard.E2.2"
+  bastion_upgrade       = true
+  netnum                = 32
+  newbits               = 13
+  notification_enabled  = true
+  notification_endpoint = ""
+  notification_protocol = "EMAIL"
+  notification_topic    = "bastion"
+  ssh_private_key_path  = ""
+  ssh_public_key_path   = ""
+  timezone              = "Australia/Sydney"
+  use_autonomous        = true
+}
+
+# admin
+oci_base_admin = {
   availability_domains      = 1
-  bastion_access            = "ANYWHERE"
-  bastion_image_id          = "NONE"
-  bastion_shape             = "VM.Standard.E2.1"
-  bastion_upgrade           = true  
-  create_bastion            = true
-  enable_instance_principal = false
-  enable_notification       = false
+  admin_enabled             = true
+  admin_image_id            = "NONE"
+  admin_shape               = "VM.Standard.E2.2"
+  admin_upgrade             = false
+  enable_instance_principal = true
+  netnum                    = 33
   newbits                   = 13
-  netnum                    = 32
+  notification_enabled      = false
   notification_endpoint     = ""
   notification_protocol     = "EMAIL"
-  notification_topic        = "bastion"
+  notification_topic        = "admin"
   ssh_private_key_path      = ""
   ssh_public_key_path       = ""
   timezone                  = "Australia/Sydney"
-  use_autonomous            = false  
+  use_autonomous            = false
 }

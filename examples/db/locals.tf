@@ -20,31 +20,49 @@ locals {
   }
 
   oci_base_vcn = {
-    create_nat_gateway     = var.create_nat_gateway
-    create_service_gateway = var.create_service_gateway
+    create_nat_gateway     = var.nat_gateway_enabled
+    create_service_gateway = var.service_gateway_enabled
     vcn_cidr               = var.vcn_cidr
     vcn_dns_label          = var.vcn_dns_label
     vcn_name               = var.vcn_name
   }
 
   oci_base_bastion = {
-    availability_domains      = var.availability_domains["bastion"]
-    bastion_access            = var.bastion_access
-    bastion_image_id          = "NONE"
-    bastion_shape             = var.bastion_shape
-    bastion_upgrade           = false
-    create_bastion            = var.create_bastion
-    enable_instance_principal = var.enable_instance_principal
-    enable_notification       = false
-    newbits                   = var.newbits["bastion"]
-    netnum                    = var.subnets["bastion"]
-    notification_endpoint     = ""
-    notification_protocol     = "EMAIL"
-    notification_topic        = "bastion"
+    availability_domains  = var.availability_domains["bastion"]
+    bastion_access        = var.bastion_access
+    bastion_image_id      = var.bastion_image_id
+    bastion_shape         = var.bastion_shape
+    bastion_upgrade       = var.bastion_package_upgrade
+    bastion_enabled       = var.bastion_enabled
+    netnum                = var.netnum["bastion"]
+    newbits               = var.newbits["bastion"]
+    notification_enabled  = var.bastion_notification_enabled
+    notification_endpoint = var.bastion_notification_endpoint
+    notification_protocol = var.bastion_notification_protocol
+    notification_topic    = var.bastion_notification_topic
+    ssh_private_key_path  = var.ssh_private_key_path
+    ssh_public_key_path   = var.ssh_public_key_path
+    timezone              = var.bastion_timezone
+    use_autonomous        = var.bastion_use_autonomous
+  }
+
+  oci_base_admin = {
+    availability_domains      = var.availability_domains["admin"]
+    admin_image_id            = "NONE"
+    admin_shape               = var.admin_shape
+    admin_upgrade             = var.admin_package_upgrade
+    admin_enabled             = var.admin_enabled
+    enable_instance_principal = var.admin_instance_principal
+    netnum                    = var.netnum["admin"]
+    newbits                   = var.newbits["admin"]
+    notification_enabled      = var.admin_notification_enabled
+    notification_endpoint     = var.admin_notification_endpoint
+    notification_protocol     = var.admin_notification_protocol
+    notification_topic        = var.admin_notification_topic
     ssh_private_key_path      = var.ssh_private_key_path
     ssh_public_key_path       = var.ssh_public_key_path
-    timezone                  = "Australia/Sydney"
-    use_autonomous            = false
+    timezone                  = var.admin_timezone
+    use_autonomous            = var.admin_use_autonomous
   }
 
   db_identity = {

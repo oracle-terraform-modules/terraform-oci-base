@@ -21,6 +21,7 @@ Configuration Terraform Options:
 . link:#general-oci[General OCI]
 . link:#oci-networking[OCI Networking]
 . link:#bastion-host[Bastion Host]
+. link:#admin-host[Admin Host]
 
 === Identity and access
 
@@ -88,12 +89,12 @@ Configuration Terraform Options:
 |Values
 |Default
 
-|create_nat_gateway
+|nat_gateway_enabled
 |Whether to create a NAT gateway. *Required* for private subnets.
 |true/false
-|false
+|true
 
-|create_service_gateway
+|service_gateway_enabled
 |Whether to create a Service Gateway to use Oracle Services.
 |true/false
 |false
@@ -141,6 +142,11 @@ Configuration Terraform Options:
 |XXX.XXX.XXX.XXX/YY
 |ANYWHERE
 
+|bastion_enabled
+|Whether to create the bastion host.
+|true/false
+|true
+
 |bastion_image_id
 |Custom image id for the bastion host
 |image id or NONE. If the value is set to NONE, an Oracle Platform image will be used instead. Set use_autonomous to _false_ if you want to use your own image.
@@ -155,16 +161,6 @@ Configuration Terraform Options:
 |Whether to upgrade the bastion host packages after provisioning. It's useful to set this to false during development so the bastion is provisioned faster.
 |true/false
 |true
-
-|create_bastion
-|Whether to create the bastion host.
-|true/false
-|false
-
-|enable_instance_principal
-|Whether to enable instance_principal on the bastion. Refer to {uri-instance-principal-note}[instance_principal].
-|true/false
-|false
 
 |enable_notification
 |Whether to enable ONS notification for the bastion host.
@@ -228,6 +224,72 @@ Configuration Terraform Options:
 
 |use_autonomous
 |Whether to use Autonomous Linux or an Oracle Linux Platform image or custom image. Set to false if you want to use your own image id or Oracle Linux Platform image.
+|true/false
+|false
+
+|===
+
+== Admin Host
+
+[stripes=odd,cols="1d,4d,3a,3a", options=header,width="100%"] 
+|===
+|Parameter
+|Description
+|Values
+|Default
+
+|admin_enabled
+|Whether to create the admin host.
+|true/false
+|true
+
+|admin_image_id
+|Custom image id for the admin host
+|image_id or NONE. If the value is set to NONE, an Oracle Platform image will be used instead. Set use_autonomous to _false_ if you want to use your own image. For now, *do not use Autonomous for the admin host.*
+|NONE
+
+|enable_instance_principal
+|Whether to enable instance_principal on the admin server. Refer to {uri-instance-principal-note}[instance_principal][instance_principal]
+|true/false
+|true
+
+|admin_notification_enabled
+|Whether to enable ONS notification for the admin host. *Do not enable for now*.
+|true/false
+|false
+
+|admin_notification_endpoint
+|The subscription notification endpoint. Email address to be notified. Only email is currently supported although ONS can also support Slack, Pagerduty among others.
+|
+|
+
+|admin_notification_protocol
+|The notification protocol used.
+|EMAIL
+|EMAIL
+
+|admin_notification_topic
+|The name of the notification topic
+|
+|admin
+
+|admin_package_upgrade
+|Whether to also upgrade the packages for the admin host.
+|true/false
+|true
+
+|admin_shape
+|The shape of admin instance.
+|
+|VM.Standard.E2.1
+
+|admin_timezone
+|The preferred timezone for the admin host. {uri-timezones}[List of timezones]
+|
+|Australia/Sydney
+
+|admin_use_autonomous
+|Whether to use Autonomous Linux or an Oracle Linux Platform image or custom image. Set to false if you want to use your own image id or Oracle Linux Platform image. *Do not use autonomous for now*
 |true/false
 |false
 

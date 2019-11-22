@@ -77,7 +77,7 @@ Open a terminal and test:
 [source,bash]
 ----
 terraform -v
-Terraform v0.12.8
+Terraform v0.12.16
 ----
 
 === OCI API Keys
@@ -113,7 +113,7 @@ To obtain the compartment OCID:
 
 === Identity and Access Management Rights
 
-If you are enabling notifications and instance_principal for the bastion, the Terraform user must have the rights to manage dynamic groups.
+If you are enabling notifications for the bastion host or instance_principal for the admin server, the Terraform user must have the rights to manage policies and dynamic groups respectively.
 
 === Using Autonomous Linux
 

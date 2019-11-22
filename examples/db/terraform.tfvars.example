@@ -1,9 +1,5 @@
-# Copyright 2017, 2019, Oracle Corporation and/or affiliates.  All rights reserved.
-# Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl/
-
-# Keep root variables flat to make it easy for users to fill in
-
 # Identity and access parameters
+
 api_fingerprint = ""
 
 api_private_key_path = ""
@@ -14,7 +10,6 @@ tenancy_id = ""
 
 user_id = ""
 
-# ssh keys
 ssh_private_key_path = ""
 
 ssh_public_key_path = ""
@@ -24,35 +19,90 @@ label_prefix = "basedbexample"
 
 region = "us-phoenix-1"
 
-# networking parameters
+# networking
+
+nat_gateway_enabled = true
+
+netnum = {
+  admin   = 33
+  bastion = 32
+  db      = 16
+}
+
 newbits = {
+  admin   = 13
   bastion = 13
   db      = 11
 }
+
+service_gateway_enabled = true
 
 vcn_cidr = "10.0.0.0/16"
 
 vcn_dns_label = "basedb"
 
-vcn_name = "db vcn"
+vcn_name = "basedb"
 
-# nat
-create_nat_gateway = true
 
-# service gateway
-create_service_gateway = true
+# bastion
 
-subnets = {
-  bastion = 32
-  db      = 16
+bastion_access = "ANYWHERE"
+
+bastion_enabled = true
+
+bastion_image_id = "NONE"
+
+bastion_notification_enabled = true
+
+bastion_notification_endpoint = "<email_address>"
+
+bastion_notification_protocol = "EMAIL"
+
+bastion_notification_topic= "bastion_server_notification"
+
+bastion_package_upgrade = false
+
+bastion_shape = "VM.Standard.E2.1"
+
+bastion_timezone = "Australia/Sydney"
+
+bastion_use_autonomous = true
+
+admin_enabled = true
+
+admin_image_id = "NONE"
+
+admin_instance_principal = true
+
+admin_notification_enabled = false
+
+admin_notification_endpoint = ""
+
+admin_notification_protocol = "EMAIL"
+
+admin_notification_topic= "admin_server_notification"
+
+admin_package_upgrade = true
+
+admin_shape   = "VM.Standard.E2.1"
+
+admin_timezone= "Australia/Sydney"
+
+admin_use_autonomous = false
+
+# availability_domains
+
+availability_domains = {
+  bastion = 1
+  admin  = 1
 }
 
 # bastion
 bastion_shape = "VM.Standard.E2.2"
 
-create_bastion = true
-
 bastion_access = "ANYWHERE"
+
+bastion_enabled = true
 
 enable_instance_principal = false
 
@@ -60,6 +110,7 @@ image_id = "NONE"
 
 # availability domains
 availability_domains = {
+  admin   = 1
   bastion = 1
   db      = 1
 }

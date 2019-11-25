@@ -18,7 +18,7 @@ locals {
     region       = var.oci_base_general.region
   }
 
-  oci_bastion_infra = {
+  oci_bastion_network = {
     ad_names             = data.template_file.ad_names.*.rendered
     availability_domains = var.oci_base_bastion.availability_domains
     ig_route_id          = module.vcn.ig_route_id

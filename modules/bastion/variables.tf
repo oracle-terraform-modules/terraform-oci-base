@@ -25,7 +25,7 @@ variable "oci_bastion_general" {
 
 # bastion
 
-variable "oci_bastion_infra" {
+variable "oci_bastion_network" {
   type = object({
     ad_names             = list(string)
     availability_domains = number

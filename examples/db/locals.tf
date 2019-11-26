@@ -20,20 +20,20 @@ locals {
   }
 
   oci_base_vcn = {
-    create_nat_gateway     = var.nat_gateway_enabled
-    create_service_gateway = var.service_gateway_enabled
-    vcn_cidr               = var.vcn_cidr
-    vcn_dns_label          = var.vcn_dns_label
-    vcn_name               = var.vcn_name
+    nat_gateway_enabled     = var.nat_gateway_enabled
+    service_gateway_enabled = var.service_gateway_enabled
+    vcn_cidr                = var.vcn_cidr
+    vcn_dns_label           = var.vcn_dns_label
+    vcn_name                = var.vcn_name
   }
 
   oci_base_bastion = {
     availability_domains  = var.availability_domains["bastion"]
+    bastion_enabled       = var.bastion_enabled
     bastion_access        = var.bastion_access
     bastion_image_id      = var.bastion_image_id
     bastion_shape         = var.bastion_shape
     bastion_upgrade       = var.bastion_package_upgrade
-    bastion_enabled       = var.bastion_enabled
     netnum                = var.netnum["bastion"]
     newbits               = var.newbits["bastion"]
     notification_enabled  = var.bastion_notification_enabled
@@ -48,10 +48,10 @@ locals {
 
   oci_base_admin = {
     availability_domains      = var.availability_domains["admin"]
+    admin_enabled             = var.admin_enabled
     admin_image_id            = "NONE"
     admin_shape               = var.admin_shape
     admin_upgrade             = var.admin_package_upgrade
-    admin_enabled             = var.admin_enabled
     enable_instance_principal = var.admin_instance_principal
     netnum                    = var.netnum["admin"]
     newbits                   = var.newbits["admin"]
@@ -82,13 +82,13 @@ locals {
   }
 
   db_network = {
-    ig_route_id                = module.base.ig_route_id
-    is_service_gateway_enabled = var.create_service_gateway
-    nat_route_id               = module.base.nat_route_id
-    newbits                    = var.newbits
-    subnets                    = var.subnets
-    vcn_cidr                   = var.vcn_cidr
-    vcn_id                     = module.base.vcn_id
+    ig_route_id             = module.base.ig_route_id
+    service_gateway_enabled = var.service_gateway_enabled
+    nat_route_id            = module.base.nat_route_id
+    netnum                  = var.netnum
+    newbits                 = var.newbits
+    vcn_cidr                = var.vcn_cidr
+    vcn_id                  = module.base.vcn_id
   }
 
   db_config = {

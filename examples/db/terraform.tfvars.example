@@ -94,24 +94,7 @@ admin_use_autonomous = false
 
 availability_domains = {
   bastion = 1
-  admin  = 1
-}
-
-# bastion
-bastion_shape = "VM.Standard.E2.2"
-
-bastion_access = "ANYWHERE"
-
-bastion_enabled = true
-
-enable_instance_principal = false
-
-image_id = "NONE"
-
-# availability domains
-availability_domains = {
   admin   = 1
-  bastion = 1
   db      = 1
 }
 

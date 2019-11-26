@@ -248,22 +248,12 @@ variable "admin_use_autonomous" {
 
 # availability domains
 variable "availability_domains" {
-  description = "ADs where to provision non-OKE resources"
-  default = {
-    bastion = 1
-    admin   = 1
-  }
-  type = map
-}
-
-# availability domains
-variable "availability_domains" {
   description = "ADs where to provision compute resources"
-  type        = "map"
+  type        = map
 
   default = {
     bastion = 1
-    db  = 1
+    db      = 1
   }
 }
 
@@ -272,76 +262,95 @@ variable "availability_domains" {
 variable "db_system_shape" {
   description = "compute shape of db nodes"
   default     = "VM.Standard2.8"
+  type        = string
 }
 
 variable "cpu_core_count" {
   default = "2"
+  type    = number
 }
 
 variable "db_edition" {
   default = "ENTERPRISE_EDITION"
+  type    = string
 }
 
 variable "db_admin_password" {
   default = "BEstrO0ng_#12"
+  type    = string
 }
 
 variable "db_name" {
   default = "basedb"
+  type    = string
 }
 
 variable "db_home_db_name" {
   default = "basedb2"
+  type    = string
 }
 
 variable "db_version" {
   default = "19.0.0.0"
+  type    = string
 }
 
 variable "db_home_display_name" {
   default = "basedbhome"
+  type    = string
 }
 
 variable "db_disk_redundancy" {
   default = "HIGH"
+  type    = string
 }
 
 variable "db_system_display_name" {
   default = "basedb_system"
+  type    = string
 }
 
 variable "hostname" {
   default = "myoracledb"
+  type    = string
 }
 
 variable "n_character_set" {
   default = "AL16UTF16"
+  type    = string
 }
 
 variable "character_set" {
   default = "AL32UTF8"
+  type    = string
 }
 
 variable "db_workload" {
   default = "OLTP"
+  type    = string
 }
 
 variable "pdb_name" {
   default = "pdb1"
+  type    = string
 }
 
 variable "data_storage_size_in_gb" {
-  default = "256"
+  default = 256
+  type    = number
 }
 
 variable "license_model" {
   default = "LICENSE_INCLUDED"
+  type    = string
 }
 
 variable "node_count" {
-  default = "1"
+  default = 1
+  type    = number
 }
 
 variable "data_storage_percentage" {
-  default = "40"
+  default = 40
+  type    = number
 }

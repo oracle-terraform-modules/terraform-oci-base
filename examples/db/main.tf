@@ -15,6 +15,9 @@ module "base" {
 
   # bastion parameters
   oci_base_bastion = local.oci_base_bastion
+
+  # admin parameters
+  oci_base_admin = local.oci_base_admin
 }
 
 module "db" {

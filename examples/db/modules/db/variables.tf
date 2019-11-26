@@ -32,13 +32,13 @@ variable "db_bastion" {
 
 variable "db_network" {
   type = object({
-    ig_route_id                = string
-    is_service_gateway_enabled = bool
-    nat_route_id               = string
-    newbits                    = map(number)
-    subnets                    = map(number)
-    vcn_cidr                   = string
-    vcn_id                     = string
+    ig_route_id             = string
+    service_gateway_enabled = bool
+    nat_route_id            = string
+    netnum                  = map(number)
+    newbits                 = map(number)
+    vcn_cidr                = string
+    vcn_id                  = string
   })
 }
 

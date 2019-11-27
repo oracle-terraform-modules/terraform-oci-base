@@ -25,12 +25,13 @@ variable "oci_admin_general" {
 
 variable "oci_admin" {
   type = object({
-    admin_image_id      = string
-    admin_shape         = string
-    admin_upgrade       = bool
-    admin_enabled       = bool
-    ssh_public_key_path = string
-    timezone            = string
+    admin_image_id            = string
+    admin_shape               = string
+    admin_upgrade             = bool
+    admin_enabled             = bool
+    enable_instance_principal = bool
+    ssh_public_key_path       = string
+    timezone                  = string
   })
 }
 
@@ -52,6 +53,5 @@ variable "oci_admin_notification" {
     notification_endpoint = string
     notification_protocol = string
     notification_topic    = string
-
   })
 }

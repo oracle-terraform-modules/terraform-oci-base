@@ -192,7 +192,7 @@ variable "admin_image_id" {
   type        = string
 }
 
-variable "admin_instance_principal" {
+variable "enable_instance_principal" {
   description = "enable the admin server host to call OCI API services without requiring api key"
   default     = true
   type        = bool

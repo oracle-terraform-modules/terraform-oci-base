@@ -72,7 +72,7 @@ admin_enabled = true
 
 admin_image_id = "NONE"
 
-admin_instance_principal = true
+enable_instance_principal = true
 
 admin_notification_enabled = false
 

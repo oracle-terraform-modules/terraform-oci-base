@@ -52,7 +52,7 @@ locals {
     admin_image_id            = "NONE"
     admin_shape               = var.admin_shape
     admin_upgrade             = var.admin_package_upgrade
-    enable_instance_principal = var.admin_instance_principal
+    enable_instance_principal = var.enable_instance_principal
     netnum                    = var.netnum["admin"]
     newbits                   = var.newbits["admin"]
     notification_enabled      = var.admin_notification_enabled

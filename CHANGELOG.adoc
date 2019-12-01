@@ -7,6 +7,13 @@ All notable changes to this project are documented in this file.
 
 The format is based on {uri-changelog}[Keep a Changelog].
 
+== 1.0.0 (December 2 2019)
+
+* Added link to Solution Guide #16 (thanks @kumar-dhanagopal)
+* Fix issue of data.oci_core_images.oracle_images returns empty tuple #20 (thanks @kumar-dhanagopal)
+* Updated repo to include internal admin server host to enhance security #21 (thanks @karthicgit)
+* Updated examples to with the latest base repo variables (thanks @karthicgit)
+
 == 0.0.2 (October 17 2019)
 
 * Changed subnets to netnums (thanks @kumar-dhanagopal)

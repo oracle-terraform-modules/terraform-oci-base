@@ -11,9 +11,10 @@
 :uri-docs: {uri-rel-file-base}/docs
 :uri-instance-principal: {uri-docs}/instanceprincipal.adoc
 :uri-ons: {uri-docs}/notifcations.adoc
-:uri-reusing: {uri-rel-tree-base}/examples/db
 :uri-oci-keys: https://docs.cloud.oracle.com/iaas/Content/API/Concepts/apisigningkey.htm
 :uri-oci-ocids: https://docs.cloud.oracle.com/iaas/Content/API/Concepts/apisigningkey.htm#five
+:uri-reusing: {uri-rel-tree-base}/examples/db
+:uri-solution-guide: https://docs.oracle.com/en/solutions/set-resources-to-provision-deploy-cloud-environment/index.html#GUID-F647FBA1-C61C-4EA8-872C-AAB9DDA593DB
 :uri-terraform: https://www.terraform.io
 :uri-terraform-oci: https://www.terraform.io/docs/providers/oci/index.html
 :uri-terraform-options: {uri-docs}/terraformoptions.adoc
@@ -86,6 +87,10 @@ terraform init
 terraform plan
 terraform apply
 ----
+
+=== Detailed Solution guide
+
+The use of this Terraform module is explained in more details on the {uri-solution-guide}[Oracle Solution guide].
 
 === Related documentation:
 

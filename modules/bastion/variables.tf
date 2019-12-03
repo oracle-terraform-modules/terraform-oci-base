@@ -61,3 +61,7 @@ variable "oci_bastion_notification" {
   })
   description = "OCI notification parameters for bastion"
 }
+
+variable "tagging" {
+  type = map(any)
+}

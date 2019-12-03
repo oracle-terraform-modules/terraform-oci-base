@@ -5,6 +5,7 @@ resource "oci_core_nat_gateway" "nat_gateway" {
   compartment_id = var.oci_base_vcn.compartment_id
   display_name   = "${var.oci_base_vcn.label_prefix}-nat-gw"
   vcn_id         = oci_core_vcn.vcn.id
+  freeform_tags       = var.tagging
   count          = var.oci_base_vcn.nat_gateway_enabled == true ? 1 : 0
 }
 

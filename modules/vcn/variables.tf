@@ -13,3 +13,7 @@ variable "oci_base_vcn" {
   })
   description = "vcn basic parameters"
 }
+
+variable "tagging" {
+  type = map(any)
+}

@@ -4,6 +4,7 @@
 resource "oci_core_instance" "admin" {
   availability_domain = element(var.oci_admin_network.ad_names, (var.oci_admin_network.availability_domains - 1))
   compartment_id      = var.oci_admin_identity.compartment_id
+  freeform_tags       = var.tagging
 
   create_vnic_details {
     assign_public_ip = false

@@ -55,3 +55,7 @@ variable "oci_admin_notification" {
     notification_topic    = string
   })
 }
+
+variable "tagging" {
+  type = map(any)
+}

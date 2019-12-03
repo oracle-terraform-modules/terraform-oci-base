@@ -10,6 +10,7 @@ resource "oci_core_subnet" "bastion" {
   route_table_id             = var.oci_bastion_network.ig_route_id
   security_list_ids          = [oci_core_security_list.bastion[0].id]
   vcn_id                     = var.oci_bastion_network.vcn_id
+  freeform_tags       = var.tagging
 
   count = var.oci_bastion.bastion_enabled == true ? 1 : 0
 }

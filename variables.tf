@@ -131,3 +131,7 @@ variable "oci_base_admin" {
     use_autonomous            = false
   }
 }
+
+variable "tagging" {
+  type = map(any)
+}

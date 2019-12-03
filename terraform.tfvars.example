@@ -63,3 +63,6 @@ oci_base_admin = {
   timezone                  = "Australia/Sydney"
   use_autonomous            = false
 }
+
+tagging = {"Environment"="UAT"
+           "Owner"="Admin"}

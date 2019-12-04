@@ -6,7 +6,7 @@ resource "oci_core_vcn" "vcn" {
   compartment_id = var.oci_base_vcn.compartment_id
   display_name   = "${var.oci_base_vcn.label_prefix}-${var.oci_base_vcn.vcn_name}"
   dns_label      = var.oci_base_vcn.vcn_dns_label
-  freeform_tags       = var.tagging
+  freeform_tags  = var.tagging
 }
 
 resource "oci_core_internet_gateway" "ig" {

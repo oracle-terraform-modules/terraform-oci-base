@@ -28,7 +28,7 @@ resource "oci_identity_dynamic_group" "admin_instance_principal" {
   description    = "dynamic group to allow instances to call services for 1 admin"
   matching_rule  = "ALL {instance.id = '${join(",", data.oci_core_instance.admin.*.id)}'}"
   name           = "${var.oci_admin_general.label_prefix}-admin_instance_principal"
-  freeform_tags       = var.tagging
+  freeform_tags  = var.tagging
   count          = var.oci_admin.admin_enabled == true && var.oci_admin.enable_instance_principal == true ? 1 : 0
 }
 
@@ -38,6 +38,6 @@ resource "oci_identity_policy" "admin_instance_principal" {
   description    = "policy to allow admin host to call services"
   name           = "${var.oci_admin_general.label_prefix}-admin_instance_principal"
   statements     = ["Allow dynamic-group ${oci_identity_dynamic_group.admin_instance_principal[0].name} to manage all-resources in compartment id ${data.oci_identity_compartments.compartments_id.compartments.0.id}"]
-  freeform_tags       = var.tagging
+  freeform_tags  = var.tagging
   count          = var.oci_admin.admin_enabled == true && var.oci_admin.enable_instance_principal == true ? 1 : 0
 }

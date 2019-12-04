@@ -13,7 +13,7 @@ resource "oci_core_internet_gateway" "ig" {
   compartment_id = var.oci_base_vcn.compartment_id
   display_name   = "${var.oci_base_vcn.label_prefix}-ig-gw"
   vcn_id         = oci_core_vcn.vcn.id
-  freeform_tags       = var.tagging
+  freeform_tags  = var.tagging
 }
 
 resource "oci_core_route_table" "ig_route" {

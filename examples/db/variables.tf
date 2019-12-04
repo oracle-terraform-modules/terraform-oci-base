@@ -354,3 +354,7 @@ variable "data_storage_percentage" {
   default = 40
   type    = number
 }
+
+variable "tagging" {
+  type = map(any)
+}

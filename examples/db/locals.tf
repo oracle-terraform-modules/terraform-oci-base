@@ -65,6 +65,8 @@ locals {
     use_autonomous            = var.admin_use_autonomous
   }
 
+  tagging = var.tagging
+
   db_identity = {
     compartment_id = var.compartment_id
     tenancy_id     = var.tenancy_id

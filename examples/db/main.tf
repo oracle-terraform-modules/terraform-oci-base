@@ -18,6 +18,9 @@ module "base" {
 
   # admin parameters
   oci_base_admin = local.oci_base_admin
+
+  #tagging
+  tagging = local.tagging
 }
 
 module "db" {

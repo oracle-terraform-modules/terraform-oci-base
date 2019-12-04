@@ -98,6 +98,9 @@ availability_domains = {
   db      = 1
 }
 
+tagging = {"Environment"="UAT"
+           "Owner"="Admin"}
+           
 # db
 
 db_system_shape = "VM.Standard2.8"

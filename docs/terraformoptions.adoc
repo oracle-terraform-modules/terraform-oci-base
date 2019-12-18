@@ -149,8 +149,8 @@ Configuration Terraform Options:
 
 |bastion_image_id
 |Custom image id for the bastion host
-|image id or NONE. If the value is set to NONE, an Oracle Platform image will be used instead. Set use_autonomous to _false_ if you want to use your own image.
-|NONE
+|imageid/Autonomous
+|Autonomous
 
 |bastion_shape
 |The shape of bastion instance.
@@ -222,11 +222,6 @@ Configuration Terraform Options:
 |
 |
 
-|use_autonomous
-|Whether to use Autonomous Linux or an Oracle Linux Platform image or custom image. Set to false if you want to use your own image id or Oracle Linux Platform image.
-|true/false
-|false
-
 |===
 
 == Admin Host
@@ -245,7 +240,7 @@ Configuration Terraform Options:
 
 |admin_image_id
 |Custom image id for the admin host
-|image_id or NONE. If the value is set to NONE, an Oracle Platform image will be used instead. Set use_autonomous to _false_ if you want to use your own image. For now, *do not use Autonomous for the admin host.*
+|image_id/Oracle. If the value is set to Oracle, an Oracle Platform image will be used instead.
 |NONE
 
 |enable_instance_principal
@@ -287,10 +282,5 @@ Configuration Terraform Options:
 |The preferred timezone for the admin host. {uri-timezones}[List of timezones]
 |
 |Australia/Sydney
-
-|admin_use_autonomous
-|Whether to use Autonomous Linux or an Oracle Linux Platform image or custom image. Set to false if you want to use your own image id or Oracle Linux Platform image. *Do not use autonomous for now*
-|true/false
-|false
 
 |===

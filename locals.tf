@@ -36,7 +36,6 @@ locals {
     bastion_upgrade     = var.oci_base_bastion.bastion_upgrade
     ssh_public_key_path = var.oci_base_bastion.ssh_public_key_path
     timezone            = var.oci_base_bastion.timezone
-    use_autonomous      = var.oci_base_bastion.use_autonomous
   }
 
   oci_bastion_notification = {

@@ -67,14 +67,13 @@ variable "oci_base_bastion" {
     ssh_private_key_path  = string
     ssh_public_key_path   = string
     timezone              = string
-    use_autonomous        = bool
   })
   description = "bastion host parameters"
   default = {
     availability_domains  = 1
     bastion_access        = "ANYWHERE"
     bastion_enabled       = false
-    bastion_image_id      = "NONE"
+    bastion_image_id      = "Autonomous"
     bastion_shape         = "VM.Standard.E2.1"
     bastion_upgrade       = true
     netnum                = 13
@@ -86,7 +85,6 @@ variable "oci_base_bastion" {
     ssh_private_key_path  = ""
     ssh_public_key_path   = ""
     timezone              = ""
-    use_autonomous        = true
   }
 }
 
@@ -109,13 +107,12 @@ variable "oci_base_admin" {
     ssh_private_key_path      = string
     ssh_public_key_path       = string
     timezone                  = string
-    use_autonomous            = bool
   })
   description = "admin host parameters"
   default = {
     availability_domains      = 1
     admin_enabled             = false
-    admin_image_id            = "NONE"
+    admin_image_id            = "Oracle"
     admin_shape               = "VM.Standard.E2.1"
     admin_upgrade             = true
     enable_instance_principal = true
@@ -128,6 +125,5 @@ variable "oci_base_admin" {
     ssh_private_key_path      = ""
     ssh_public_key_path       = ""
     timezone                  = ""
-    use_autonomous            = false
   }
 }

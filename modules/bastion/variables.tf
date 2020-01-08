@@ -47,7 +47,6 @@ variable "oci_bastion" {
     bastion_upgrade     = bool
     ssh_public_key_path = string
     timezone            = string
-    use_autonomous      = bool
   })
   description = "bastion host parameters"
 }

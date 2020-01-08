@@ -29,7 +29,7 @@ resource "oci_core_instance" "admin" {
 
   source_details {
     source_type = "image"
-    source_id   = var.oci_admin.admin_image_id == "NONE" ? data.oci_core_images.admin_images.images.0.id : var.oci_admin.image_id
+    source_id   = local.admin_image_id
   }
 
   timeouts {

@@ -9,4 +9,5 @@ locals {
   anywhere      = "0.0.0.0/0"
   ssh_port      = 22
   tcp_protocol  = 6
+  admin_image_id = var.oci_admin.admin_image_id == "Oracle" ? data.oci_core_images.admin_images.images.0.id : var.oci_admin.admin_image_id
 }

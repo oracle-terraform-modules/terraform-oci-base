@@ -9,5 +9,5 @@ locals {
   anywhere         = "0.0.0.0/0"
   ssh_port         = 22
   tcp_protocol     = 6
-  bastion_image_id = var.oci_bastion.bastion_image_id == "Autonomous" ? data.oci_core_images.autonomous_images[0].images.0.id : var.oci_bastion.bastion_image_id
+  bastion_image_id = var.oci_bastion.bastion_image_id == "Autonomous" ? data.oci_core_images.autonomous_images.images.0.id : var.oci_bastion.bastion_image_id
 }

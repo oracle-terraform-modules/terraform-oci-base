@@ -241,7 +241,7 @@ Configuration Terraform Options:
 |admin_image_id
 |Custom image id for the admin host
 |image_id/Oracle. If the value is set to Oracle, an Oracle Platform image will be used instead.
-|NONE
+|Oracle
 
 |enable_instance_principal
 |Whether to enable instance_principal on the admin server. Refer to {uri-instance-principal-note}[instance_principal][instance_principal]

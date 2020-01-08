@@ -27,7 +27,6 @@ data "oci_core_images" "autonomous_images" {
   operating_system_version = "7.7"
   shape                    = var.oci_bastion.bastion_shape
   sort_by                  = "TIMECREATED"
-  count                    = (var.oci_bastion.bastion_enabled == true && var.oci_bastion.bastion_image_id == "Autonomous") ? 1 : 0
 }
 
 # cloud init for bastion

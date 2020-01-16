@@ -23,7 +23,7 @@ data "template_file" "autonomous_cloud_init_file" {
 
 data "oci_core_images" "autonomous_images" {
   compartment_id           = var.oci_base_identity.compartment_id
-  operating_system         = "Autonomous Linux"
+  operating_system         = "Oracle Autonomous Linux"
   operating_system_version = "7.7"
   shape                    = var.oci_bastion.bastion_shape
   sort_by                  = "TIMECREATED"

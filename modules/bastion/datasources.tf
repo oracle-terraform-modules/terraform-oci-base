@@ -67,5 +67,5 @@ data "oci_core_instance" "bastion" {
 data "oci_ons_notification_topic" "bastion_notification" {
   #Required
   topic_id = oci_ons_notification_topic.bastion_notification[0].topic_id
-  count    = var.oci_bastion_notification.notification_enabled == true ? 1 : 0
+  count    = (var.oci_bastion.bastion_enabled == true && var.oci_bastion_notification.notification_enabled == true) ? 1 : 0
 }

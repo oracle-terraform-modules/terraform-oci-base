@@ -42,7 +42,7 @@ locals {
     notification_enabled  = var.oci_base_bastion.notification_enabled
     notification_endpoint = var.oci_base_bastion.notification_endpoint
     notification_protocol = var.oci_base_bastion.notification_protocol
-    notification_topic    = "${var.oci_base_general.label_prefix}-${var.oci_base_bastion.notification_topic}"
+    notification_topic    = var.oci_base_bastion.notification_topic
   }
 
   oci_admin_network = {
@@ -69,6 +69,6 @@ locals {
     notification_enabled  = var.oci_base_admin.notification_enabled
     notification_endpoint = var.oci_base_admin.notification_endpoint
     notification_protocol = var.oci_base_admin.notification_protocol
-    notification_topic    = "${var.oci_base_general.label_prefix}-${var.oci_base_admin.notification_topic}"
+    notification_topic    = var.oci_base_admin.notification_topic
   }
 }

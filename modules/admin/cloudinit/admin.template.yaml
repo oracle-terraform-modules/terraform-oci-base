@@ -14,7 +14,7 @@ write_files:
     content: |
       ${admin_sh_content}
 runcmd:
- - echo "Configuring admin..." | tee /root/admin/admin.txt
+ - echo "Configuring admin..."
  - bash /root/admin/admin.sh
  - echo "export OCI_CLI_AUTH=instance_principal" >>  /home/opc/.bashrc
  - touch /home/opc/admin.finish

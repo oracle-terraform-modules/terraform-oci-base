@@ -25,6 +25,19 @@ variable "oci_bastion_general" {
 
 # bastion
 
+variable "oci_bastion" {
+  type = object({
+    bastion_access      = string
+    bastion_enabled     = bool
+    bastion_image_id    = string
+    bastion_shape       = string
+    bastion_upgrade     = bool
+    ssh_public_key_path = string
+    timezone            = string
+  })
+  description = "bastion host parameters"
+}
+
 variable "oci_bastion_network" {
   type = object({
     ad_names             = list(string)
@@ -38,18 +51,7 @@ variable "oci_bastion_network" {
   description = "bastion host networking parameters"
 }
 
-variable "oci_bastion" {
-  type = object({
-    bastion_access      = string
-    bastion_enabled     = bool
-    bastion_image_id    = string
-    bastion_shape       = string
-    bastion_upgrade     = bool
-    ssh_public_key_path = string
-    timezone            = string
-  })
-  description = "bastion host parameters"
-}
+
 
 variable "oci_bastion_notification" {
   type = object({

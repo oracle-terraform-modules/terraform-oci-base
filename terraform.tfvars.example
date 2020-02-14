@@ -9,7 +9,7 @@ oci_base_identity = {
 }
 
 oci_base_general = {
-  label_prefix = "base"
+  label_prefix = "dev"
   region       = "us-phoenix-1"
 }
 
@@ -34,7 +34,7 @@ oci_base_bastion = {
   bastion_upgrade       = true
   netnum                = 32
   newbits               = 13
-  notification_enabled  = true
+  notification_enabled  = false
   notification_endpoint = ""
   notification_protocol = "EMAIL"
   notification_topic    = "bastion"

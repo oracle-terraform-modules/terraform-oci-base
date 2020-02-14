@@ -7,22 +7,21 @@ resource "oci_core_instance" "bastion" {
 
   create_vnic_details {
     assign_public_ip = true
-    subnet_id        = oci_core_subnet.bastion[0].id
     display_name     = "${var.oci_bastion_general.label_prefix}-bastion-vnic"
     hostname_label   = "bastion"
+    subnet_id        = oci_core_subnet.bastion[0].id
   }
 
   display_name = "${var.oci_bastion_general.label_prefix}-bastion"
 
-  extended_metadata = {
-    ssh_authorized_keys = file(var.oci_bastion.ssh_public_key_path)
-    subnet_id           = oci_core_subnet.bastion[0].id
-    user_data           = data.template_cloudinit_config.bastion[0].rendered
-  }
-
   # prevent the bastion from destroying and recreating itself if the image ocid changes 
   lifecycle {
     ignore_changes = [source_details[0].source_id]
+  }
+
+  metadata = {
+    ssh_authorized_keys = file(var.oci_bastion.ssh_public_key_path)
+    user_data           = data.template_cloudinit_config.bastion[0].rendered
   }
 
   shape = var.oci_bastion.bastion_shape

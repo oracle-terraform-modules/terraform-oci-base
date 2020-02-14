@@ -37,16 +37,20 @@ This section documents the use of {uri-oci-instance-principal}[instance_principa
 
 Any user who has access to the instance (who can SSH to the instance), automatically inherits the privileges granted to the instance. Before you enable this feature, ensure that you know who can access it, and that they should be authorized with the permissions you are granting to the instance.
 
-By default, this feature is *_enabled_*.
+By default, this feature is *_disabled_*.
 
-When you enable this feature, by default, the admin host has privileges to all resources in the compartment. 
+When you enable this feature, by default, the admin host has privileges to manage all resources in the compartment. 
 
 You can also turn on and off the feature at any time without impact on the admin host.
 
-To enable, set enable_instance_principal to true:
+To enable, set enable_instance_principal in oci_base_admin to true:
 
 ----
-enable_instance_principal = "true"
+oci_base_admin = {
+  ....
+  enable_instance_principal = true
+  ....
+}
 ----
 
 and verify:
@@ -55,13 +59,19 @@ and verify:
 oci network vcn list --compartment-id <compartment-ocid>
 ----
 
+You should be able to see a list of VCNs created in the compartment.
+
 ==== Disabling instance_principal on the admin host
 
-. Set enable_instance_principal to false in terraform.tfvars
+To disable, set enable_instance_principal in oci_base_admin to false:
 
 +
 ----
-enable_instance_principal = false
+oci_base_admin = {
+  ....
+  enable_instance_principal = false
+  ....
+}
 ----
 
 . Run terraform apply again:

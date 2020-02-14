@@ -14,15 +14,14 @@ resource "oci_core_instance" "admin" {
 
   display_name = "${var.oci_admin_general.label_prefix}-admin"
 
-  extended_metadata = {
-    ssh_authorized_keys = file(var.oci_admin.ssh_public_key_path)
-    user_data           = data.template_cloudinit_config.admin[0].rendered
-    subnet_id           = oci_core_subnet.admin[0].id
-  }
-
   # prevent the bastion from destroying and recreating itself if the image ocid changes 
   lifecycle {
     ignore_changes = [source_details[0].source_id]
+  }
+
+  metadata = {
+    ssh_authorized_keys = file(var.oci_admin.ssh_public_key_path)
+    user_data           = data.template_cloudinit_config.admin[0].rendered
   }
 
   shape = var.oci_admin.admin_shape

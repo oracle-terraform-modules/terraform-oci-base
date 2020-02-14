@@ -5,7 +5,8 @@ resource "oci_core_nat_gateway" "nat_gateway" {
   compartment_id = var.oci_base_vcn.compartment_id
   display_name   = "${var.oci_base_vcn.label_prefix}-nat-gw"
   vcn_id         = oci_core_vcn.vcn.id
-  count          = var.oci_base_vcn.nat_gateway_enabled == true ? 1 : 0
+
+  count = var.oci_base_vcn.nat_gateway_enabled == true ? 1 : 0
 }
 
 resource "oci_core_route_table" "nat_route" {
@@ -29,5 +30,6 @@ resource "oci_core_route_table" "nat_route" {
   }
 
   vcn_id = oci_core_vcn.vcn.id
-  count  = var.oci_base_vcn.nat_gateway_enabled == true ? 1 : 0
+
+  count = var.oci_base_vcn.nat_gateway_enabled == true ? 1 : 0
 }

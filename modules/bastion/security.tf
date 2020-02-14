@@ -4,7 +4,6 @@
 resource "oci_core_security_list" "bastion" {
   compartment_id = var.oci_base_identity.compartment_id
   display_name   = "${var.oci_bastion_general.label_prefix}-bastion"
-  vcn_id         = var.oci_bastion_network.vcn_id
 
   egress_security_rules {
     protocol    = local.all_protocols
@@ -21,5 +20,7 @@ resource "oci_core_security_list" "bastion" {
       max = local.ssh_port
     }
   }
+  vcn_id = var.oci_bastion_network.vcn_id
+
   count = var.oci_bastion.bastion_enabled == true ? 1 : 0
 }

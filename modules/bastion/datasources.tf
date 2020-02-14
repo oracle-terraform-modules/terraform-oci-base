@@ -8,6 +8,7 @@ data "template_file" "autonomous_template" {
     notification_enabled = var.oci_bastion_notification.notification_enabled
     topic_id             = var.oci_bastion_notification.notification_enabled == true ? oci_ons_notification_topic.bastion_notification[0].topic_id : "null"
   }
+
   count = (var.oci_bastion.bastion_enabled == true && var.oci_bastion.bastion_image_id == "Autonomous") ? 1 : 0
 }
 
@@ -18,6 +19,7 @@ data "template_file" "autonomous_cloud_init_file" {
     notification_sh_content = base64gzip(data.template_file.autonomous_template[0].rendered)
     timezone                = var.oci_bastion.timezone
   }
+
   count = (var.oci_bastion.bastion_enabled == true && var.oci_bastion.bastion_image_id == "Autonomous") ? 1 : 0
 }
 
@@ -46,26 +48,29 @@ data "template_cloudinit_config" "bastion" {
 data "oci_core_vnic_attachments" "bastion_vnics_attachments" {
   availability_domain = element(var.oci_bastion_network.ad_names, (var.oci_bastion_network.availability_domains - 1))
   compartment_id      = var.oci_base_identity.compartment_id
-  instance_id         = oci_core_instance.bastion[0].id
   depends_on          = [oci_core_instance.bastion]
-  count               = var.oci_bastion.bastion_enabled == true ? 1 : 0
+  instance_id         = oci_core_instance.bastion[0].id
+
+  count = var.oci_bastion.bastion_enabled == true ? 1 : 0
 }
 
 # Gets the OCID of the first (default) VNIC on the bastion instance
 data "oci_core_vnic" "bastion_vnic" {
-  vnic_id    = lookup(data.oci_core_vnic_attachments.bastion_vnics_attachments[0].vnic_attachments[0], "vnic_id")
   depends_on = [oci_core_instance.bastion]
-  count      = var.oci_bastion.bastion_enabled == true ? 1 : 0
+  vnic_id    = lookup(data.oci_core_vnic_attachments.bastion_vnics_attachments[0].vnic_attachments[0], "vnic_id")
+
+  count = var.oci_bastion.bastion_enabled == true ? 1 : 0
 }
 
 data "oci_core_instance" "bastion" {
-  instance_id = oci_core_instance.bastion[0].id
   depends_on  = [oci_core_instance.bastion]
-  count       = var.oci_bastion.bastion_enabled == true ? 1 : 0
+  instance_id = oci_core_instance.bastion[0].id
+
+  count = var.oci_bastion.bastion_enabled == true ? 1 : 0
 }
 
 data "oci_ons_notification_topic" "bastion_notification" {
-  #Required
   topic_id = oci_ons_notification_topic.bastion_notification[0].topic_id
-  count    = (var.oci_bastion.bastion_enabled == true && var.oci_bastion_notification.notification_enabled == true) ? 1 : 0
+
+  count = (var.oci_bastion.bastion_enabled == true && var.oci_bastion_notification.notification_enabled == true) ? 1 : 0
 }

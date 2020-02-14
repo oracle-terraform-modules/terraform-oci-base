@@ -4,7 +4,6 @@
 resource "oci_core_security_list" "admin" {
   compartment_id = var.oci_admin_identity.compartment_id
   display_name   = "${var.oci_admin_general.label_prefix}-admin"
-  vcn_id         = var.oci_admin_network.vcn_id
 
   egress_security_rules {
     protocol    = local.all_protocols
@@ -22,5 +21,7 @@ resource "oci_core_security_list" "admin" {
       max = local.ssh_port
     }
   }
+  vcn_id         = var.oci_admin_network.vcn_id
+
   count = var.oci_admin.admin_enabled == true ? 1 : 0
 }

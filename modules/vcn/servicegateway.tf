@@ -12,13 +12,12 @@ data "oci_core_services" "all_oci_services" {
 
 resource "oci_core_service_gateway" "service_gateway" {
   compartment_id = var.oci_base_vcn.compartment_id
-  display_name   = "${var.oci_base_vcn.label_prefix}-sg-gw"
   depends_on     = [oci_core_nat_gateway.nat_gateway]
+  display_name   = "${var.oci_base_vcn.label_prefix}-sg-gw"
 
   services {
     service_id = lookup(data.oci_core_services.all_oci_services[0].services[0], "id")
   }
-
   vcn_id = oci_core_vcn.vcn.id
   count  = var.oci_base_vcn.service_gateway_enabled == true ? 1 : 0
 }

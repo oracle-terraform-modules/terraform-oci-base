@@ -32,10 +32,14 @@ The {uri-oci-notifications}[Oracle Cloud Infrastructure Notifications service] c
 Set the following parameters in the terraform.tfvars in order to enable ONS Notification for the bastion host:
 
 ----
-  notification_enabled       = true
-  notification_endpoint      = "email_address"
-  notification_protocol      = "EMAIL"
-  notification_topic         = "bastion"
+oci_base_bastion = {
+  ...
+  notification_enabled  = true
+  notification_endpoint = "valid_email_address"
+  notification_protocol = "EMAIL"
+  notification_topic    = "bastion"
+  ...
+}
 ----
 
 If your bastion is already created, set the above parameters in the terraform.tfvars and run terraform apply again:
@@ -46,26 +50,16 @@ terraform apply
 
 You'll then receive a notification email to confirm the subscription.
 
-Note that at the time of enabling ONS notification, instance_principal for the bastion must be enabled by setting *enable_instance_principal* to _true_. This can subsequently be disabled by setting it to _false_:
-
-----
-  enable_instance_principal = false
-----
-
-and running terraform apply again:
-
-----
-terraform apply
-----
-
-Read more on {uri-instance-principal}[instance_principal].
-
 ==== Disabling ONS Notification for the bastion host
 
 Set the following parameters in the terraform.tfvars to disable ONS Notification:
 
 ----
-  notification_enabled        = false
+oci_base_bastion = {
+  ...
+  notification_enabled  = false
+  ...
+}
 ----
 
 and run terraform apply again:

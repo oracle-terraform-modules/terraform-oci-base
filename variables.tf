@@ -11,7 +11,7 @@ variable "oci_base_identity" {
     tenancy_id           = string
     user_id              = string
   })
-  description = "identity and provider parameters"
+  description = "oci identity and provider parameters"
 }
 
 # general oci parameters
@@ -23,7 +23,7 @@ variable "oci_base_general" {
   })
   description = "general oci parameters"
   default = {
-    label_prefix = "base"
+    label_prefix = ""
     region       = ""
   }
 }
@@ -38,13 +38,13 @@ variable "oci_base_vcn" {
     vcn_dns_label           = string
     vcn_name                = string
   })
-  description = "VCN basic parameters"
+  description = "VCN parameters"
   default = {
     nat_gateway_enabled     = true
-    service_gateway_enabled = false
+    service_gateway_enabled = true
     vcn_cidr                = "10.0.0.0/16"
-    vcn_dns_label           = "base"
-    vcn_name                = "base"
+    vcn_dns_label           = ""
+    vcn_name                = ""
   }
 }
 
@@ -74,7 +74,7 @@ variable "oci_base_bastion" {
     bastion_access        = "ANYWHERE"
     bastion_enabled       = false
     bastion_image_id      = "Autonomous"
-    bastion_shape         = "VM.Standard.E2.1"
+    bastion_shape         = ""
     bastion_upgrade       = true
     netnum                = 13
     newbits               = 32
@@ -113,9 +113,9 @@ variable "oci_base_admin" {
     availability_domains      = 1
     admin_enabled             = false
     admin_image_id            = "Oracle"
-    admin_shape               = "VM.Standard.E2.1"
+    admin_shape               = ""
     admin_upgrade             = true
-    enable_instance_principal = true
+    enable_instance_principal = false
     netnum                    = 33
     newbits                   = 13
     notification_enabled      = false

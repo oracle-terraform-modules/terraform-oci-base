@@ -11,6 +11,7 @@ variable "oci_admin_identity" {
     tenancy_id           = string
     user_id              = string
   })
+  description = "parameters related to oci identity"
 }
 
 variable "oci_admin_general" {
@@ -19,6 +20,7 @@ variable "oci_admin_general" {
     label_prefix = string
     region       = string
   })
+  description = "general oci parameters"
 }
 
 # admin
@@ -33,6 +35,7 @@ variable "oci_admin" {
     ssh_public_key_path       = string
     timezone                  = string
   })
+  description = "admin host parameters"
 }
 
 variable "oci_admin_network" {
@@ -45,6 +48,7 @@ variable "oci_admin_network" {
     vcn_cidr             = string
     vcn_id               = string
   })
+  description = "admin host networking parameters"
 }
 
 variable "oci_admin_notification" {
@@ -54,4 +58,5 @@ variable "oci_admin_notification" {
     notification_protocol = string
     notification_topic    = string
   })
+  description = "OCI notification parameters for admin"
 }

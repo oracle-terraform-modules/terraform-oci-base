@@ -4,6 +4,7 @@
 module "vcn" {
   source       = "./modules/vcn"
   oci_base_vcn = local.oci_base_vcn
+  tagging      = local.tagging
 }
 
 module "bastion" {
@@ -13,6 +14,7 @@ module "bastion" {
   oci_bastion_network      = local.oci_bastion_network
   oci_bastion              = local.oci_bastion
   oci_bastion_notification = local.oci_bastion_notification
+  tagging                  = local.tagging
 }
 
 module "admin" {
@@ -22,4 +24,5 @@ module "admin" {
   oci_admin_network      = local.oci_admin_network
   oci_admin              = local.oci_admin
   oci_admin_notification = local.oci_admin_notification
+  tagging                = local.tagging
 }

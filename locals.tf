@@ -71,4 +71,9 @@ locals {
     notification_protocol = var.oci_base_admin.notification_protocol
     notification_topic    = var.oci_base_admin.notification_topic
   }
+
+  tagging = {
+     computetag           = var.tagging.computetag
+     networktag           = var.tagging.networktag
+  }
 }

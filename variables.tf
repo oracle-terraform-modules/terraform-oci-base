@@ -127,3 +127,11 @@ variable "oci_base_admin" {
     timezone                  = ""
   }
 }
+
+#tagging
+variable "tagging" {
+  type = object({
+    computetag                = map(any)
+    networktag                = map(any)
+  }) 
+}

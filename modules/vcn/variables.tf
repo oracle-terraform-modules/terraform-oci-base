@@ -13,3 +13,11 @@ variable "oci_base_vcn" {
   })
   description = "vcn basic parameters"
 }
+
+#tagging
+variable "tagging" {
+  type = object({
+    computetag                = map(any)
+    networktag                = map(any)
+  }) 
+}

@@ -284,3 +284,22 @@ Configuration Terraform Options:
 |Australia/Sydney
 
 |===
+
+== Tagging
+
+[stripes=odd,cols="1d,4d,3a,3a", options=header,width="100%"] 
+|===
+|Parameter
+|Description
+|Values
+|Default
+
+|computetag
+|Freeform tag for compute instances.
+|
+|
+
+|networktag
+|Freeform tag for network components like VCN and subnets.
+|
+|

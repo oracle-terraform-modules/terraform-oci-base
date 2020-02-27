@@ -7,6 +7,11 @@ All notable changes to this project are documented in this file.
 
 The format is based on {uri-changelog}[Keep a Changelog].
 
+== 1.1.1 (February 28, 2020)
+* New release for hashicorp registry (#38, #40)
+* Fixed broken links in README.md (#43)
+* Renamed examples/db to database and removed the submodule since it's not rendering properly on the registry page
+
 == 1.1.0 (January 17, 2020)
 * By default, bastion now uses Oracle Autonomous Linux platform image instead of the MarketPlace image
 * Fixed Invalid index issue when bastion is disabled (#29)

@@ -1,22 +1,22 @@
 # Terraform Base for Oracle Cloud Infrastructure
 
-[changelog]: https://github.com/oracle/terraform-oci-base/CHANGELOG.adoc
-[contributing]: https://github.com/oracle/terraform-oci-base/CONTRIBUTING.adoc
-[contributors]: https://github.com/oracle/terraform-oci-base/CONTRIBUTORS.adoc
-[docs]: https://github.com/oracle/terraform-oci-base/docs
+[changelog]: https://github.com/oracle-terraform-modules/terraform-oci-base/blob/master/CHANGELOG.adoc
+[contributing]: https://github.com/oracle-terraform-modules/terraform-oci-base/blob/master/CONTRIBUTING.adoc
+[contributors]: https://github.com/oracle-terraform-modules/terraform-oci-base/blob/master/CONTRIBUTORS.adoc
+[docs]: https://github.com/oracle-terraform-modules/terraform-oci-base/tree/master/docs
 
-[instance_principal]: https://github.com/oracle/terraform-oci-base/docs/instanceprincipal.adoc
+[instance_principal]: https://github.com/oracle-terraform-modules/terraform-oci-base/blob/master/docs/instanceprincipal.adoc
 
-[license]: https://github.com/oracle/terraform-oci-base/docs/LICENSE
+[license]: https://github.com/oracle-terraform-modules/terraform-oci-base/blob/master/LICENSE
 [canonical_license]: https://oss.oracle.com/licenses/upl/
 
 [oci]: https://cloud.oracle.com/cloud-infrastructure
 [oci_documentation]: https://docs.cloud.oracle.com/iaas/Content/home.htm
 
-[ons]: https://github.com/oracle/terraform-oci-base/docs/notifications.adoc
+[ons]: https://github.com/oracle-terraform-modules/terraform-oci-base/blob/master/docs/notifications.adoc
 [oracle]: https://www.oracle.com
-[prerequisites]: https://github.com/oracle/terraform-oci-base/docs/prerequisites.adoc
-[quickstart]: https://github.com/oracle/terraform-oci-base/docs/quickstart.adoc
+[prerequisites]: https://github.com/oracle-terraform-modules/terraform-oci-base/blob/master/docs/prerequisites.adoc
+[quickstart]: https://github.com/oracle-terraform-modules/terraform-oci-base/blob/master/docs/quickstart.adoc
 [repo]: https://github.com/oracle/terraform-oci-base
 [reuse]: https://github.com/oracle/terraform-oci-base/examples/db
 [subnets]: https://erikberg.com/notes/networks.html
@@ -24,7 +24,7 @@
 [terraform_cidr_subnet]: http://blog.itsjustcode.net/blog/2017/11/18/terraform-cidrsubnet-deconstructed/
 [terraform_hashircorp_examples]: https://github.com/hashicorp/terraform-guides/tree/master/infrastructure-as-code/terraform-0.12-examples
 [terraform_oci]: https://www.terraform.io/docs/providers/oci/index.html
-[terraform_options]: https://github.com/oracle/terraform-oci-base/docs/terraformoptions.adoc
+[terraform_options]: https://github.com/oracle-terraform-modules/terraform-oci-base/blob/master/docs/terraformoptions.adoc
 [terraform_oci_examples]: https://github.com/terraform-providers/terraform-provider-oci/tree/master/examples
 [terraform_oci_oke]: https://github.com/oracle-terraform-modules/terraform-oci-oke
 

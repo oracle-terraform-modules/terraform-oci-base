@@ -21,7 +21,7 @@ module "base" {
 }
 
 module "db" {
-  source = "./modules/db"
+  source = "./db"
 
   db_identity = local.db_identity
 

@@ -10,6 +10,7 @@ resource "oci_core_subnet" "admin" {
   route_table_id             = var.oci_admin_network.nat_route_id
   security_list_ids          = [oci_core_security_list.admin[0].id]
   vcn_id                     = var.oci_admin_network.vcn_id
+  freeform_tags              = var.tagging.networktag
 
   count = var.oci_admin.admin_enabled == true ? 1 : 0
 }

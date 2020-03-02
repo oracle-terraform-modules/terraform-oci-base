@@ -62,3 +62,11 @@ variable "oci_bastion_notification" {
   })
   description = "OCI notification parameters for bastion"
 }
+
+#tagging
+variable "tagging" {
+  type = object({
+    computetag                = map(any)
+    networktag                = map(any)
+  }) 
+}

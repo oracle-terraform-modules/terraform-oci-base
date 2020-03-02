@@ -60,3 +60,12 @@ variable "oci_admin_notification" {
   })
   description = "OCI notification parameters for admin"
 }
+
+#tagging
+variable "tagging" {
+  type = object({
+    computetag                = map(any)
+    networktag                = map(any)
+  }) 
+}
+

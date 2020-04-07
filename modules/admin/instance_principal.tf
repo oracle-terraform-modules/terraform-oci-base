@@ -43,3 +43,27 @@ resource "oci_identity_policy" "admin_instance_principal" {
 
   count = var.oci_admin.admin_enabled == true && var.oci_admin.enable_instance_principal == true ? 1 : 0
 }
+
+resource null_resource "instance_principal_complete" {
+  connection {
+    host        = oci_core_instance.admin[0].private_ip
+    private_key = file(var.oci_admin.ssh_private_key_path)
+    timeout     = "40m"
+    type        = "ssh"
+    user        = "opc"
+
+    bastion_host        = var.oci_admin_bastion.bastion_ip
+    bastion_user        = "opc"
+    bastion_private_key = file(var.oci_admin_bastion.ssh_private_key_path)
+  }
+
+  depends_on = [oci_identity_dynamic_group.admin_instance_principal, oci_identity_policy.admin_instance_principal]
+
+  provisioner "remote-exec" {
+    inline = [
+      "touch $HOME/ip.finish",
+    ]
+  }
+
+  count = var.oci_admin.admin_enabled == true && var.oci_admin.enable_instance_principal == true ? 1 : 0
+}

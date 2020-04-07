@@ -24,5 +24,6 @@ module "admin" {
   oci_admin_network      = local.oci_admin_network
   oci_admin              = local.oci_admin
   oci_admin_notification = local.oci_admin_notification
+  oci_admin_bastion      = local.oci_admin_bastion
   tagging                = local.tagging
 }

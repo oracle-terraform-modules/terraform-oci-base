@@ -61,6 +61,7 @@ locals {
     admin_shape               = var.oci_base_admin.admin_shape
     admin_upgrade             = var.oci_base_admin.admin_upgrade
     enable_instance_principal = var.oci_base_admin.enable_instance_principal
+    ssh_private_key_path      = var.oci_base_admin.ssh_private_key_path
     ssh_public_key_path       = var.oci_base_admin.ssh_public_key_path
     timezone                  = var.oci_base_admin.timezone
   }
@@ -72,8 +73,13 @@ locals {
     notification_topic    = var.oci_base_admin.notification_topic
   }
 
+  oci_admin_bastion = {
+    bastion_ip           = module.bastion.bastion_public_ip
+    ssh_private_key_path = var.oci_base_bastion.ssh_private_key_path
+  }
+
   tagging = {
-     computetag           = var.tagging.computetag
-     networktag           = var.tagging.networktag
+    computetag = var.tagging.computetag
+    networktag = var.tagging.networktag
   }
 }

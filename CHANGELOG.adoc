@@ -7,6 +7,13 @@ All notable changes to this project are documented in this file.
 
 The format is based on {uri-changelog}[Keep a Changelog].
 
+== 1.1.3 (April 7, 2020)
+* Added a file (ip.finish) on admin host to allow solution stacks to detect when the instance_principal for admin host is ready (#46)
+
+== 1.1.2 (February 28, 2020)
+* Fixed broken links in README.md (#43)
+* Renamed examples/db to database and removed the submodule since it's not rendering properly on the registry page
+
 == 1.1.1 (February 28, 2020)
 * New release for hashicorp registry (#38, #40)
 * Fixed broken links in README.md (#43)

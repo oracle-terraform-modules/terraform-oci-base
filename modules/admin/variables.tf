@@ -32,7 +32,6 @@ variable "oci_admin" {
     admin_upgrade             = bool
     admin_enabled             = bool
     enable_instance_principal = bool
-    ssh_private_key_path      = string
     ssh_public_key_path       = string
     timezone                  = string
   })
@@ -67,13 +66,5 @@ variable "tagging" {
   type = object({
     computetag = map(any)
     networktag = map(any)
-  })
-}
-
-# bastion
-variable "oci_admin_bastion" {
-  type = object({
-    bastion_ip           = string
-    ssh_private_key_path = string
   })
 }

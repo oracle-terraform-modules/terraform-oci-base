@@ -7,6 +7,9 @@ All notable changes to this project are documented in this file.
 
 The format is based on {uri-changelog}[Keep a Changelog].
 
+== 1.1.4 (May 5, 2020)
+* Removed instance_principal check (#48)
+
 == 1.1.3 (April 7, 2020)
 * Added a file (ip.finish) on admin host to allow solution stacks to detect when the instance_principal for admin host is ready (#46)
 

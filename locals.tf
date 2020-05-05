@@ -61,7 +61,6 @@ locals {
     admin_shape               = var.oci_base_admin.admin_shape
     admin_upgrade             = var.oci_base_admin.admin_upgrade
     enable_instance_principal = var.oci_base_admin.enable_instance_principal
-    ssh_private_key_path      = var.oci_base_admin.ssh_private_key_path
     ssh_public_key_path       = var.oci_base_admin.ssh_public_key_path
     timezone                  = var.oci_base_admin.timezone
   }

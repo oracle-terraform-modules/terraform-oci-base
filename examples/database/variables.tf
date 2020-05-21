@@ -12,8 +12,10 @@ variable "api_private_key_path" {
   type        = string
 }
 
-variable "compartment_id" {
-  description = "compartment id"
+variable "region" {
+  # List of regions: https://docs.cloud.oracle.com/iaas/Content/General/Concepts/regions.htm#ServiceAvailabilityAcrossRegions
+  description = "region"
+  default     = "us-phoenix-1"
   type        = string
 }
 
@@ -39,9 +41,9 @@ variable "ssh_public_key_path" {
 }
 
 # general oci parameters
-variable "disable_auto_retries" {
-  default = true
-  type    = bool
+variable "compartment_id" {
+  description = "compartment id"
+  type        = string
 }
 
 variable "label_prefix" {
@@ -50,14 +52,13 @@ variable "label_prefix" {
   type        = string
 }
 
-variable "region" {
-  # List of regions: https://docs.cloud.oracle.com/iaas/Content/General/Concepts/regions.htm#ServiceAvailabilityAcrossRegions
-  description = "region"
-  default     = "us-phoenix-1"
-  type        = string
-}
-
 # networking parameters
+
+variable "internet_gateway_enabled" {
+  description = "whether to create a nat gateway"
+  default     = false
+  type        = bool
+}
 
 variable "nat_gateway_enabled" {
   description = "whether to create a nat gateway"
@@ -70,9 +71,6 @@ variable "netnum" {
   default = {
     admin   = 33
     bastion = 32
-    int_lb  = 16
-    pub_lb  = 17
-    workers = 1
   }
   type = map
 }
@@ -82,8 +80,6 @@ variable "newbits" {
   default = {
     admin   = 13
     bastion = 13
-    lb      = 11
-    workers = 2
   }
   type = map
 }
@@ -101,13 +97,13 @@ variable "vcn_cidr" {
 }
 
 variable "vcn_dns_label" {
-  default = "oke"
+  default = "db"
   type    = string
 }
 
 variable "vcn_name" {
   description = "name of vcn"
-  default     = "oke vcn"
+  default     = "db vcn"
   type        = string
 }
 

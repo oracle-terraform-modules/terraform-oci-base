@@ -1,26 +1,29 @@
-# Identity and access parameters
+# provider parameters
 
-oci_base_identity = {
+oci_base_provider = {
   api_fingerprint      = ""
   api_private_key_path = ""
-  compartment_id       = ""
+  region               = "us-phoenix-1"
   tenancy_id           = ""
   user_id              = ""
 }
 
+# general oci parameters
+
 oci_base_general = {
-  label_prefix = "dev"
-  region       = "us-phoenix-1"
+  compartment_id       = ""
+  label_prefix         = "dev"
 }
 
 # networking
 
 oci_base_vcn = {
-  nat_gateway_enabled     = true
-  service_gateway_enabled = true
-  vcn_cidr                = "10.0.0.0/16"
-  vcn_dns_label           = "base"
-  vcn_name                = "base"
+  internet_gateway_enabled     = true
+  nat_gateway_enabled          = true
+  service_gateway_enabled      = true
+  vcn_cidr                     = "10.0.0.0/16"
+  vcn_dns_label                = "base"
+  vcn_name                     = "base"
 }
 
 # bastion

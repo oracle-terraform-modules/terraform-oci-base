@@ -24,7 +24,7 @@ data "template_file" "autonomous_cloud_init_file" {
 }
 
 data "oci_core_images" "autonomous_images" {
-  compartment_id           = var.oci_base_identity.compartment_id
+  compartment_id           = var.oci_bastion_general.compartment_id
   operating_system         = "Oracle Autonomous Linux"
   operating_system_version = "7.7"
   shape                    = var.oci_bastion.bastion_shape
@@ -47,7 +47,7 @@ data "template_cloudinit_config" "bastion" {
 # Gets a list of VNIC attachments on the bastion instance
 data "oci_core_vnic_attachments" "bastion_vnics_attachments" {
   availability_domain = element(var.oci_bastion_network.ad_names, (var.oci_bastion_network.availability_domains - 1))
-  compartment_id      = var.oci_base_identity.compartment_id
+  compartment_id      = var.oci_bastion_general.compartment_id
   depends_on          = [oci_core_instance.bastion]
   instance_id         = oci_core_instance.bastion[0].id
 

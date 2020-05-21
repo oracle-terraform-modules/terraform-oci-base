@@ -2,16 +2,17 @@
 # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl/
 
 locals {
-  oci_base_identity = {
+  oci_base_provider = {
     api_fingerprint      = var.api_fingerprint
     api_private_key_path = var.api_private_key_path
-    compartment_id       = var.compartment_id
+    region               = var.region
     tenancy_id           = var.tenancy_id
     user_id              = var.user_id
   }
+
   oci_base_general = {
-    label_prefix = var.label_prefix
-    region       = var.region
+    compartment_id = var.compartment_id
+    label_prefix   = var.label_prefix
   }
 
   oci_base_ssh_keys = {
@@ -20,11 +21,12 @@ locals {
   }
 
   oci_base_vcn = {
-    nat_gateway_enabled     = var.nat_gateway_enabled
-    service_gateway_enabled = var.service_gateway_enabled
-    vcn_cidr                = var.vcn_cidr
-    vcn_dns_label           = var.vcn_dns_label
-    vcn_name                = var.vcn_name
+    internet_gateway_enabled = var.internet_gateway_enabled
+    nat_gateway_enabled      = var.nat_gateway_enabled
+    service_gateway_enabled  = var.service_gateway_enabled
+    vcn_cidr                 = var.vcn_cidr
+    vcn_dns_label            = var.vcn_dns_label
+    vcn_name                 = var.vcn_name
   }
 
   oci_base_bastion = {

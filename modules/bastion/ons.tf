@@ -3,35 +3,35 @@
 
 provider "oci" {
   alias            = "home"
-  fingerprint      = var.oci_base_identity.api_fingerprint
-  private_key_path = var.oci_base_identity.api_private_key_path
+  fingerprint      = var.oci_bastion_provider.api_fingerprint
+  private_key_path = var.oci_bastion_provider.api_private_key_path
   region           = var.oci_bastion_general.home_region
-  tenancy_ocid     = var.oci_base_identity.tenancy_id
-  user_ocid        = var.oci_base_identity.user_id
+  tenancy_ocid     = var.oci_bastion_provider.tenancy_id
+  user_ocid        = var.oci_bastion_provider.user_id
 }
 
 data "oci_identity_compartments" "compartments_id" {
   access_level              = "ACCESSIBLE"
-  compartment_id            = var.oci_base_identity.tenancy_id
+  compartment_id            = var.oci_bastion_provider.tenancy_id
   compartment_id_in_subtree = "true"
 
   filter {
     name   = "id"
-    values = [var.oci_base_identity.compartment_id]
+    values = [var.oci_bastion_general.compartment_id]
   }
 
   count = (var.oci_bastion.bastion_enabled == true && var.oci_bastion_notification.notification_enabled == true) ? 1 : 0
 }
 
 resource "oci_ons_notification_topic" "bastion_notification" {
-  compartment_id = var.oci_base_identity.compartment_id
+  compartment_id = var.oci_bastion_general.compartment_id
   name           = "${var.oci_bastion_general.label_prefix}-${var.oci_bastion_notification.notification_topic}"
 
   count = (var.oci_bastion.bastion_enabled == true && var.oci_bastion_notification.notification_enabled == true) ? 1 : 0
 }
 
 resource "oci_ons_subscription" "bastion_notification" {
-  compartment_id = var.oci_base_identity.compartment_id
+  compartment_id = var.oci_bastion_general.compartment_id
   endpoint       = var.oci_bastion_notification.notification_endpoint
   protocol       = var.oci_bastion_notification.notification_protocol
   topic_id       = oci_ons_notification_topic.bastion_notification[0].topic_id
@@ -42,7 +42,7 @@ resource "oci_ons_subscription" "bastion_notification" {
 resource "oci_identity_dynamic_group" "bastion_notification" {
   provider = oci.home
 
-  compartment_id = var.oci_base_identity.tenancy_id
+  compartment_id = var.oci_bastion_provider.tenancy_id
   depends_on     = [oci_core_instance.bastion]
   description    = "dynamic group to allow bastion to send notifications to ONS"
   matching_rule  = "ALL {instance.id = '${join(",", data.oci_core_instance.bastion.*.id)}'}"
@@ -54,7 +54,7 @@ resource "oci_identity_dynamic_group" "bastion_notification" {
 resource "oci_identity_policy" "bastion_notification" {
   provider = oci.home
 
-  compartment_id = var.oci_base_identity.compartment_id
+  compartment_id = var.oci_bastion_general.compartment_id
   depends_on     = [oci_core_instance.bastion]
   description    = "policy to allow bastion host to publish messages to ONS"
   name           = "${var.oci_bastion_general.label_prefix}-bastion-notification"

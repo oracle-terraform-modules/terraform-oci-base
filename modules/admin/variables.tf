@@ -3,22 +3,22 @@
 
 # general
 
-variable "oci_admin_identity" {
+variable "oci_admin_provider" {
   type = object({
     api_fingerprint      = string
     api_private_key_path = string
-    compartment_id       = string
+    region               = string
     tenancy_id           = string
     user_id              = string
   })
-  description = "parameters related to oci identity"
+  description = "parameters related to oci provider"
 }
 
 variable "oci_admin_general" {
   type = object({
-    home_region  = string
-    label_prefix = string
-    region       = string
+    compartment_id = string
+    home_region    = string
+    label_prefix   = string
   })
   description = "general oci parameters"
 }

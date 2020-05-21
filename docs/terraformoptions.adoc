@@ -17,13 +17,13 @@
 
 Configuration Terraform Options:
 
-. link:#identity-and-access[Identity and Access]
+. link:#Provider[Identity and Access]
 . link:#general-oci[General OCI]
 . link:#oci-networking[OCI Networking]
 . link:#bastion-host[Bastion Host]
 . link:#admin-host[Admin Host]
 
-=== Identity and access
+=== Provider
 
 [stripes=odd,cols="1d,4d,3a,3a", options=header,width="100%"] 
 |===
@@ -42,8 +42,8 @@ Configuration Terraform Options:
 |
 |None
 
-|compartment_id
-|Compartment id where the VCN and other resources will be provisioned. *Required*
+|region
+|Region where to provision the resources. {uri-oci-region}[List of regions]. *Required*
 |
 |None
 
@@ -68,15 +68,15 @@ Configuration Terraform Options:
 |Values
 |Default
 
+|compartment_id
+|Compartment id where the VCN and other resources will be provisioned. *Required*
+|
+|None
+
 |label_prefix
 |a string to be prepended to the name of resources. *Recommended*
 |
 |
-
-|region
-|Region where to provision the resources. {uri-oci-region}[List of regions]. *Required*
-|
-|us-phoenix-1
 
 |===
 
@@ -88,6 +88,11 @@ Configuration Terraform Options:
 |Description
 |Values
 |Default
+
+|internet_gateway_enabled
+|Whether to create an internet gateway. *Required* for public subnets.
+|true/false
+|true
 
 |nat_gateway_enabled
 |Whether to create a NAT gateway. *Required* for private subnets.

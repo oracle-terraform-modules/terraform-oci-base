@@ -2,20 +2,10 @@
 # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl
 
 locals {
-  oci_base_vcn = {
-    compartment_id          = var.oci_base_identity.compartment_id
-    label_prefix            = var.oci_base_general.label_prefix
-    nat_gateway_enabled     = var.oci_base_vcn.nat_gateway_enabled
-    service_gateway_enabled = var.oci_base_vcn.service_gateway_enabled
-    vcn_cidr                = var.oci_base_vcn.vcn_cidr
-    vcn_dns_label           = var.oci_base_vcn.vcn_dns_label
-    vcn_name                = var.oci_base_vcn.vcn_name
-  }
-
-  oci_bastion_general = {
-    label_prefix = var.oci_base_general.label_prefix
-    home_region  = lookup(data.oci_identity_regions.home_region.regions[0], "name")
-    region       = var.oci_base_general.region
+  oci_base_general = {
+    compartment_id = var.oci_base_general.compartment_id
+    home_region    = lookup(data.oci_identity_regions.home_region.regions[0], "name")
+    label_prefix   = var.oci_base_general.label_prefix
   }
 
   oci_bastion_network = {

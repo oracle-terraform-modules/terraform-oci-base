@@ -2,7 +2,7 @@
 # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl/
 
 resource "oci_core_security_list" "bastion" {
-  compartment_id = var.oci_base_identity.compartment_id
+  compartment_id = var.oci_bastion_general.compartment_id
   display_name   = "${var.oci_bastion_general.label_prefix}-bastion"
 
   egress_security_rules {

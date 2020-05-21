@@ -68,7 +68,7 @@ module "base" {
   source = "./modules/base"
 
   # identity
-  oci_base_identity = local.oci_base_identity
+  oci_base_provider = local.oci_base_provider
 
   # general oci parameters
   oci_base_general = local.oci_base_general

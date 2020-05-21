@@ -2,7 +2,7 @@
 # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl
 
 data "oci_core_images" "admin_images" {
-  compartment_id           = var.oci_admin_identity.compartment_id
+  compartment_id           = var.oci_admin_general.compartment_id
   operating_system         = "Oracle Linux"
   operating_system_version = "7.7"
   shape                    = var.oci_admin.admin_shape
@@ -45,7 +45,7 @@ data "template_cloudinit_config" "admin" {
 # Gets a list of VNIC attachments on the admin instance
 data "oci_core_vnic_attachments" "admin_vnics_attachments" {
   availability_domain = element(var.oci_admin_network.ad_names, (var.oci_admin_network.availability_domains - 1))
-  compartment_id      = var.oci_admin_identity.compartment_id
+  compartment_id      = var.oci_admin_general.compartment_id
   instance_id         = oci_core_instance.admin[0].id
 
   count = var.oci_admin.admin_enabled == true ? 1 : 0

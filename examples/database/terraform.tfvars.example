@@ -4,7 +4,7 @@ api_fingerprint = ""
 
 api_private_key_path = ""
 
-compartment_id = ""
+region = "us-phoenix-1"
 
 tenancy_id = ""
 
@@ -15,11 +15,14 @@ ssh_private_key_path = ""
 ssh_public_key_path = ""
 
 # general oci parameters
+
+compartment_id = ""
+
 label_prefix = "basedbexample"
 
-region = "us-phoenix-1"
-
 # networking
+
+internet_gateway_enabled = false
 
 nat_gateway_enabled = true
 

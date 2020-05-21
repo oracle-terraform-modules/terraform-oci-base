@@ -3,7 +3,7 @@
 
 resource "oci_core_instance" "bastion" {
   availability_domain = element(var.oci_bastion_network.ad_names, (var.oci_bastion_network.availability_domains - 1))
-  compartment_id      = var.oci_base_identity.compartment_id
+  compartment_id      = var.oci_bastion_general.compartment_id
   freeform_tags       = var.tagging.computetag
    
 

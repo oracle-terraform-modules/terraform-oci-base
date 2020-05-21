@@ -1,50 +1,48 @@
 # Copyright 2017, 2019, Oracle Corporation and/or affiliates.  All rights reserved.
 # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl/
 
-# Identity and access parameters
+# provider parameters
 
-variable "oci_base_identity" {
+variable "oci_base_provider" {
   type = object({
     api_fingerprint      = string
     api_private_key_path = string
-    compartment_id       = string
+    region               = string
     tenancy_id           = string
     user_id              = string
   })
-  description = "oci identity and provider parameters"
+  description = "oci provider parameters"
 }
 
 # general oci parameters
 
 variable "oci_base_general" {
   type = object({
-    label_prefix = string
-    region       = string
+    compartment_id = string
+    label_prefix   = string
   })
   description = "general oci parameters"
-  default = {
-    label_prefix = ""
-    region       = ""
-  }
 }
 
 # networking parameters
 
 variable "oci_base_vcn" {
   type = object({
-    nat_gateway_enabled     = bool
-    service_gateway_enabled = bool
-    vcn_cidr                = string
-    vcn_dns_label           = string
-    vcn_name                = string
+    internet_gateway_enabled = bool
+    nat_gateway_enabled      = bool
+    service_gateway_enabled  = bool
+    vcn_cidr                 = string
+    vcn_dns_label            = string
+    vcn_name                 = string
   })
   description = "VCN parameters"
   default = {
-    nat_gateway_enabled     = true
-    service_gateway_enabled = true
-    vcn_cidr                = "10.0.0.0/16"
-    vcn_dns_label           = ""
-    vcn_name                = ""
+    internet_gateway_enabled = false
+    nat_gateway_enabled      = true
+    service_gateway_enabled  = true
+    vcn_cidr                 = "10.0.0.0/16"
+    vcn_dns_label            = ""
+    vcn_name                 = ""
   }
 }
 
@@ -131,7 +129,7 @@ variable "oci_base_admin" {
 #tagging
 variable "tagging" {
   type = object({
-    computetag                = map(any)
-    networktag                = map(any)
-  }) 
+    computetag = map(any)
+    networktag = map(any)
+  })
 }

@@ -2,7 +2,7 @@
 # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl
 
 resource "oci_core_security_list" "admin" {
-  compartment_id = var.oci_admin_identity.compartment_id
+  compartment_id = var.oci_admin_general.compartment_id
   display_name   = "${var.oci_admin_general.label_prefix}-admin"
 
   egress_security_rules {
@@ -13,7 +13,7 @@ resource "oci_core_security_list" "admin" {
   ingress_security_rules {
     # allow ssh
     protocol = local.tcp_protocol
-    
+
     source = var.oci_admin_network.vcn_cidr
 
     tcp_options {
@@ -21,7 +21,7 @@ resource "oci_core_security_list" "admin" {
       max = local.ssh_port
     }
   }
-  vcn_id         = var.oci_admin_network.vcn_id
+  vcn_id = var.oci_admin_network.vcn_id
 
   count = var.oci_admin.admin_enabled == true ? 1 : 0
 }

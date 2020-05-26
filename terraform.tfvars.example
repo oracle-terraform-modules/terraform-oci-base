@@ -21,6 +21,10 @@ oci_base_vcn = {
   internet_gateway_enabled     = true
   nat_gateway_enabled          = true
   service_gateway_enabled      = true
+  tags = {
+    department  = "finance"
+    environment = "dev"
+  }
   vcn_cidr                     = "10.0.0.0/16"
   vcn_dns_label                = "base"
   vcn_name                     = "base"
@@ -29,7 +33,7 @@ oci_base_vcn = {
 # bastion
 
 oci_base_bastion = {
-  availability_domains  = 1
+  availability_domain  = 1
   bastion_access        = "ANYWHERE"
   bastion_enabled       = true
   bastion_image_id      = "Autonomous"
@@ -43,30 +47,35 @@ oci_base_bastion = {
   notification_topic    = "bastion"
   ssh_private_key_path  = ""
   ssh_public_key_path   = ""
+  tags = {
+    department  = "finance"
+    environment = "dev"
+    role        = "bastion"
+  }
   timezone              = "Australia/Sydney"
 }
 
-# admin
-oci_base_admin = {
-  availability_domains      = 1
-  admin_enabled             = true
-  admin_image_id            = "Oracle"
-  admin_shape               = "VM.Standard.E2.2"
-  admin_upgrade             = false
+# operator
+oci_base_operator = {
+  availability_domain       = 1
+  operator_enabled          = true
+  operator_image_id         = "Oracle"
+  operator_shape            = "VM.Standard.E2.2"
+  operator_upgrade          = false
   enable_instance_principal = true
   netnum                    = 33
   newbits                   = 13
   notification_enabled      = false
   notification_endpoint     = ""
   notification_protocol     = "EMAIL"
-  notification_topic        = "admin"
+  notification_topic        = "operator"
   ssh_private_key_path      = ""
   ssh_public_key_path       = ""
-  timezone                  = "Australia/Sydney"
-}
+  tags = {
+    department  = "finance"
+    environment = "dev"
+    role        = "operator"
+  }
 
-#tagging
-tagging = { 
-  computetag    =  { "Envrionment" = "UAT" }
-  networktag    =   { "Name" = "TerrformedVCN"}
+  timezone = "Australia/Sydney"
 }

@@ -31,15 +31,17 @@ variable "oci_base_vcn" {
     internet_gateway_enabled = bool
     nat_gateway_enabled      = bool
     service_gateway_enabled  = bool
+    tags                     = map(any)
     vcn_cidr                 = string
     vcn_dns_label            = string
     vcn_name                 = string
   })
   description = "VCN parameters"
   default = {
-    internet_gateway_enabled = false
+    internet_gateway_enabled = true
     nat_gateway_enabled      = true
     service_gateway_enabled  = true
+    tags                     = null
     vcn_cidr                 = "10.0.0.0/16"
     vcn_dns_label            = ""
     vcn_name                 = ""
@@ -50,7 +52,7 @@ variable "oci_base_vcn" {
 
 variable "oci_base_bastion" {
   type = object({
-    availability_domains  = number
+    availability_domain   = number
     bastion_access        = string
     bastion_enabled       = bool
     bastion_image_id      = string
@@ -64,11 +66,12 @@ variable "oci_base_bastion" {
     notification_topic    = string
     ssh_private_key_path  = string
     ssh_public_key_path   = string
+    tags                  = map(any)
     timezone              = string
   })
   description = "bastion host parameters"
   default = {
-    availability_domains  = 1
+    availability_domain   = 1
     bastion_access        = "ANYWHERE"
     bastion_enabled       = false
     bastion_image_id      = "Autonomous"
@@ -82,19 +85,24 @@ variable "oci_base_bastion" {
     notification_topic    = "bastion"
     ssh_private_key_path  = ""
     ssh_public_key_path   = ""
-    timezone              = ""
+    tags = {
+      department  = "finance"
+      environment = "dev"
+      role        = "operator"
+    }
+    timezone = "Australia/Sydney"
   }
 }
 
-# admin
+# operator
 
-variable "oci_base_admin" {
+variable "oci_base_operator" {
   type = object({
-    availability_domains      = number
-    admin_enabled             = bool
-    admin_image_id            = string
-    admin_shape               = string
-    admin_upgrade             = bool
+    availability_domain       = number
+    operator_enabled          = bool
+    operator_image_id         = string
+    operator_shape            = string
+    operator_upgrade          = bool
     enable_instance_principal = bool
     netnum                    = number
     newbits                   = number
@@ -104,32 +112,33 @@ variable "oci_base_admin" {
     notification_topic        = string
     ssh_private_key_path      = string
     ssh_public_key_path       = string
+    tags                      = map(any)
     timezone                  = string
   })
-  description = "admin host parameters"
+  description = "operator host parameters"
   default = {
-    availability_domains      = 1
-    admin_enabled             = false
-    admin_image_id            = "Oracle"
-    admin_shape               = ""
-    admin_upgrade             = true
+    availability_domain       = 1
+    operator_enabled          = false
+    operator_image_id         = "Oracle"
+    operator_shape            = ""
+    operator_upgrade          = true
     enable_instance_principal = false
     netnum                    = 33
     newbits                   = 13
     notification_enabled      = false
     notification_endpoint     = ""
     notification_protocol     = "EMAIL"
-    notification_topic        = "admin"
+    notification_topic        = "operator"
     ssh_private_key_path      = ""
     ssh_public_key_path       = ""
-    timezone                  = ""
+    tags = {
+      compute = {
+        "role" = "operator"
+      }
+      network = {
+        "role" = "operator"
+      }
+    }
+    timezone = "Australia/Sydney"
   }
-}
-
-#tagging
-variable "tagging" {
-  type = object({
-    computetag = map(any)
-    networktag = map(any)
-  })
 }

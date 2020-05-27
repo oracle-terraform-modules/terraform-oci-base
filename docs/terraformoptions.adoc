@@ -231,7 +231,15 @@ Configuration Terraform Options:
 |tags
 |The tags to apply on the bastion resources.
 |map(any)
-|null
+|
+[source,hcl]
+----
+tags = {
+    department  = ""
+    environment = "dev"
+    role        = "bastion"
+}
+----
 
 |timezone
 |The preferred timezone for the bastion host. {uri-timezones}[List of timezones]
@@ -297,7 +305,15 @@ Configuration Terraform Options:
 |tags
 |The tags to apply on the bastion resources.
 |map(any)
-|null
+|
+[source,hcl]
+----
+tags = {
+  department  = ""
+  environment = "dev"
+  role        = "operator"
+}
+----
 
 |operator_timezone
 |The preferred timezone for the operator host. {uri-timezones}[List of timezones]

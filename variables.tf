@@ -86,9 +86,9 @@ variable "oci_base_bastion" {
     ssh_private_key_path  = ""
     ssh_public_key_path   = ""
     tags = {
-      department  = "finance"
+      department  = ""
       environment = "dev"
-      role        = "operator"
+      role        = "bastion"
     }
     timezone = "Australia/Sydney"
   }
@@ -132,12 +132,9 @@ variable "oci_base_operator" {
     ssh_private_key_path      = ""
     ssh_public_key_path       = ""
     tags = {
-      compute = {
-        "role" = "operator"
-      }
-      network = {
-        "role" = "operator"
-      }
+      department  = ""
+      environment = "dev"
+      role        = "operator"
     }
     timezone = "Australia/Sydney"
   }

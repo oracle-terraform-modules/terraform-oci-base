@@ -1,7 +1,7 @@
 # Copyright 2017, 2019, Oracle Corporation and/or affiliates.  All rights reserved.
 # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl
 
-# Identity and access parameters
+# Provider parameters
 variable "api_fingerprint" {
   description = "fingerprint of oci api private key"
   type        = string
@@ -69,7 +69,7 @@ variable "nat_gateway_enabled" {
 variable "netnum" {
   description = "zero-based index of the subnet when the network is masked with the newbit."
   default = {
-    admin   = 33
+    operator   = 33
     bastion = 32
   }
   type = map
@@ -78,7 +78,7 @@ variable "netnum" {
 variable "newbits" {
   description = "new mask for the subnet within the virtual network. use as newbits parameter for cidrsubnet function"
   default = {
-    admin   = 13
+    operator   = 13
     bastion = 13
   }
   type = map
@@ -174,72 +174,66 @@ variable "bastion_use_autonomous" {
   type        = bool
 }
 
-# admin server
+# operator
 
-variable "admin_enabled" {
-  description = "whether to create an admin server in a private subnet"
+variable "operator_enabled" {
+  description = "whether to create an operator in a private subnet"
   default     = true
   type        = bool
 }
 
-variable "admin_image_id" {
-  description = "image id to use for admin server."
+variable "operator_image_id" {
+  description = "image id to use for operator."
   default     = "NONE"
   type        = string
 }
 
 variable "enable_instance_principal" {
-  description = "enable the admin server host to call OCI API services without requiring api key"
+  description = "enable the operator server host to call OCI API services without requiring api key"
   default     = true
   type        = bool
 }
 
-variable "admin_notification_enabled" {
-  description = "Whether to enable notification on the admin host"
+variable "operator_notification_enabled" {
+  description = "Whether to enable notification on the operator host"
   default     = false
   type        = bool
 }
 
-variable "admin_notification_endpoint" {
-  description = "The subscription notification endpoint for the admin. Email address to be notified."
+variable "operator_notification_endpoint" {
+  description = "The subscription notification endpoint for the operator. Email address to be notified."
   default     = ""
   type        = string
 }
 
-variable "admin_notification_protocol" {
+variable "operator_notification_protocol" {
   description = "The notification protocol used."
   default     = "EMAIL"
   type        = string
 }
 
-variable "admin_notification_topic" {
+variable "operator_notification_topic" {
   description = "The name of the notification topic."
-  default     = "admin"
+  default     = "operator"
   type        = string
 }
 
-variable "admin_package_upgrade" {
+variable "operator_package_upgrade" {
   description = "Whether to upgrade the bastion host packages after provisioning. It’s useful to set this to false during development so the bastion is provisioned faster."
   default     = true
   type        = bool
 }
 
-variable "admin_shape" {
-  description = "shape of admin server instance"
+variable "operator_shape" {
+  description = "shape of operator server instance"
   default     = "VM.Standard.E2.1"
   type        = string
 }
 
-variable "admin_timezone" {
+variable "operator_timezone" {
   default     = "Australia/Sydney"
-  description = "The preferred timezone for the admin host."
+  description = "The preferred timezone for the operator host."
   type        = string
-}
-
-variable "admin_use_autonomous" {
-  description = "Whether to use Autonomous Linux or an Oracle Linux Platform image or custom image. Set to false if you want to use your own image id or Oracle Linux Platform image."
-  default     = true
-  type        = bool
 }
 
 # availability domains

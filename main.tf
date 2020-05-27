@@ -1,12 +1,6 @@
 # Copyright 2017, 2019, Oracle Corporation and/or affiliates.  All rights reserved.
 # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl
 
-# module "vcn" {
-#   source       = "./modules/vcn"
-#   oci_base_vcn = local.oci_base_vcn
-#   tagging      = local.tagging
-# }
-
 module "vcn" {
   source  = "oracle-terraform-modules/vcn/oci"
   version = "1.0.1"
@@ -32,8 +26,8 @@ module "vcn" {
 }
 
 module "bastion" {
-  # source                   = "./modules/bastion"
-  source = "github.com/oracle-terraform-modules/terraform-oci-bastion?ref=v1.0.1"
+  source  = "oracle-terraform-modules/bastion/oci"
+  version = "1.0.1"
 
   # provider identity parameters
   api_fingerprint      = var.oci_base_provider.api_fingerprint
@@ -75,19 +69,9 @@ module "bastion" {
 
 }
 
-# module "admin" {
-#   source                 = "./modules/admin"
-#   oci_admin_provider     = var.oci_base_provider
-#   oci_admin_general      = local.oci_base_general
-#   oci_admin_network      = local.oci_admin_network
-#   oci_admin              = local.oci_admin
-#   oci_admin_notification = local.oci_admin_notification
-#   tagging                = local.tagging
-# }
-
 module "operator" {
-  # source                   = "./modules/operator"
-  source = "github.com/oracle-terraform-modules/terraform-oci-operator?ref=v1.0.4"
+  source  = "oracle-terraform-modules/operator/oci"
+  version = "1.0.4"
 
   # provider identity parameters
   api_fingerprint      = var.oci_base_provider.api_fingerprint

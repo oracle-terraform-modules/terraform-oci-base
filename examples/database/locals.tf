@@ -2,16 +2,17 @@
 # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl/
 
 locals {
-  oci_base_identity = {
+  oci_base_provider = {
     api_fingerprint      = var.api_fingerprint
     api_private_key_path = var.api_private_key_path
-    compartment_id       = var.compartment_id
+    region               = var.region
     tenancy_id           = var.tenancy_id
     user_id              = var.user_id
   }
+
   oci_base_general = {
-    label_prefix = var.label_prefix
-    region       = var.region
+    compartment_id = var.compartment_id
+    label_prefix   = var.label_prefix
   }
 
   oci_base_ssh_keys = {
@@ -20,11 +21,13 @@ locals {
   }
 
   oci_base_vcn = {
-    nat_gateway_enabled     = var.nat_gateway_enabled
-    service_gateway_enabled = var.service_gateway_enabled
-    vcn_cidr                = var.vcn_cidr
-    vcn_dns_label           = var.vcn_dns_label
-    vcn_name                = var.vcn_name
+    internet_gateway_enabled = var.internet_gateway_enabled
+    nat_gateway_enabled      = var.nat_gateway_enabled
+    service_gateway_enabled  = var.service_gateway_enabled
+    tags                     = null
+    vcn_cidr                 = var.vcn_cidr
+    vcn_dns_label            = var.vcn_dns_label
+    vcn_name                 = var.vcn_name
   }
 
   oci_base_bastion = {
@@ -42,27 +45,28 @@ locals {
     notification_topic    = var.bastion_notification_topic
     ssh_private_key_path  = var.ssh_private_key_path
     ssh_public_key_path   = var.ssh_public_key_path
+    tags                  = null
     timezone              = var.bastion_timezone
     use_autonomous        = var.bastion_use_autonomous
   }
 
-  oci_base_admin = {
-    availability_domains      = var.availability_domains["admin"]
-    admin_enabled             = var.admin_enabled
-    admin_image_id            = "NONE"
-    admin_shape               = var.admin_shape
-    admin_upgrade             = var.admin_package_upgrade
+  oci_base_operator = {
+    availability_domains      = var.availability_domains["operator"]
+    operator_enabled          = var.operator_enabled
+    operator_image_id         = "NONE"
+    operator_shape            = var.operator_shape
+    operator_upgrade          = var.operator_package_upgrade
     enable_instance_principal = var.enable_instance_principal
-    netnum                    = var.netnum["admin"]
-    newbits                   = var.newbits["admin"]
-    notification_enabled      = var.admin_notification_enabled
-    notification_endpoint     = var.admin_notification_endpoint
-    notification_protocol     = var.admin_notification_protocol
-    notification_topic        = var.admin_notification_topic
+    netnum                    = var.netnum["operator"]
+    newbits                   = var.newbits["operator"]
+    notification_enabled      = var.operator_notification_enabled
+    notification_endpoint     = var.operator_notification_endpoint
+    notification_protocol     = var.operator_notification_protocol
+    notification_topic        = var.operator_notification_topic
     ssh_private_key_path      = var.ssh_private_key_path
     ssh_public_key_path       = var.ssh_public_key_path
-    timezone                  = var.admin_timezone
-    use_autonomous            = var.admin_use_autonomous
+    tags                      = null
+    timezone                  = var.operator_timezone
   }
 
   db_identity = {

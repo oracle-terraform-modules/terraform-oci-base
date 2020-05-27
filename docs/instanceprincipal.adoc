@@ -22,31 +22,32 @@
 :uri-terraform: https://www.terraform.io
 :uri-terraform-download: https://www.terraform.io/downloads.html
 
-This section documents the use of {uri-oci-instance-principal}[instance_principal] in the project.
+This section documents the use of {uri-oci-instance-principal}[instance_principal] for admin purposes in the project.
 
 . link:#using-instance_principal[Using instance_principal]
-.. link:#enabling-instance_principal-on-the-bastion-host[Enabling instance_principal on the bastion host]
-.. link:#disabling-instance_principal-on-the-bastion-host[Disabling instance_principal on the bastion host]
+.. link:#enabling-instance_principal-on-the-operator-host[Enabling instance_principal on the operator host]
+.. link:#disabling-instance_principal-on-the-operator-host[Disabling instance_principal on the operator host]
 .. link:#recommendations-for-using-instance_principal[Recommendations for using instance_principal]
 
 
 === Using instance_principal
 
-==== Enabling instance_principal on the admin host
+==== Enabling instance_principal on the operator host
 {uri-oci-instance-principal}[instance_principal] is an IAM service feature that enables instances to be authorized actors (or principals) to perform actions on service resources. Each compute instance has its own identity, and it authenticates using the certificates that are added to it. These certificates are automatically created, assigned to instances and rotated, preventing the need for you to distribute credentials to your hosts and rotate them.
 
 Any user who has access to the instance (who can SSH to the instance), automatically inherits the privileges granted to the instance. Before you enable this feature, ensure that you know who can access it, and that they should be authorized with the permissions you are granting to the instance.
 
 By default, this feature is *_disabled_*.
 
-When you enable this feature, by default, the admin host has privileges to manage all resources in the compartment. 
+After you enable this feature, the operator host has privileges to manage all resources in the compartment. 
 
-You can also turn on and off the feature at any time without impact on the admin host.
+You can also turn on and off the feature at any time without impact on the operator host.
 
-To enable, set enable_instance_principal in oci_base_admin to true:
+To enable, set enable_instance_principal in oci_base_operator to true:
 
+[source,hcl]
 ----
-oci_base_admin = {
+oci_base_operator = {
   ....
   enable_instance_principal = true
   ....
@@ -55,19 +56,20 @@ oci_base_admin = {
 
 and verify:
 
+[source,bash]
 ----
 oci network vcn list --compartment-id <compartment-ocid>
 ----
 
 You should be able to see a list of VCNs created in the compartment.
 
-==== Disabling instance_principal on the admin host
+==== Disabling instance_principal on the operator host
 
-To disable, set enable_instance_principal in oci_base_admin to false:
+To disable, set enable_instance_principal in oci_base_operator to false:
 
-+
+[source,hcl]
 ----
-oci_base_admin = {
+oci_base_operator = {
   ....
   enable_instance_principal = false
   ....
@@ -76,7 +78,7 @@ oci_base_admin = {
 
 . Run terraform apply again:
 
-+
+[source,bash]
 ----
 terraform apply
 ----
@@ -84,5 +86,5 @@ terraform apply
 ==== Recommendations for using instance_principal
 
 . Do not enable instance_principal if you are not using it
-. Enable instance_principal *_if and only if_* you are using the admin host to execute oci commands e.g. modifying dynamic groups, changing policies
+. Enable instance_principal *_if and only if_* you are using the operator host to execute oci commands e.g. modifying dynamic groups, changing policies
 . Disable instance_principal once the oci operation is done

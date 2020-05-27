@@ -8,19 +8,19 @@ output "ad_names" {
   value       = sort(data.template_file.ad_names.*.rendered)
 }
 
-output "admin_private_ip" {
-  description = "private ip address of admin host"
-  value       = module.admin.admin_private_ip
+output "operator_private_ip" {
+  description = "private ip address of operator host"
+  value       = module.operator.operator_private_ip
 }
 
 output "bastion_public_ip" {
-  description = "public ip address of admin host"
+  description = "public ip address of operator host"
   value       = module.bastion.bastion_public_ip
 }
 
 output "group_name" {
-  description = "name of dynamic group for admin host instance_principal"
-  value       = module.admin.admin_instance_principal_group_name
+  description = "name of dynamic group for operator host instance_principal"
+  value       = module.operator.operator_instance_principal_group_name
 }
 
 output "ig_route_id" {
@@ -55,7 +55,7 @@ output "ssh_to_bastion" {
   value       = "ssh -i ${var.oci_base_bastion.ssh_private_key_path} opc@${module.bastion.bastion_public_ip}"
 }
 
-output "ssh_to_admin" {
-  description = "convenient output to ssh to the admin host"
-  value       = "ssh -i ${var.oci_base_bastion.ssh_private_key_path} -J opc@${module.bastion.bastion_public_ip} opc@${module.admin.admin_private_ip}"
+output "ssh_to_operator" {
+  description = "convenient output to ssh to the operator host"
+  value       = "ssh -i ${var.oci_base_bastion.ssh_private_key_path} -J opc@${module.bastion.bastion_public_ip} opc@${module.operator.operator_private_ip}"
 }

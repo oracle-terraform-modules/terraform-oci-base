@@ -4,7 +4,7 @@ api_fingerprint = ""
 
 api_private_key_path = ""
 
-compartment_id = ""
+region = "us-phoenix-1"
 
 tenancy_id = ""
 
@@ -15,24 +15,27 @@ ssh_private_key_path = ""
 ssh_public_key_path = ""
 
 # general oci parameters
+
+compartment_id = ""
+
 label_prefix = "basedbexample"
 
-region = "us-phoenix-1"
-
 # networking
+
+internet_gateway_enabled = false
 
 nat_gateway_enabled = true
 
 netnum = {
-  admin   = 33
-  bastion = 32
-  db      = 16
+  operator   = 33
+  bastion    = 32
+  db         = 16
 }
 
 newbits = {
-  admin   = 13
-  bastion = 13
-  db      = 11
+  operator   = 13
+  bastion    = 13
+  db         = 11
 }
 
 service_gateway_enabled = true
@@ -68,34 +71,34 @@ bastion_timezone = "Australia/Sydney"
 
 bastion_use_autonomous = true
 
-admin_enabled = true
+operator_enabled = false
 
-admin_image_id = "NONE"
+operator_image_id = "NONE"
 
 enable_instance_principal = true
 
-admin_notification_enabled = false
+operator_notification_enabled = false
 
-admin_notification_endpoint = ""
+operator_notification_endpoint = ""
 
-admin_notification_protocol = "EMAIL"
+operator_notification_protocol = "EMAIL"
 
-admin_notification_topic= "admin_server_notification"
+operator_notification_topic= "operator_server_notification"
 
-admin_package_upgrade = true
+operator_package_upgrade = true
 
-admin_shape   = "VM.Standard.E2.1"
+operator_shape   = "VM.Standard.E2.1"
 
-admin_timezone= "Australia/Sydney"
+operator_timezone= "Australia/Sydney"
 
-admin_use_autonomous = false
+operator_use_autonomous = false
 
 # availability_domains
 
 availability_domains = {
-  bastion = 1
-  admin   = 1
-  db      = 1
+  bastion  = 1
+  operator = 1
+  db       = 1
 }
 
 # db

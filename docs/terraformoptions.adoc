@@ -17,13 +17,13 @@
 
 Configuration Terraform Options:
 
-. link:#identity-and-access[Identity and Access]
+. link:#Provider[Identity and Access]
 . link:#general-oci[General OCI]
 . link:#oci-networking[OCI Networking]
 . link:#bastion-host[Bastion Host]
-. link:#admin-host[Admin Host]
+. link:#operator-host[Operator Host]
 
-=== Identity and access
+=== Provider
 
 [stripes=odd,cols="1d,4d,3a,3a", options=header,width="100%"] 
 |===
@@ -42,8 +42,8 @@ Configuration Terraform Options:
 |
 |None
 
-|compartment_id
-|Compartment id where the VCN and other resources will be provisioned. *Required*
+|region
+|Region where to provision the resources. {uri-oci-region}[List of regions]. *Required*
 |
 |None
 
@@ -68,15 +68,15 @@ Configuration Terraform Options:
 |Values
 |Default
 
+|compartment_id
+|Compartment id where the VCN and other resources will be provisioned. *Required*
+|
+|None
+
 |label_prefix
 |a string to be prepended to the name of resources. *Recommended*
 |
 |
-
-|region
-|Region where to provision the resources. {uri-oci-region}[List of regions]. *Required*
-|
-|us-phoenix-1
 
 |===
 
@@ -89,6 +89,11 @@ Configuration Terraform Options:
 |Values
 |Default
 
+|internet_gateway_enabled
+|Whether to create an internet gateway. *Required* for public subnets.
+|true/false
+|true
+
 |nat_gateway_enabled
 |Whether to create a NAT gateway. *Required* for private subnets.
 |true/false
@@ -98,6 +103,12 @@ Configuration Terraform Options:
 |Whether to create a Service Gateway to use Oracle Services.
 |true/false
 |true
+
+|tags
+|The tags to apply on the VCN.
+|map(any)
+|null
+
 
 |vcn_cidr
 |The VCN's CIDR block.
@@ -217,6 +228,19 @@ Configuration Terraform Options:
 |
 |None
 
+|tags
+|The tags to apply on the bastion resources.
+|map(any)
+|
+[source,hcl]
+----
+tags = {
+    department  = ""
+    environment = "dev"
+    role        = "bastion"
+}
+----
+
 |timezone
 |The preferred timezone for the bastion host. {uri-timezones}[List of timezones]
 |
@@ -224,7 +248,7 @@ Configuration Terraform Options:
 
 |===
 
-== Admin Host
+== Operator Host
 
 [stripes=odd,cols="1d,4d,3a,3a", options=header,width="100%"] 
 |===
@@ -233,23 +257,23 @@ Configuration Terraform Options:
 |Values
 |Default
 
-|admin_enabled
-|Whether to create the admin host.
+|operator_enabled
+|Whether to create the operator host.
 |true/false
 |false
 
-|admin_image_id
-|Custom image id for the admin host
+|operator_image_id
+|Custom image id for the operator host
 |image_id/Oracle. If the value is set to Oracle, an Oracle Platform image will be used instead.
 |Oracle
 
 |enable_instance_principal
-|Whether to enable instance_principal on the admin server. Refer to {uri-instance-principal-note}[instance_principal][instance_principal]
+|Whether to enable instance_principal on the operator server. Refer to {uri-instance-principal-note}[instance_principal][instance_principal]
 |true/false
 |false
 
 |notification_enabled
-|Whether to enable ONS notification for the admin host. *Do not enable for now*.
+|Whether to enable ONS notification for the operator host. *Do not enable for now*.
 |true/false
 |false
 
@@ -266,40 +290,34 @@ Configuration Terraform Options:
 |notification_topic
 |The name of the notification topic
 |
-|admin
+|operator
 
-|admin_package_upgrade
-|Whether to also upgrade the packages for the admin host.
+|operator_package_upgrade
+|Whether to also upgrade the packages for the operator host.
 |true/false
 |true
 
-|admin_shape
-|The shape of admin instance.
+|operator_shape
+|The shape of operator instance.
 |
 |
 
-|admin_timezone
-|The preferred timezone for the admin host. {uri-timezones}[List of timezones]
+|tags
+|The tags to apply on the bastion resources.
+|map(any)
+|
+[source,hcl]
+----
+tags = {
+  department  = ""
+  environment = "dev"
+  role        = "operator"
+}
+----
+
+|operator_timezone
+|The preferred timezone for the operator host. {uri-timezones}[List of timezones]
 |
 |Australia/Sydney
 
 |===
-
-== Tagging
-
-[stripes=odd,cols="1d,4d,3a,3a", options=header,width="100%"] 
-|===
-|Parameter
-|Description
-|Values
-|Default
-
-|computetag
-|Freeform tag for compute instances.
-|
-|
-
-|networktag
-|Freeform tag for network components like VCN and subnets.
-|
-|

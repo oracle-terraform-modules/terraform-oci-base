@@ -22,7 +22,7 @@ oci_base_vcn = {
   nat_gateway_enabled          = true
   service_gateway_enabled      = true
   tags = {
-    department  = ""
+    department  = "finance"
     environment = "dev"
   }
   vcn_cidr                     = "10.0.0.0/16"
@@ -48,7 +48,7 @@ oci_base_bastion = {
   ssh_private_key_path  = ""
   ssh_public_key_path   = ""
   tags = {
-    department  = ""
+    department  = "finace"
     environment = "dev"
     role        = "bastion"
   }
@@ -72,7 +72,7 @@ oci_base_operator = {
   ssh_private_key_path      = ""
   ssh_public_key_path       = ""
   tags = {
-    department  = ""
+    department  = "finance"
     environment = "dev"
     role        = "operator"
   }

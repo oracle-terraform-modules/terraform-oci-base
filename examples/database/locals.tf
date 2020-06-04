@@ -24,7 +24,7 @@ locals {
     internet_gateway_enabled = var.internet_gateway_enabled
     nat_gateway_enabled      = var.nat_gateway_enabled
     service_gateway_enabled  = var.service_gateway_enabled
-    tags                     = null
+    tags                     = var.tags["vcn"]
     vcn_cidr                 = var.vcn_cidr
     vcn_dns_label            = var.vcn_dns_label
     vcn_name                 = var.vcn_name
@@ -45,7 +45,7 @@ locals {
     notification_topic    = var.bastion_notification_topic
     ssh_private_key_path  = var.ssh_private_key_path
     ssh_public_key_path   = var.ssh_public_key_path
-    tags                  = null
+    tags                  = var.tags["bastion"]
     timezone              = var.bastion_timezone
     use_autonomous        = var.bastion_use_autonomous
   }
@@ -65,7 +65,7 @@ locals {
     notification_topic        = var.operator_notification_topic
     ssh_private_key_path      = var.ssh_private_key_path
     ssh_public_key_path       = var.ssh_public_key_path
-    tags                      = null
+    tags                      = var.tags["operator"]
     timezone                  = var.operator_timezone
   }
 

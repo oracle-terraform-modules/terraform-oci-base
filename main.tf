@@ -16,13 +16,10 @@ module "vcn" {
   internet_gateway_enabled = var.oci_base_vcn.internet_gateway_enabled
   nat_gateway_enabled      = var.oci_base_vcn.nat_gateway_enabled
   service_gateway_enabled  = var.oci_base_vcn.service_gateway_enabled
-  tags = {
-    department  = "finance"
-    environment = "dev"
-  }
-  vcn_cidr      = var.oci_base_vcn.vcn_cidr
-  vcn_dns_label = var.oci_base_vcn.vcn_dns_label
-  vcn_name      = var.oci_base_vcn.vcn_name
+  tags                     = var.oci_base_vcn.tags
+  vcn_cidr                 = var.oci_base_vcn.vcn_cidr
+  vcn_dns_label            = var.oci_base_vcn.vcn_dns_label
+  vcn_name                 = var.oci_base_vcn.vcn_name
 }
 
 module "bastion" {

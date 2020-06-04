@@ -235,8 +235,6 @@ Configuration Terraform Options:
 [source,hcl]
 ----
 tags = {
-    department  = ""
-    environment = "dev"
     role        = "bastion"
 }
 ----
@@ -309,8 +307,6 @@ tags = {
 [source,hcl]
 ----
 tags = {
-  department  = ""
-  environment = "dev"
   role        = "operator"
 }
 ----

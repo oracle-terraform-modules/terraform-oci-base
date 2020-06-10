@@ -7,6 +7,21 @@ All notable changes to this project are documented in this file.
 
 The format is based on {uri-changelog}[Keep a Changelog].
 
+== 1.2.3 (June 10, 2020)
+* Upgraded bastion to 1.0.2
+* Upgraded operator to 1.0.7
+
+== 1.2.2 (June 04, 2020)
+* Upgraded operator to 1.0.6
+
+== 1.2.1 (June 04, 2020)
+* Fixed hard coded bugs (#53)
+* Updated docs
+
+== 1.2.0 (May 28, 2020)
+* Renamed admin to operator
+* All 3 modules (vcn, bastion, operator) now use the 3 separate modules from HashiCorp registry
+
 == 1.1.4 (May 5, 2020)
 * Removed instance_principal check (#48)
 

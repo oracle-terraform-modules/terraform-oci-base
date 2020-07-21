@@ -74,7 +74,7 @@ Configuration Terraform Options:
 |None
 
 |label_prefix
-|a string to be prepended to the name of resources. *Recommended*
+|a string to be prepended to the name of resources. *Recommended*.Set to *"none"* if you dont want any prefix.
 |
 |
 

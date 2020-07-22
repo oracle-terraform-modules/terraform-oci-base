@@ -7,6 +7,11 @@ All notable changes to this project are documented in this file.
 
 The format is based on {uri-changelog}[Keep a Changelog].
 
+== 1.2.4 (July 22, 2020)
+* Upgraded vcn module to 1.0.3
+* Upgraded bastion module to 1.0.3
+* Upgraded operator module to 1.0.8
+
 == 1.2.3 (June 10, 2020)
 * Upgraded bastion to 1.0.2
 * Upgraded operator to 1.0.7

@@ -95,7 +95,8 @@ Note the fingerprint.
 
 Follow the documentation for {uri-oci-compartment}[creating a compartment].
 
-Note: OCI creates default root compartment during account/tenant creation. It should be not be used for this project. Recommendation is to have a new compartment or a child compartment.
+Note: OCI creates default root compartment during account/tenant creation. It should be not be used for this project.
+We recommend creating a {uri-oci-compartment}[new compartment] or a {uri-oci-compartment}[child compartment].
 
 === Obtain the necessary OCIDs
 

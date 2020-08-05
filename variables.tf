@@ -18,8 +18,9 @@ variable "oci_base_provider" {
 
 variable "oci_base_general" {
   type = object({
-    compartment_id = string
-    label_prefix   = string
+    compartment_id      = string
+    label_prefix        = string
+    root_compartment_id = string
   })
   description = "general oci parameters"
 }
@@ -65,6 +66,7 @@ variable "oci_base_bastion" {
     notification_protocol = string
     notification_topic    = string
     ssh_private_key_path  = string
+    ssh_public_key        = string
     ssh_public_key_path   = string
     tags                  = map(any)
     timezone              = string
@@ -84,6 +86,7 @@ variable "oci_base_bastion" {
     notification_protocol = "EMAIL"
     notification_topic    = "bastion"
     ssh_private_key_path  = ""
+    ssh_public_key        = ""
     ssh_public_key_path   = ""
     tags = {
       role        = "bastion"
@@ -109,6 +112,7 @@ variable "oci_base_operator" {
     notification_protocol     = string
     notification_topic        = string
     ssh_private_key_path      = string
+    ssh_public_key            = string
     ssh_public_key_path       = string
     tags                      = map(any)
     timezone                  = string
@@ -128,6 +132,7 @@ variable "oci_base_operator" {
     notification_protocol     = "EMAIL"
     notification_topic        = "operator"
     ssh_private_key_path      = ""
+    ssh_public_key            = ""
     ssh_public_key_path       = ""
     tags = {
       role        = "operator"

@@ -24,18 +24,14 @@ module "vcn" {
 
 module "bastion" {
   source  = "oracle-terraform-modules/bastion/oci"
-  version = "1.0.3"
+  version = "1.0.6"
 
-  # provider identity parameters
-  api_fingerprint      = var.oci_base_provider.api_fingerprint
-  api_private_key_path = var.oci_base_provider.api_private_key_path
   region               = var.oci_base_provider.region
-  tenancy_id           = var.oci_base_provider.tenancy_id
-  user_id              = var.oci_base_provider.user_id
 
   # general oci parameters
   compartment_id = var.oci_base_general.compartment_id
   label_prefix   = var.oci_base_general.label_prefix
+  root_compartment_id = var.oci_base_provider.tenancy_id
 
   # network parameters
 
@@ -51,7 +47,7 @@ module "bastion" {
   bastion_image_id    = var.oci_base_bastion.bastion_image_id
   bastion_shape       = var.oci_base_bastion.bastion_shape
   bastion_upgrade     = var.oci_base_bastion.bastion_upgrade
-  ssh_public_key      = ""
+  ssh_public_key      = var.oci_base_bastion.ssh_public_key
   ssh_public_key_path = var.oci_base_bastion.ssh_public_key_path
   timezone            = var.oci_base_bastion.timezone
 
@@ -68,18 +64,14 @@ module "bastion" {
 
 module "operator" {
   source  = "oracle-terraform-modules/operator/oci"
-  version = "1.0.8"
+  version = "1.0.11"
 
-  # provider identity parameters
-  api_fingerprint      = var.oci_base_provider.api_fingerprint
-  api_private_key_path = var.oci_base_provider.api_private_key_path
   region               = var.oci_base_provider.region
-  tenancy_id           = var.oci_base_provider.tenancy_id
-  user_id              = var.oci_base_provider.user_id
 
   # general oci parameters
   compartment_id = var.oci_base_general.compartment_id
   label_prefix   = var.oci_base_general.label_prefix
+  root_compartment_id = var.oci_base_provider.tenancy_id  
 
   # network parameters
   availability_domain = var.oci_base_operator.availability_domain
@@ -94,7 +86,7 @@ module "operator" {
   operator_instance_principal = var.oci_base_operator.enable_instance_principal
   operator_shape              = var.oci_base_operator.operator_shape
   operator_upgrade            = var.oci_base_operator.operator_upgrade
-  ssh_public_key              = ""
+  ssh_public_key              = var.oci_base_operator.ssh_public_key
   ssh_public_key_path         = var.oci_base_operator.ssh_public_key_path
   timezone                    = var.oci_base_operator.timezone
 

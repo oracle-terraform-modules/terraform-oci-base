@@ -78,6 +78,11 @@ Configuration Terraform Options:
 |
 |
 
+|root_compartment_id
+|Tenancy id where the VCN and other resources will be provisioned. *Required*
+|
+|None
+
 |===
 
 === OCI Networking

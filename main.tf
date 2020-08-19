@@ -64,7 +64,7 @@ module "bastion" {
 
 module "operator" {
   source  = "oracle-terraform-modules/operator/oci"
-  version = "1.0.11"
+  version = "1.0.12"
 
   region               = var.oci_base_provider.region
 

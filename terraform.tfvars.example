@@ -13,7 +13,6 @@ oci_base_provider = {
 oci_base_general = {
   compartment_id       = ""
   label_prefix         = "dev"
-  root_compartment_id  = ""  
 }
 
 # networking

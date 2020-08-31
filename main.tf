@@ -24,14 +24,18 @@ module "vcn" {
 
 module "bastion" {
   source  = "oracle-terraform-modules/bastion/oci"
-  version = "1.0.6"
+  version = "1.0.7"
 
+  # provider identity parameters
+  api_fingerprint      = var.oci_base_provider.api_fingerprint
+  api_private_key_path = var.oci_base_provider.api_private_key_path
   region               = var.oci_base_provider.region
+  tenancy_id           = var.oci_base_provider.tenancy_id
+  user_id              = var.oci_base_provider.user_id
 
   # general oci parameters
   compartment_id = var.oci_base_general.compartment_id
   label_prefix   = var.oci_base_general.label_prefix
-  root_compartment_id = var.oci_base_provider.tenancy_id
 
   # network parameters
 
@@ -64,14 +68,18 @@ module "bastion" {
 
 module "operator" {
   source  = "oracle-terraform-modules/operator/oci"
-  version = "1.0.12"
+  version = "1.0.13"
 
+  # provider identity parameters
+  api_fingerprint      = var.oci_base_provider.api_fingerprint
+  api_private_key_path = var.oci_base_provider.api_private_key_path
   region               = var.oci_base_provider.region
+  tenancy_id           = var.oci_base_provider.tenancy_id
+  user_id              = var.oci_base_provider.user_id
 
   # general oci parameters
   compartment_id = var.oci_base_general.compartment_id
   label_prefix   = var.oci_base_general.label_prefix
-  root_compartment_id = var.oci_base_provider.tenancy_id  
 
   # network parameters
   availability_domain = var.oci_base_operator.availability_domain

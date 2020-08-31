@@ -20,7 +20,6 @@ variable "oci_base_general" {
   type = object({
     compartment_id      = string
     label_prefix        = string
-    root_compartment_id = string
   })
   description = "general oci parameters"
 }

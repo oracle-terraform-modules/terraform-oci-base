@@ -155,7 +155,7 @@ Configuration Terraform Options:
 
 |bastion_access
 |CIDR block in the form of a string to which ssh access to the bastion must be restricted to. *_ANYWHERE_* is equivalent to 0.0.0.0/0 and allows ssh access from anywhere.
-|XXX.XXX.XXX.XXX/YY
+|XYZ.XYZ.XYZ.XYZ/YY
 |ANYWHERE
 
 |bastion_enabled

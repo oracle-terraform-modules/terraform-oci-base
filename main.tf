@@ -68,7 +68,7 @@ module "bastion" {
 
 module "operator" {
   source  = "oracle-terraform-modules/operator/oci"
-  version = "1.0.13"
+  version = "1.0.14"
 
   # provider identity parameters
   api_fingerprint      = var.oci_base_provider.api_fingerprint

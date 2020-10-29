@@ -32,6 +32,7 @@ locals {
 
   oci_base_bastion = {
     availability_domains  = var.availability_domains["bastion"]
+    availability_domain   = var.availability_domains["bastion"]
     bastion_enabled       = var.bastion_enabled
     bastion_access        = var.bastion_access
     bastion_image_id      = var.bastion_image_id
@@ -45,13 +46,16 @@ locals {
     notification_topic    = var.bastion_notification_topic
     ssh_private_key_path  = var.ssh_private_key_path
     ssh_public_key_path   = var.ssh_public_key_path
-    tags                  = var.tags["bastion"]
     timezone              = var.bastion_timezone
     use_autonomous        = var.bastion_use_autonomous
+    tags = {
+      role = "bastion" 
+    }    
   }
 
   oci_base_operator = {
     availability_domains      = var.availability_domains["operator"]
+    availability_domain       = var.availability_domains["operator"]
     operator_enabled          = var.operator_enabled
     operator_image_id         = "NONE"
     operator_shape            = var.operator_shape
@@ -65,8 +69,10 @@ locals {
     notification_topic        = var.operator_notification_topic
     ssh_private_key_path      = var.ssh_private_key_path
     ssh_public_key_path       = var.ssh_public_key_path
-    tags                      = var.tags["operator"]
     timezone                  = var.operator_timezone
+    tags = {
+      role = "operator" 
+    }    
   }
 
   db_identity = {

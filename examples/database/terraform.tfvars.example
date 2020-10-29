@@ -53,7 +53,7 @@ bastion_access = "ANYWHERE"
 
 bastion_enabled = true
 
-bastion_image_id = "NONE"
+bastion_image_id = "Autonomous"
 
 bastion_notification_enabled = true
 

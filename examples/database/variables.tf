@@ -40,6 +40,11 @@ variable "ssh_public_key_path" {
   type        = string
 }
 
+variable "ssh_public_key" {
+  description = "ssh public key"
+  type        = string
+}
+
 # general oci parameters
 variable "compartment_id" {
   description = "compartment id"
@@ -50,6 +55,15 @@ variable "label_prefix" {
   description = "a string that will be prependend to all resources"
   default     = "oke"
   type        = string
+}
+
+variable "tags" {
+  description = "a map of tags"
+  type = map
+
+  default = {
+    terraform = true
+  }
 }
 
 # networking parameters

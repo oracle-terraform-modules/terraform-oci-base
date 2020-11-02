@@ -7,7 +7,13 @@ All notable changes to this project are documented in this file.
 
 The format is based on {uri-changelog}[Keep a Changelog].
 
-== 1.4.0 (Sep 1, 2020)
+== 1.3.4 (November 3, 2020)
+* Upgraded operator module to v1.0.15 to avoid name collision for dynamic group for operator (#76)
+
+== 1.3.3 (October 28, 2020)
+* Upgraded operator module to v1.0.14 to temporarily disable OSMS (#71)
+
+== 1.3.2 (September 1, 2020)
 * Reverses 1.3.0 and 1.3.11 (#69)
 * Upgraded bastion module to 1.0.7
 * Upgraded operator module to 1.0.13

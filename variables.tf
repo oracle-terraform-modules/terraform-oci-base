@@ -18,8 +18,8 @@ variable "oci_base_provider" {
 
 variable "oci_base_general" {
   type = object({
-    compartment_id      = string
-    label_prefix        = string
+    compartment_id = string
+    label_prefix   = string
   })
   description = "general oci parameters"
 }
@@ -56,7 +56,7 @@ variable "oci_base_bastion" {
     bastion_access        = string
     bastion_enabled       = bool
     bastion_image_id      = string
-    bastion_shape         = string
+    bastion_shape         = map(any)
     bastion_upgrade       = bool
     netnum                = number
     newbits               = number
@@ -72,11 +72,17 @@ variable "oci_base_bastion" {
   })
   description = "bastion host parameters"
   default = {
-    availability_domain   = 1
-    bastion_access        = "ANYWHERE"
-    bastion_enabled       = false
-    bastion_image_id      = "Autonomous"
-    bastion_shape         = ""
+    availability_domain = 1
+    bastion_access      = "ANYWHERE"
+    bastion_enabled     = false
+    bastion_image_id    = "Autonomous"
+    bastion_shape = {
+      # shape = "VM.Standard.E2.2"
+      shape            = "VM.Standard.E3.Flex",
+      ocpus            = 1,
+      memory           = 4,
+      boot_volume_size = 50
+    }
     bastion_upgrade       = true
     netnum                = 13
     newbits               = 32
@@ -88,7 +94,7 @@ variable "oci_base_bastion" {
     ssh_public_key        = ""
     ssh_public_key_path   = ""
     tags = {
-      role        = "bastion"
+      role = "bastion"
     }
     timezone = "Australia/Sydney"
   }
@@ -101,7 +107,7 @@ variable "oci_base_operator" {
     availability_domain       = number
     operator_enabled          = bool
     operator_image_id         = string
-    operator_shape            = string
+    operator_shape            = map(any)
     operator_upgrade          = bool
     enable_instance_principal = bool
     netnum                    = number
@@ -118,10 +124,16 @@ variable "oci_base_operator" {
   })
   description = "operator host parameters"
   default = {
-    availability_domain       = 1
-    operator_enabled          = false
-    operator_image_id         = "Oracle"
-    operator_shape            = ""
+    availability_domain = 1
+    operator_enabled    = false
+    operator_image_id   = "Oracle"
+    operator_shape = {
+      # shape = "VM.Standard.E2.2"
+      shape            = "VM.Standard.E3.Flex",
+      ocpus            = 1,
+      memory           = 4,
+      boot_volume_size = 50
+    }
     operator_upgrade          = true
     enable_instance_principal = false
     netnum                    = 33
@@ -134,7 +146,7 @@ variable "oci_base_operator" {
     ssh_public_key            = ""
     ssh_public_key_path       = ""
     tags = {
-      role        = "operator"
+      role = "operator"
     }
     timezone = "Australia/Sydney"
   }

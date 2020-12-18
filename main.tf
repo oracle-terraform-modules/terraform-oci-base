@@ -3,7 +3,7 @@
 
 module "vcn" {
   source  = "oracle-terraform-modules/vcn/oci"
-  version = "2.0.0-RC1"
+  version = "2.0.0"
 
   # provider parameters
   region = var.oci_base_provider.region
@@ -24,7 +24,7 @@ module "vcn" {
 
 module "bastion" {
   source  = "oracle-terraform-modules/bastion/oci"
-  version = "2.0.0-RC1"
+  version = "2.0.0"
 
   # provider identity parameters
   api_fingerprint      = var.oci_base_provider.api_fingerprint
@@ -63,12 +63,11 @@ module "bastion" {
 
   # tags
   tags = var.oci_base_bastion.tags
-
 }
 
 module "operator" {
   source  = "oracle-terraform-modules/operator/oci"
-  version = "2.0.0-RC1"
+  version = "2.0.0"
 
   # provider identity parameters
   api_fingerprint      = var.oci_base_provider.api_fingerprint

@@ -7,6 +7,9 @@ All notable changes to this project are documented in this file.
 
 The format is based on {uri-changelog}[Keep a Changelog].
 
+== 2.1.0 (March 22, 2021)
+* Upgraded module to use operator 2.1 so we can use OL8 for operator
+
 == 2.0.0 (December 8, 2020)
 * Set minimum version to Terraform 0.13 (#78)
 * Use all Terraform 0.13 submodules (#80)

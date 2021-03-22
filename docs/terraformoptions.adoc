@@ -187,24 +187,24 @@ Configuration Terraform Options:
 |The difference between the VCN's netmask and the desired subnets' masks specified in the form of a map. The values of the map are used as the newbits parameter in the {uri-terraform-cidrsubnet}[cidrsubnet] Terraform function to calculate each subnet's mask.
 |[source]
 ----
-13
+14
 ----
 |
 [source]
 ----
-13
+14
 ----
 
 |`netnum`
 |0-based index of the subnet when the VCN's CIDR is masked with the corresponding newbit value and specified in the form of a map. Used to define the boundaries of the subnet. The values of the map are used as the netnum parameter in the {uri-terraform-cidrsubnet}[cidrsubnet] Terraform function.
 |[source]
 ----
-32
+0
 ----
 |
 [source]
 ----
-32
+0
 ----
 
 |`notification_enabled`
@@ -280,6 +280,30 @@ tags = {
 |true/false
 |false
 
+|`newbits`
+|The difference between the VCN's netmask and the desired subnets' masks specified in the form of a map. The values of the map are used as the newbits parameter in the {uri-terraform-cidrsubnet}[cidrsubnet] Terraform function to calculate each subnet's mask.
+|[source]
+----
+14
+----
+|
+[source]
+----
+14
+----
+
+|`netnum`
+|0-based index of the subnet when the VCN's CIDR is masked with the corresponding newbit value and specified in the form of a map. Used to define the boundaries of the subnet. The values of the map are used as the netnum parameter in the {uri-terraform-cidrsubnet}[cidrsubnet] Terraform function.
+|[source]
+----
+0
+----
+|
+[source]
+----
+0
+----
+
 |`notification_enabled`
 |Whether to enable ONS notification for the operator host. *Do not enable for now*.
 |true/false
@@ -319,6 +343,22 @@ tags = {
   memory=4,
   boot_volume_size=50
 }`
+
+|`operating_system_version`
+|The Oracle Linux version.
+|"8"
+|"8"
+
+|`ssh_private_key_path`
+|path to ssh private key. This ssh key is used to authenticate and log into the bastion host. Must be the private key of the public key provided below. *Required* if bastion is enabled.
+
+|
+|None
+
+|`ssh_public_key_path`
+|path to ssh public key. The ssh key is used when provisioning the bastion host. Must be the public key of the private key provided above. *Required* if bastion is enabled.
+|
+|None
 
 |`tags`
 |The tags to apply on the bastion resources.

@@ -84,8 +84,8 @@ variable "oci_base_bastion" {
       boot_volume_size = 50
     }
     bastion_upgrade       = true
-    netnum                = 13
-    newbits               = 32
+    netnum                = 0
+    newbits               = 14
     notification_enabled  = false
     notification_endpoint = ""
     notification_protocol = "EMAIL"
@@ -108,6 +108,7 @@ variable "oci_base_operator" {
     operator_enabled          = bool
     operator_image_id         = string
     operator_shape            = map(any)
+    operating_system_version  = string
     operator_upgrade          = bool
     enable_instance_principal = bool
     netnum                    = number
@@ -134,10 +135,11 @@ variable "oci_base_operator" {
       memory           = 4,
       boot_volume_size = 50
     }
+    operating_system_version  = "8"
     operator_upgrade          = true
     enable_instance_principal = false
-    netnum                    = 33
-    newbits                   = 13
+    netnum                    = 1
+    newbits                   = 14
     notification_enabled      = false
     notification_endpoint     = ""
     notification_protocol     = "EMAIL"

@@ -45,8 +45,8 @@ oci_base_bastion = {
     boot_volume_size=50
   }
   bastion_upgrade       = true
-  netnum                = 32
-  newbits               = 13
+  netnum                = 0
+  newbits               = 14
   notification_enabled  = false
   notification_endpoint = ""
   notification_protocol = "EMAIL"
@@ -74,10 +74,11 @@ oci_base_operator = {
     memory=4,
     boot_volume_size=50
   }
+  operating_system_version  = "8"
   operator_upgrade          = false
   enable_instance_principal = true
-  netnum                    = 33
-  newbits                   = 13
+  netnum                    = 1
+  newbits                   = 14
   notification_enabled      = false
   notification_endpoint     = ""
   notification_protocol     = "EMAIL"

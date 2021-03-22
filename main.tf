@@ -67,7 +67,7 @@ module "bastion" {
 
 module "operator" {
   source  = "oracle-terraform-modules/operator/oci"
-  version = "2.0.0"
+  version = "2.1.0"
 
   # provider identity parameters
   api_fingerprint      = var.oci_base_provider.api_fingerprint
@@ -92,6 +92,7 @@ module "operator" {
   operator_image_id           = var.oci_base_operator.operator_image_id
   operator_instance_principal = var.oci_base_operator.enable_instance_principal
   operator_shape              = var.oci_base_operator.operator_shape
+  operating_system_version    = var.oci_base_operator.operating_system_version
   operator_upgrade            = var.oci_base_operator.operator_upgrade
   ssh_public_key              = var.oci_base_operator.ssh_public_key
   ssh_public_key_path         = var.oci_base_operator.ssh_public_key_path

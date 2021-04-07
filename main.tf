@@ -3,7 +3,7 @@
 
 module "vcn" {
   source  = "oracle-terraform-modules/vcn/oci"
-  version = "2.0.0"
+  version = "2.2.0"
 
   # provider parameters
   region = var.oci_base_provider.region
@@ -11,15 +11,22 @@ module "vcn" {
   # general oci parameters
   compartment_id = var.oci_base_general.compartment_id
   label_prefix   = var.oci_base_general.label_prefix
+  tags           = var.oci_base_vcn.tags
 
   # vcn parameters
+  create_drg               = var.oci_base_vcn.create_drg
+  drg_display_name         = var.oci_base_vcn.drg_display_name
   internet_gateway_enabled = var.oci_base_vcn.internet_gateway_enabled
+  lockdown_default_seclist = var.oci_base_vcn.lockdown_default_seclist
   nat_gateway_enabled      = var.oci_base_vcn.nat_gateway_enabled
   service_gateway_enabled  = var.oci_base_vcn.service_gateway_enabled
-  tags                     = var.oci_base_vcn.tags
   vcn_cidr                 = var.oci_base_vcn.vcn_cidr
   vcn_dns_label            = var.oci_base_vcn.vcn_dns_label
   vcn_name                 = var.oci_base_vcn.vcn_name
+
+  # routing rules
+  internet_gateway_route_rules = var.oci_base_vcn.internet_gateway_route_rules
+  nat_gateway_route_rules      = var.oci_base_vcn.nat_gateway_route_rules
 }
 
 module "bastion" {

@@ -28,23 +28,33 @@ variable "oci_base_general" {
 
 variable "oci_base_vcn" {
   type = object({
-    internet_gateway_enabled = bool
-    nat_gateway_enabled      = bool
-    service_gateway_enabled  = bool
-    tags                     = map(any)
-    vcn_cidr                 = string
-    vcn_dns_label            = string
-    vcn_name                 = string
+    create_drg                   = bool
+    drg_display_name             = string
+    internet_gateway_enabled     = bool
+    lockdown_default_seclist     = bool
+    nat_gateway_enabled          = bool
+    service_gateway_enabled      = bool
+    tags                         = map(any)
+    vcn_cidr                     = string
+    vcn_dns_label                = string
+    vcn_name                     = string
+    internet_gateway_route_rules = list(any)
+    nat_gateway_route_rules      = list(any)
   })
   description = "VCN parameters"
   default = {
-    internet_gateway_enabled = true
-    nat_gateway_enabled      = true
-    service_gateway_enabled  = true
-    tags                     = null
-    vcn_cidr                 = "10.0.0.0/16"
-    vcn_dns_label            = ""
-    vcn_name                 = ""
+    create_drg                   = false
+    drg_display_name             = "drg"
+    internet_gateway_enabled     = true
+    lockdown_default_seclist     = true
+    nat_gateway_enabled          = true
+    service_gateway_enabled      = true
+    tags                         = null
+    vcn_cidr                     = "10.0.0.0/16"
+    vcn_dns_label                = ""
+    vcn_name                     = ""
+    internet_gateway_route_rules = []
+    nat_gateway_route_rules      = []
   }
 }
 

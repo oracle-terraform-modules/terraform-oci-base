@@ -89,8 +89,23 @@ Configuration Terraform Options:
 |Values
 |Default
 
+|`create_drg`
+|whether to create Dynamic Routing Gateway. If set to true, creates a Dynamic Routing Gateway and attach it to the vcn.
+|true/false
+|false
+
+|`drg_display_name`
+|Name of Dynamic Routing Gateway. Does not have to be unique (Updatable)
+|
+|
+
 |`internet_gateway_enabled`
 |Whether to create an internet gateway. *Required* for public subnets.
+|true/false
+|true
+
+|`lockdown_default_seclist`
+|whether to remove all default security rules from the VCN Default Security List
 |true/false
 |true
 
@@ -123,6 +138,54 @@ Configuration Terraform Options:
 |`vcn_name` 
 |The name of the VCN that will be appended to the label_prefix. *Recommended*
 |
+|
+
+|`internet_gateway_route_rules` 
+|List of routing rules to add to Internet Gateway Route Table. (Updatable)
+|`[
+    {
+      destination = "192.168.1.0/24"
+      destination_type = "CIDR_BLOCK"
+      network_entity_id = "drg" // use drg created by this module. Requires `create_drg = true`
+      description = "route through drg"
+    },
+    {
+      destination = "8.8.8.0/24"
+      destination_type = "CIDR_BLOCK"
+      network_entity_id = "internet_gateway" // use Internet Gateway created by this module. Requires `internet_gateway_enabled = true`
+      description = "route through Internet Gateway"
+    },
+    {
+      destination = "8.8.8.0/24"
+      destination_type = "CIDR_BLOCK"
+      network_entity_id = "ocid1.drg." // use an externally created resource or a resource that was not available at the time of the 1st run`
+      description = "route through an externally created resource or a resource that was not available at the time of the 1st run"
+    }    
+  ]`
+|
+
+|`nat_gateway_route_rules` 
+|List of routing rules to add to NAT Gateway Route Table. (Updatable)
+|`[
+    {
+      destination = "192.168.1.0/24"
+      destination_type = "CIDR_BLOCK"
+      network_entity_id = "drg" // use drg created by this module. Requires `create_drg = true`
+      description = "route through drg"
+    },
+    {
+      destination = "8.8.8.0/24"
+      destination_type = "CIDR_BLOCK"
+      network_entity_id = "nat_gateway" // use NAT gateway created by this module. Requires `nat_gateway_enabled = true`
+      description = "route through NAT gateway"
+    },
+    {
+      destination = "8.8.8.0/24"
+      destination_type = "CIDR_BLOCK"
+      network_entity_id = "ocid1.drg." // use an externally created resource or a resource that was not available at the time of the 1st run`
+      description = "route through an externally created resource or a resource that was not available at the time of the 1st run"
+    }    
+  ]`
 |
 
 |===

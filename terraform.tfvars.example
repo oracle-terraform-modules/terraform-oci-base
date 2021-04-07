@@ -18,7 +18,10 @@ oci_base_general = {
 # networking
 
 oci_base_vcn = {
+  create_drg                   = false
+  drg_display_name             = "drg"
   internet_gateway_enabled     = true
+  lockdown_default_seclist     = true
   nat_gateway_enabled          = true
   service_gateway_enabled      = true
   tags = {
@@ -28,6 +31,50 @@ oci_base_vcn = {
   vcn_cidr                     = "10.0.0.0/16"
   vcn_dns_label                = "base"
   vcn_name                     = "base"
+  internet_gateway_route_rules = [
+    /*
+    {
+      destination = "192.168.1.0/24"
+      destination_type = "CIDR_BLOCK"
+      network_entity_id = "drg" // use drg created by this module. Requires `create_drg = true`
+      description = "route through drg"
+    },
+    {
+      destination = "8.8.8.0/24"
+      destination_type = "CIDR_BLOCK"
+      network_entity_id = "internet_gateway" // use Internet Gateway created by this module. Requires `internet_gateway_enabled = true`
+      description = "route through Internet Gateway"
+    },
+    {
+      destination = "8.8.8.0/24"
+      destination_type = "CIDR_BLOCK"
+      network_entity_id = "ocid1.drg." // use an externally created resource or a resource that was not available at the time of the 1st run`
+      description = "route through an externally created resource or a resource that was not available at the time of the 1st run"
+    }
+    */ 
+  ]
+  nat_gateway_route_rules      = [
+    /*
+    {
+      destination = "192.168.1.0/24"
+      destination_type = "CIDR_BLOCK"
+      network_entity_id = "drg" // use drg created by this module. Requires `create_drg = true`
+      description = "route through drg"
+    },
+    {
+      destination = "8.8.8.0/24"
+      destination_type = "CIDR_BLOCK"
+      network_entity_id = "nat_gateway" // use NAT gateway created by this module. Requires `nat_gateway_enabled = true`
+      description = "route through NAT gateway"
+    },
+    {
+      destination = "8.8.8.0/24"
+      destination_type = "CIDR_BLOCK"
+      network_entity_id = "ocid1.drg." // use an externally created resource or a resource that was not available at the time of the 1st run`
+      description = "route through an externally created resource or a resource that was not available at the time of the 1st run"
+    }
+    */
+  ]
 }
 
 # bastion

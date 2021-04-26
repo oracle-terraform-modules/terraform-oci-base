@@ -7,6 +7,12 @@ All notable changes to this project are documented in this file.
 
 The format is based on {uri-changelog}[Keep a Changelog].
 
+== 1.3.5 (April 26, 2021)
+* Last release for Terraform 0.12
+
+== 2.1.1 (March 23, 2021)
+* Patched operator for faster provisioning
+
 == 2.1.0 (March 22, 2021)
 * Upgraded module to use operator 2.1 so we can use OL8 for operator
 

@@ -62,30 +62,33 @@ variable "oci_base_vcn" {
 
 variable "oci_base_bastion" {
   type = object({
-    availability_domain   = number
-    bastion_access        = string
-    bastion_enabled       = bool
-    bastion_image_id      = string
-    bastion_shape         = map(any)
-    bastion_upgrade       = bool
-    netnum                = number
-    newbits               = number
-    notification_enabled  = bool
-    notification_endpoint = string
-    notification_protocol = string
-    notification_topic    = string
-    ssh_private_key_path  = string
-    ssh_public_key        = string
-    ssh_public_key_path   = string
-    tags                  = map(any)
-    timezone              = string
+    availability_domain              = number
+    bastion_access                   = string
+    bastion_enabled                  = bool
+    bastion_image_id                 = string
+    bastion_operating_system_version = string
+    bastion_shape                    = map(any)
+    bastion_state                    = string
+    bastion_upgrade                  = bool
+    netnum                           = number
+    newbits                          = number
+    notification_enabled             = bool
+    notification_endpoint            = string
+    notification_protocol            = string
+    notification_topic               = string
+    ssh_private_key_path             = string
+    ssh_public_key                   = string
+    ssh_public_key_path              = string
+    tags                             = map(any)
+    timezone                         = string
   })
   description = "bastion host parameters"
   default = {
-    availability_domain = 1
-    bastion_access      = "ANYWHERE"
-    bastion_enabled     = false
-    bastion_image_id    = "Autonomous"
+    availability_domain              = 1
+    bastion_access                   = "ANYWHERE"
+    bastion_enabled                  = false
+    bastion_image_id                 = "Autonomous"
+    bastion_operating_system_version = "7.9"
     bastion_shape = {
       # shape = "VM.Standard.E2.2"
       shape            = "VM.Standard.E3.Flex",
@@ -93,6 +96,7 @@ variable "oci_base_bastion" {
       memory           = 4,
       boot_volume_size = 50
     }
+    bastion_state         = "RUNNING"
     bastion_upgrade       = true
     netnum                = 0
     newbits               = 14

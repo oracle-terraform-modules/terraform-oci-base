@@ -226,6 +226,11 @@ Configuration Terraform Options:
 |imageid/Autonomous
 |Autonomous
 
+|`bastion_operating_system_version`
+|The version of the operating system.
+|7.9
+|7.9
+
 |`bastion_shape`
 |The shape of bastion instance. This is now specified as a map and supports E3.Flex. If a non-Flex shape is specified, then the other parameters are ignored.
 |e.g. `bastion_shape = {
@@ -240,6 +245,11 @@ Configuration Terraform Options:
   memory=4,
   boot_volume_size=50
 }`
+
+|`bastion_shape`
+|The default state of the bastion compute instance.
+|RUNNING | STOPPED
+|RUNNING
 
 |`bastion_upgrade`
 |Whether to upgrade the bastion host packages after provisioning. It's useful to set this to false during development/testing so the bastion is provisioned faster.

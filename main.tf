@@ -31,7 +31,7 @@ module "vcn" {
 
 module "bastion" {
   source  = "oracle-terraform-modules/bastion/oci"
-  version = "2.0.0"
+  version = "2.1.0"
 
   # provider identity parameters
   api_fingerprint      = var.oci_base_provider.api_fingerprint
@@ -54,13 +54,15 @@ module "bastion" {
   vcn_id              = module.vcn.vcn_id
 
   # bastion parameters
-  bastion_enabled     = var.oci_base_bastion.bastion_enabled
-  bastion_image_id    = var.oci_base_bastion.bastion_image_id
-  bastion_shape       = var.oci_base_bastion.bastion_shape
-  bastion_upgrade     = var.oci_base_bastion.bastion_upgrade
-  ssh_public_key      = var.oci_base_bastion.ssh_public_key
-  ssh_public_key_path = var.oci_base_bastion.ssh_public_key_path
-  timezone            = var.oci_base_bastion.timezone
+  bastion_enabled                  = var.oci_base_bastion.bastion_enabled
+  bastion_image_id                 = var.oci_base_bastion.bastion_image_id
+  bastion_operating_system_version = var.oci_base_bastion.bastion_operating_system_version
+  bastion_shape                    = var.oci_base_bastion.bastion_shape
+  bastion_state                    = var.oci_base_bastion.bastion_state
+  bastion_upgrade                  = var.oci_base_bastion.bastion_upgrade
+  ssh_public_key                   = var.oci_base_bastion.ssh_public_key
+  ssh_public_key_path              = var.oci_base_bastion.ssh_public_key_path
+  timezone                         = var.oci_base_bastion.timezone
 
   # notification
   notification_enabled  = var.oci_base_bastion.notification_enabled

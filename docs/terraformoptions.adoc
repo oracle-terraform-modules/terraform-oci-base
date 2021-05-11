@@ -246,9 +246,9 @@ Configuration Terraform Options:
   boot_volume_size=50
 }`
 
-|`bastion_shape`
+|`bastion_state`
 |The default state of the bastion compute instance.
-|RUNNING | STOPPED
+|RUNNING/STOPPED
 |RUNNING
 
 |`bastion_upgrade`

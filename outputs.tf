@@ -1,4 +1,4 @@
-# Copyright 2017, 2019, Oracle Corporation and/or affiliates.  All rights reserved.
+# Copyright 2017, 2021, Oracle Corporation and/or affiliates.  All rights reserved.
 # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl
 
 # for reuse
@@ -52,10 +52,10 @@ output "home_region" {
 
 output "ssh_to_bastion" {
   description = "convenient output to ssh to the bastion host"
-  value       = "ssh -i ${var.oci_base_bastion.ssh_private_key_path} opc@${module.bastion.bastion_public_ip}"
+  value       = "ssh -i ${var.ssh_private_key_path} opc@${module.bastion.bastion_public_ip}"
 }
 
 output "ssh_to_operator" {
   description = "convenient output to ssh to the operator host"
-  value       = "ssh -i ${var.oci_base_bastion.ssh_private_key_path} -J opc@${module.bastion.bastion_public_ip} opc@${module.operator.operator_private_ip}"
+  value       = "ssh -i ${var.ssh_private_key_path} -J opc@${module.bastion.bastion_public_ip} opc@${module.operator.operator_private_ip}"
 }

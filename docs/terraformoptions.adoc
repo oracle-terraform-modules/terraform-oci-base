@@ -5,8 +5,8 @@
 :sectnums:
 :uri-repo: https://github.com/oracle/terraform-oci-base
 
-:uri-rel-file-base: link:{uri-repo}/blob/master
-:uri-rel-tree-base: link:{uri-repo}/tree/master
+:uri-rel-file-base: link:{uri-repo}/blob/main
+:uri-rel-tree-base: link:{uri-repo}/tree/main
 :uri-docs: {uri-rel-file-base}/docs
 :uri-instance-principal-note: {uri-docs}/prerequisites.adoc#using-instance_principal
 :uri-oci-images: https://docs.cloud.oracle.com/iaas/images/
@@ -17,9 +17,10 @@
 
 Configuration Terraform Options:
 
-. link:#Provider[Identity and Access]
+. link:#Provider[Provider]
 . link:#general-oci[General OCI]
 . link:#oci-networking[OCI Networking]
+. link:#ssh-keys[SSH Keys]
 . link:#bastion-host[Bastion Host]
 . link:#operator-host[Operator Host]
 
@@ -94,36 +95,30 @@ Configuration Terraform Options:
 |true/false
 |false
 
+|`create_internet_gateway`
+|Whether to create an internet gateway. *Required* for public subnets.
+|true/false
+|true
+
+|`create_nat_gateway`
+|Whether to create a NAT gateway. *Required* for private subnets.
+|true/false
+|true
+
+|`create_service_gateway`
+|Whether to create a Service Gateway to use Oracle Services.
+|true/false
+|true
+
 |`drg_display_name`
 |Name of Dynamic Routing Gateway. Does not have to be unique (Updatable)
 |
 |
 
-|`internet_gateway_enabled`
-|Whether to create an internet gateway. *Required* for public subnets.
-|true/false
-|true
-
 |`lockdown_default_seclist`
 |whether to remove all default security rules from the VCN Default Security List
 |true/false
 |true
-
-|`nat_gateway_enabled`
-|Whether to create a NAT gateway. *Required* for private subnets.
-|true/false
-|true
-
-|`service_gateway_enabled`
-|Whether to create a Service Gateway to use Oracle Services.
-|true/false
-|true
-
-|`tags`
-|The tags to apply on the VCN.
-|map(any)
-|null
-
 
 |`vcn_cidr`
 |The VCN's CIDR block.
@@ -188,6 +183,80 @@ Configuration Terraform Options:
   ]`
 |
 
+|`vcn_tags`
+|The tags to apply on the VCN.
+|map(any)
+|`{
+    environment = "dev"
+    role        = "hub"
+  }`
+
+|===
+
+=== Subnets
+[stripes=odd,cols="1d,4d,3a,3a", options=header,width="100%"] 
+|===
+|Parameter
+|Description
+|Values
+|Default
+
+|`netnum`
+|0-based index of the subnet when the network is masked with the newbit. Used as netnum parameter for cidrsubnet function.
+|[source]
+----
+netnum = {
+  bastion  = 0
+  operator = 1
+}
+----
+|
+[source]
+----
+netnum = {
+  bastion  = 0
+  operator = 1
+}
+----
+
+|`newbits`
+|The masks for the subnets within the virtual network. Used as newbits parameter for cidrsubnet function.
+|[source]
+----
+newbits = {
+  bastion  = 14
+  operator = 14
+}
+----
+|
+[source]
+----
+newbits = {
+  bastion  = 14
+  operator = 14
+}
+----
+|===
+
+=== SSH Keys
+
+[stripes=odd,cols="1d,4d,3a,3a", options=header,width="100%"] 
+|===
+|Parameter
+|Description
+|Values
+|Default
+
+|`ssh_private_key_path`
+|path to ssh private key. This ssh key is used to authenticate and log into the bastion host. Must be the private key of the public key provided below. *Required* if bastion is enabled.
+
+|
+|None
+
+|`ssh_public_key_path`
+|path to ssh public key. The ssh key is used when provisioning the bastion host. Must be the public key of the private key provided above. *Required* if bastion is enabled.
+|
+|None
 |===
 
 === Bastion Host
@@ -199,8 +268,13 @@ Configuration Terraform Options:
 |Values
 |Default
 
-|`availability_domains`
-|The Availability Domain where to provision resources e.g. bastion host. This is specified in the form of a map.
+|`create_bastion`
+|Whether to create the bastion host.
+|`true`/`false`
+|`true`
+
+|`bastion_availability_domain`
+|The Availability Domain where to provision the bastion host. This is specified as a number.
 |[source]
 ----
 1
@@ -216,11 +290,6 @@ Configuration Terraform Options:
 |XYZ.XYZ.XYZ.XYZ/YY
 |ANYWHERE
 
-|`bastion_enabled`
-|Whether to create the bastion host.
-|true/false
-|false
-
 |`bastion_image_id`
 |Provide a custom image id for the bastion host or leave as Autonomous.
 |imageid/Autonomous
@@ -232,9 +301,9 @@ Configuration Terraform Options:
 |7.9
 
 |`bastion_shape`
-|The shape of bastion instance. This is now specified as a map and supports E3.Flex. If a non-Flex shape is specified, then the other parameters are ignored.
+|The shape of bastion instance. This is now specified as a map and supports E4.Flex. If a non-Flex shape is specified, then the other parameters are ignored.
 |e.g. `bastion_shape = {
-  shape="VM.Standard.E3.Flex",
+  shape="VM.Standard.E4.Flex",
   ocpus=1,
   memory=4,
   boot_volume_size=50
@@ -246,72 +315,47 @@ Configuration Terraform Options:
   boot_volume_size=50
 }`
 
-|`bastion_shape`
+|`bastion_state`
 |The default state of the bastion compute instance.
-|RUNNING | STOPPED
+|RUNNING/STOPPED
 |RUNNING
+
+|`bastion_timezone`
+|The preferred timezone for the bastion host. {uri-timezones}[List of timezones]
+|Australia/Sydney
+|Australia/Sydney
+
+|`bastion_type`
+|Whether to make the bastion host public or private.
+|public/private
+|public
 
 |`bastion_upgrade`
 |Whether to upgrade the bastion host packages after provisioning. It's useful to set this to false during development/testing so the bastion is provisioned faster.
 |true/false
 |true
 
-|`newbits`
-|The difference between the VCN's netmask and the desired subnets' masks specified in the form of a map. The values of the map are used as the newbits parameter in the {uri-terraform-cidrsubnet}[cidrsubnet] Terraform function to calculate each subnet's mask.
-|[source]
-----
-14
-----
-|
-[source]
-----
-14
-----
-
-|`netnum`
-|0-based index of the subnet when the VCN's CIDR is masked with the corresponding newbit value and specified in the form of a map. Used to define the boundaries of the subnet. The values of the map are used as the netnum parameter in the {uri-terraform-cidrsubnet}[cidrsubnet] Terraform function.
-|[source]
-----
-0
-----
-|
-[source]
-----
-0
-----
-
-|`notification_enabled`
+|`bastion_notification`
 |Whether to enable ONS notification for the bastion host.
 |true/false
 |false
 
-|`notification_endpoint`
+|`bastion_notification_endpoint`
 |The subscription notification endpoint. Email address to be notified. *Required if notification_enabled = true* .
 |
 |
 
-|`notification_protocol`
+|`bastion_notification_protocol`
 |The notification protocol used.
 |
 |EMAIL
 
-|`notification_topic`
+|`bastion_notification_topic`
 |The name of the notification topic
 |
 |bastion
 
-|`ssh_private_key_path`
-|path to ssh private key. This ssh key is used to authenticate and log into the bastion host. Must be the private key of the public key provided below. *Required* if bastion is enabled.
-
-|
-|None
-
-|`ssh_public_key_path`
-|path to ssh public key. The ssh key is used when provisioning the bastion host. Must be the public key of the private key provided above. *Required* if bastion is enabled.
-|
-|None
-
-|`tags`
+|`bastion_tags`
 |The tags to apply on the bastion resources.
 |map(any)
 |
@@ -321,11 +365,6 @@ tags = {
     role        = "bastion"
 }
 ----
-
-|`timezone`
-|The preferred timezone for the bastion host. {uri-timezones}[List of timezones]
-|
-|
 
 |===
 
@@ -338,115 +377,100 @@ tags = {
 |Values
 |Default
 
-|`operator_enabled`
+|`create_operator`
 |Whether to create the operator host.
 |true/false
 |false
+
+|`operator_availability_domain`
+|The AD to place the operator host when multi-regions AD is used
+|`1`
+|`1`
 
 |`operator_image_id`
 |Custom image id for the operator host
 |image_id/Oracle. If the value is set to Oracle, an Oracle Platform image will be used instead.
 |Oracle
 
-|`enable_instance_principal`
+|`operator_instance_principal`
 |Whether to enable instance_principal on the operator server. Refer to {uri-instance-principal-note}[instance_principal][instance_principal]
 |true/false
 |false
 
-|`newbits`
-|The difference between the VCN's netmask and the desired subnets' masks specified in the form of a map. The values of the map are used as the newbits parameter in the {uri-terraform-cidrsubnet}[cidrsubnet] Terraform function to calculate each subnet's mask.
-|[source]
-----
-14
-----
-|
-[source]
-----
-14
-----
+|`operator_nsg_ids`
+|Optional list of network security groups that the operator will be part of
+|[...]
+|[]
 
-|`netnum`
-|0-based index of the subnet when the VCN's CIDR is masked with the corresponding newbit value and specified in the form of a map. Used to define the boundaries of the subnet. The values of the map are used as the netnum parameter in the {uri-terraform-cidrsubnet}[cidrsubnet] Terraform function.
-|[source]
-----
-0
-----
-|
-[source]
-----
-0
-----
-
-|`notification_enabled`
-|Whether to enable ONS notification for the operator host. *Do not enable for now*.
-|true/false
-|false
-
-|`notification_endpoint`
-|The subscription notification endpoint. Email address to be notified. Only email is currently supported although ONS can also support Slack, Pagerduty among others.
-|
-|
-
-|`notification_protocol`
-|The notification protocol used.
-|EMAIL
-|EMAIL
-
-|`notification_topic`
-|The name of the notification topic
-|
-|operator
-
-|`operator_package_upgrade`
-|Whether to also upgrade the packages for the operator host.
-|true/false
-|true
+|`operator_os_version`
+|The version of the Oracle Linux to use.
+|`8`
+|`8`
 
 |`operator_shape`
-|The shape of operator instance. This is now specified as a map and supports E3.Flex. If a non-Flex shape is specified, then the other parameters are ignored.
+|The shape of operator instance. This is now specified as a map and supports E4.Flex. If a non-Flex shape is specified, then the other parameters are ignored.
 |e.g. `operator_shape = {
-  shape="VM.Standard.E3.Flex",
+  shape="VM.Standard.E4.Flex",
   ocpus=1,
   memory=4,
   boot_volume_size=50
 }`
 |`operator_shape = {
-  shape="VM.Standard.E3.Flex",
+  shape="VM.Standard.E4.Flex",
   ocpus=1,
   memory=4,
   boot_volume_size=50
 }`
 
-|`operating_system_version`
-|The Oracle Linux version.
-|"8"
-|"8"
+|`operator_state`
+|The target state for the instance. Could be set to RUNNING or STOPPED. (Updatable)
+|`RUNNING`/`STOPPED`
+|`RUNNING`
 
-|`ssh_private_key_path`
-|path to ssh private key. This ssh key is used to authenticate and log into the bastion host. Must be the private key of the public key provided below. *Required* if bastion is enabled.
-
+|`operator_timezone`
+|The preferred timezone for the operator host. {uri-timezones}[List of timezones]
 |
-|None
+|Australia/Sydney
 
-|`ssh_public_key_path`
-|path to ssh public key. The ssh key is used when provisioning the bastion host. Must be the public key of the private key provided above. *Required* if bastion is enabled.
+|`operator_upgrade`
+|Whether to also upgrade the packages for the operator host.
+|true/false
+|true
+
+|`operator_notification`
+|Whether to enable ONS notification for the operator host. *Do not enable for now*.
+|true/false
+|false
+
+|`operator_notification_endpoint`
+|The subscription notification endpoint. Email address to be notified. Only email is currently supported although ONS can also support Slack, Pagerduty among others.
 |
-|None
+|
 
-|`tags`
+|`operator_notification_protocol`
+|The notification protocol used.
+|EMAIL
+|EMAIL
+
+|`operator_notification_topic`
+|The name of the notification topic
+|
+|operator
+
+
+
+
+
+|`operator_tags`
 |The tags to apply on the bastion resources.
 |map(any)
 |
 [source,hcl]
 ----
 tags = {
+  environment = "dev"
   role        = "operator"
 }
 ----
-
-|`operator_timezone`
-|The preferred timezone for the operator host. {uri-timezones}[List of timezones]
-|
-|Australia/Sydney
 
 |===

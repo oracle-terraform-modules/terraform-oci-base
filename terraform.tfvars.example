@@ -1,145 +1,122 @@
-# provider parameters
+# Identity and access parameters
 
-oci_base_provider = {
-  api_fingerprint      = ""
-  api_private_key_path = ""
-  region               = "us-phoenix-1"
-  tenancy_id           = ""
-  user_id              = ""
-}
+api_fingerprint = ""
+
+api_private_key_path = ""
+
+region = "ap-sydney-1"
+
+tenancy_id = "
+
+user_id = ""
 
 # general oci parameters
+compartment_id = ""
 
-oci_base_general = {
-  compartment_id       = ""
-  label_prefix         = "dev"
-}
+label_prefix = ""
 
 # networking
 
-oci_base_vcn = {
-  create_drg                   = false
-  drg_display_name             = "drg"
-  internet_gateway_enabled     = true
-  lockdown_default_seclist     = true
-  nat_gateway_enabled          = true
-  service_gateway_enabled      = true
-  tags = {
-    department  = "finance"
-    environment = "dev"
-  }
-  vcn_cidr                     = "10.0.0.0/16"
-  vcn_dns_label                = "base"
-  vcn_name                     = "base"
-  internet_gateway_route_rules = [
-    /*
-    {
-      destination = "192.168.1.0/24"
-      destination_type = "CIDR_BLOCK"
-      network_entity_id = "drg" // use drg created by this module. Requires `create_drg = true`
-      description = "route through drg"
-    },
-    {
-      destination = "8.8.8.0/24"
-      destination_type = "CIDR_BLOCK"
-      network_entity_id = "internet_gateway" // use Internet Gateway created by this module. Requires `internet_gateway_enabled = true`
-      description = "route through Internet Gateway"
-    },
-    {
-      destination = "8.8.8.0/24"
-      destination_type = "CIDR_BLOCK"
-      network_entity_id = "ocid1.drg." // use an externally created resource or a resource that was not available at the time of the 1st run`
-      description = "route through an externally created resource or a resource that was not available at the time of the 1st run"
-    }
-    */ 
-  ]
-  nat_gateway_route_rules      = [
-    /*
-    {
-      destination = "192.168.1.0/24"
-      destination_type = "CIDR_BLOCK"
-      network_entity_id = "drg" // use drg created by this module. Requires `create_drg = true`
-      description = "route through drg"
-    },
-    {
-      destination = "8.8.8.0/24"
-      destination_type = "CIDR_BLOCK"
-      network_entity_id = "nat_gateway" // use NAT gateway created by this module. Requires `nat_gateway_enabled = true`
-      description = "route through NAT gateway"
-    },
-    {
-      destination = "8.8.8.0/24"
-      destination_type = "CIDR_BLOCK"
-      network_entity_id = "ocid1.drg." // use an externally created resource or a resource that was not available at the time of the 1st run`
-      description = "route through an externally created resource or a resource that was not available at the time of the 1st run"
-    }
-    */
-  ]
+create_drg                   = false
+create_internet_gateway      = true
+create_nat_gateway           = true
+create_service_gateway       = true
+drg_display_name             = "drg"
+lockdown_default_seclist     = true
+vcn_cidr                     = "10.0.0.0/16"
+vcn_dns_label                = "vcn"
+vcn_name                     = "vcn"
+internet_gateway_route_rules = []
+nat_gateway_route_rules = [
+  /*
+  {
+    destination = "192.168.1.0/24"
+    destination_type = "CIDR_BLOCK"
+    network_entity_id = "drg"
+    description = "route through drg"
+  },
+  {
+    destination = "172.16.1.0/24"
+    destination_type = "CIDR_BLOCK"
+    network_entity_id = "drg"
+    description = "route through drg"
+  },
+  {
+    destination = "172.16.2.0/24"
+    destination_type = "CIDR_BLOCK"
+    network_entity_id = "ocid1.drg.oc1.ap-sydney-1.aaaaaaaavwcbavgceg4rsrhe6wy7gwe6azxlueqhw4o7cug6smltapurwisa"
+    description = "route through drg"
+  }    
+*/
+]
+vcn_tags = {
+  environment = "dev"
+  role        = "hub"  
 }
+
+# subnets
+netnum = {
+    bastion  = 0
+    operator = 1
+}
+
+newbits = {
+    bastion  = 14
+    operator = 14
+}
+
+# ssh keys
+ssh_private_key_path = ""
+ssh_public_key       = ""
+ssh_public_key_path  = ""
 
 # bastion
-
-oci_base_bastion = {
-  availability_domain  = 1
-  bastion_access        = "ANYWHERE"
-  bastion_enabled       = true
-  bastion_image_id      = "Autonomous"
-  bastion_operating_system_version = "7.9"  
-  bastion_shape = {
-    # shape = "VM.Standard.E2.2"
-    shape="VM.Standard.E3.Flex",
-    ocpus=1,
-    memory=4,
-    boot_volume_size=50
-  }
-  bastion_state         = "RUNNING"  
-  bastion_upgrade       = true
-  netnum                = 0
-  newbits               = 14
-  notification_enabled  = false
-  notification_endpoint = ""
-  notification_protocol = "EMAIL"
-  notification_topic    = "bastion"
-  ssh_private_key_path  = ""
-  ssh_public_key        = ""
-  ssh_public_key_path   = ""
-  tags = {
-    department  = "finace"
-    environment = "dev"
-    role        = "bastion"
-  }
-  timezone              = "Australia/Sydney"
+create_bastion                   = true
+bastion_availability_domain      = 1
+bastion_access                   = "ANYWHERE"
+bastion_image_id                 = "Autonomous"
+bastion_operating_system_version = "7.9"
+bastion_shape = {
+  shape            = "VM.Standard.E4.Flex",
+  ocpus            = 1,
+  memory           = 4,
+  boot_volume_size = 50
+}
+bastion_state                 = "RUNNING"
+bastion_timezone              = "Australia/Sydney"
+bastion_type                  = "public"
+bastion_upgrade               = false
+bastion_notification          = false
+bastion_notification_endpoint = ""
+bastion_notification_protocol = "EMAIL"
+bastion_notification_topic    = "bastion"
+bastion_tags = {
+  environment = "dev"
+  role        = "bastion"
 }
 
-# operator
-oci_base_operator = {
-  availability_domain       = 1
-  operator_enabled          = true
-  operator_image_id         = "Oracle"
-  operator_shape = {
-    # shape = "VM.Standard.E2.2"
-    shape="VM.Standard.E3.Flex",
-    ocpus=1,
-    memory=4,
-    boot_volume_size=50
-  }
-  operating_system_version  = "8"
-  operator_upgrade          = false
-  enable_instance_principal = true
-  netnum                    = 1
-  newbits                   = 14
-  notification_enabled      = false
-  notification_endpoint     = ""
-  notification_protocol     = "EMAIL"
-  notification_topic        = "operator"
-  ssh_private_key_path      = ""
-  ssh_public_key            = ""
-  ssh_public_key_path       = ""
-  tags = {
-    department  = "finance"
-    environment = "dev"
-    role        = "operator"
-  }
 
-  timezone = "Australia/Sydney"
+# operator
+create_operator              = true
+operator_availability_domain = 1
+operator_image_id            = "Oracle"
+operator_instance_principal  = true
+operator_nsg_ids             = []
+operator_os_version          = "8"
+operator_shape = {
+  shape            = "VM.Standard.E4.Flex",
+  ocpus            = 1,
+  memory           = 4,
+  boot_volume_size = 50
+}
+operator_state                 = "RUNNING"
+operator_timezone              = "Australia/Sydney"
+operator_upgrade               = false
+operator_notification_enabled  = false
+operator_notification_endpoint = ""
+operator_notification_protocol = "EMAIL"
+operator_notification_topic    = "operator"
+operator_tags = {
+  environment = "dev"
+  role        = "operator"
 }

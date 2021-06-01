@@ -6,8 +6,8 @@
 
 :uri-repo: https://github.com/oracle/terraform-oci-base
 
-:uri-rel-file-base: link:{uri-repo}/blob/master
-:uri-rel-tree-base: link:{uri-repo}/tree/master
+:uri-rel-file-base: link:{uri-repo}/blob/main
+:uri-rel-tree-base: link:{uri-repo}/tree/main
 
 :uri-docs: {uri-rel-file-base}/docs
 
@@ -43,18 +43,14 @@ After you enable this feature, the operator host has privileges to manage all re
 
 You can also turn on and off the feature at any time without impact on the operator host.
 
-To enable, set enable_instance_principal in oci_base_operator to true:
+To enable, set `operator_instance_principal` to `true`:
 
 [source,hcl]
 ----
-oci_base_operator = {
-  ....
-  enable_instance_principal = true
-  ....
-}
+operator_instance_principal = true
 ----
 
-and verify:
+Run `terraform apply` again and verify:
 
 [source,bash]
 ----
@@ -65,18 +61,14 @@ You should be able to see a list of VCNs created in the compartment.
 
 ==== Disabling instance_principal on the operator host
 
-To disable, set enable_instance_principal in oci_base_operator to false:
+To disable, set `operator_instance_principal` to `false`:
 
 [source,hcl]
 ----
-oci_base_operator = {
-  ....
-  enable_instance_principal = false
-  ....
-}
+operator_instance_principal = false
 ----
 
-. Run terraform apply again:
+Run terraform apply again:
 
 [source,bash]
 ----

@@ -1,4 +1,4 @@
-# Copyright 2017, 2019, Oracle Corporation and/or affiliates.  All rights reserved.
+# Copyright 2017, 2021, Oracle Corporation and/or affiliates.  All rights reserved.
 # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl/
 
 locals {
@@ -21,58 +21,60 @@ locals {
   }
 
   oci_base_vcn = {
-    internet_gateway_enabled = var.internet_gateway_enabled
-    nat_gateway_enabled      = var.nat_gateway_enabled
-    service_gateway_enabled  = var.service_gateway_enabled
-    tags                     = var.tags["vcn"]
+    internet_gateway_enabled = var.create_internet_gateway
+    nat_gateway_enabled      = var.create_nat_gateway
+    service_gateway_enabled  = var.create_service_gateway
+    tags                     = var.vcn_tags
     vcn_cidr                 = var.vcn_cidr
     vcn_dns_label            = var.vcn_dns_label
     vcn_name                 = var.vcn_name
   }
 
   oci_base_bastion = {
-    availability_domains  = var.availability_domains["bastion"]
-    availability_domain   = var.availability_domains["bastion"]
-    bastion_enabled       = var.bastion_enabled
-    bastion_access        = var.bastion_access
-    bastion_image_id      = var.bastion_image_id
-    bastion_shape         = var.bastion_shape
-    bastion_upgrade       = var.bastion_package_upgrade
-    netnum                = var.netnum["bastion"]
-    newbits               = var.newbits["bastion"]
-    notification_enabled  = var.bastion_notification_enabled
+    bastion_enabled                  = var.create_bastion
+    bastion_image_id                 = var.bastion_image_id
+    bastion_operating_system_version = var.bastion_operating_system_version
+    bastion_shape                    = var.bastion_shape
+    bastion_state                    = var.bastion_state
+    bastion_upgrade                  = var.bastion_upgrade
+    timezone                         = var.bastion_timezone
+
+    ssh_public_key      = var.ssh_public_key
+    ssh_public_key_path = var.ssh_public_key_path
+
+    notification_enabled  = var.bastion_notification
     notification_endpoint = var.bastion_notification_endpoint
     notification_protocol = var.bastion_notification_protocol
     notification_topic    = var.bastion_notification_topic
-    ssh_private_key_path  = var.ssh_private_key_path
-    ssh_public_key_path   = var.ssh_public_key_path
-    timezone              = var.bastion_timezone
-    use_autonomous        = var.bastion_use_autonomous
-    tags = {
-      role = "bastion" 
-    }    
+
+    tags = var.bastion_tags
   }
 
   oci_base_operator = {
-    availability_domains      = var.availability_domains["operator"]
-    availability_domain       = var.availability_domains["operator"]
-    operator_enabled          = var.operator_enabled
-    operator_image_id         = "NONE"
-    operator_shape            = var.operator_shape
-    operator_upgrade          = var.operator_package_upgrade
-    enable_instance_principal = var.enable_instance_principal
-    netnum                    = var.netnum["operator"]
-    newbits                   = var.newbits["operator"]
-    notification_enabled      = var.operator_notification_enabled
-    notification_endpoint     = var.operator_notification_endpoint
-    notification_protocol     = var.operator_notification_protocol
-    notification_topic        = var.operator_notification_topic
-    ssh_private_key_path      = var.ssh_private_key_path
-    ssh_public_key_path       = var.ssh_public_key_path
-    timezone                  = var.operator_timezone
-    tags = {
-      role = "operator" 
-    }    
+    availability_domain = var.operator_availability_domain
+    nat_route_id        = module.vcn.nat_route_id
+    netnum              = var.netnum["operator"]
+    newbits             = var.newbits["operator"]
+    vcn_id              = module.vcn.vcn_id
+
+    operator_enabled            = var.create_operator
+    operator_image_id           = var.operator_image_id
+    operator_instance_principal = var.operator_instance_principal
+    # operator_nsg_ids            = var.operator_nsg_ids
+    operating_system_version = var.operator_os_version
+    operator_shape           = var.operator_shape
+    # operator_state = var.operator_state
+    timezone            = var.operator_timezone
+    operator_upgrade    = var.operator_upgrade
+    ssh_public_key      = var.ssh_public_key
+    ssh_public_key_path = var.ssh_public_key_path
+
+    notification_enabled  = var.operator_notification
+    notification_endpoint = var.operator_notification_endpoint
+    notification_protocol = var.operator_notification_protocol
+    notification_topic    = var.operator_notification_topic
+
+    tags = var.operator_tags
   }
 
   db_identity = {
@@ -82,7 +84,7 @@ locals {
 
   db_oci_general = {
     ad_names            = module.base.ad_names
-    availability_domain = var.availability_domains["db"]
+    availability_domain = 1
     label_prefix        = var.label_prefix
     region              = var.region
   }
@@ -93,7 +95,7 @@ locals {
 
   db_network = {
     ig_route_id             = module.base.ig_route_id
-    service_gateway_enabled = var.service_gateway_enabled
+    service_gateway_enabled = var.create_service_gateway
     nat_route_id            = module.base.nat_route_id
     netnum                  = var.netnum
     newbits                 = var.newbits

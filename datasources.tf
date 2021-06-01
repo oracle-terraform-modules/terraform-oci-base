@@ -1,8 +1,8 @@
-# Copyright 2017, 2019, Oracle Corporation and/or affiliates.  All rights reserved.
+# Copyright 2017, 2021, Oracle Corporation and/or affiliates.  All rights reserved.
 # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl/
 
 data "oci_identity_availability_domains" "ad_list" {
-  compartment_id = var.oci_base_provider.tenancy_id
+  compartment_id = var.tenancy_id
 }
 
 data "template_file" "ad_names" {
@@ -11,7 +11,7 @@ data "template_file" "ad_names" {
 }
 
 data "oci_identity_tenancy" "tenancy" {
-  tenancy_id = var.oci_base_provider.tenancy_id
+  tenancy_id = var.tenancy_id
 }
 
 # get the tenancy's home region

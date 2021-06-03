@@ -1,0 +1,19 @@
+tenancy_ocid = ""
+compartment_ocid = ""
+log_is_enabled = false
+log_retention_duration = 30
+log_group_freeform_tags = {
+  "Environment" = "Dev"
+}
+
+servicelogdefinition = {
+    #vcnlog = { loggroup = "vcnloggroup",  service = "flowlogs" ,resource="PubSubnet"}
+    #vcnlog2 = { loggroup = "vcnloggroup",  service = "flowlogs" ,resource="logsubnet"}
+    #oslog = { loggroup = "objloggroup",  service = "objectstorage" ,resource = "Logbucket" }
+    #oslog2 = { loggroup = "objloggroup",  service = "objectstorage" ,resource = "Logbucket2" }
+    #functionlog = {loggroup = "funcloggroup",service="functions",resource = "LogFunction"}
+    #apilog = { loggroup = "apiloggroup", service = "apigateway",resource="testdepl"}
+    #lblog = {loggroup="lbloggroup",service="loadbalancer",resource="testlb"}
+    #eventlog = {loggroup="eventloggroup",service = "cloudevents",resource="computecreation"}
+    #vpnlog ={loggroup="vpnloggroup",service="oci_c3_vpn",resource="testlogvpn"}
+  }

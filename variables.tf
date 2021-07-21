@@ -33,6 +33,7 @@ variable "oci_base_vcn" {
     internet_gateway_enabled     = bool
     lockdown_default_seclist     = bool
     nat_gateway_enabled          = bool
+    nat_gateway_public_ip_id     = string
     service_gateway_enabled      = bool
     tags                         = map(any)
     vcn_cidr                     = string
@@ -48,6 +49,7 @@ variable "oci_base_vcn" {
     internet_gateway_enabled     = true
     lockdown_default_seclist     = true
     nat_gateway_enabled          = true
+    nat_gateway_public_ip_id     = "none"
     service_gateway_enabled      = true
     tags                         = null
     vcn_cidr                     = "10.0.0.0/16"

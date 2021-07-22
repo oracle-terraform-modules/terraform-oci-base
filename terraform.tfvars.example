@@ -23,6 +23,7 @@ oci_base_vcn = {
   internet_gateway_enabled     = true
   lockdown_default_seclist     = true
   nat_gateway_enabled          = true
+  nat_gateway_public_ip_id     = "none"  
   service_gateway_enabled      = true
   tags = {
     department  = "finance"

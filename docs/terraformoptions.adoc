@@ -114,6 +114,11 @@ Configuration Terraform Options:
 |true/false
 |true
 
+|`nat_gateway_public_ip_id`
+|OCID of reserved IP address for NAT gateway. The reserved public IP address needs to be manually created. The default value of "none" will select a public IP address from the Oracle pool.
+|
+|none
+
 |`service_gateway_enabled`
 |Whether to create a Service Gateway to use Oracle Services.
 |true/false

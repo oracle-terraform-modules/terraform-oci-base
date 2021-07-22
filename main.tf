@@ -3,7 +3,7 @@
 
 module "vcn" {
   source  = "oracle-terraform-modules/vcn/oci"
-  version = "2.2.0"
+  version = "2.3.0"
 
   # provider parameters
   region = var.oci_base_provider.region
@@ -19,6 +19,7 @@ module "vcn" {
   internet_gateway_enabled = var.oci_base_vcn.internet_gateway_enabled
   lockdown_default_seclist = var.oci_base_vcn.lockdown_default_seclist
   nat_gateway_enabled      = var.oci_base_vcn.nat_gateway_enabled
+  nat_gateway_public_ip_id = var.oci_base_vcn.nat_gateway_public_ip_id
   service_gateway_enabled  = var.oci_base_vcn.service_gateway_enabled
   vcn_cidr                 = var.oci_base_vcn.vcn_cidr
   vcn_dns_label            = var.oci_base_vcn.vcn_dns_label

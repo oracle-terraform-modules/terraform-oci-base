@@ -7,6 +7,9 @@ All notable changes to this project are documented in this file.
 
 The format is based on {uri-changelog}[Keep a Changelog].
 
+== 2.3.1 (July 22, 2021)
+* Upgraded module to use operator module 2.2.0 so we can control the state of the operator instance without having to destroy it.
+
 == 2.3.0 (July 21, 2021)
 * Upgraded module to use VCN module 2.3.0 so we can use reserved public IP address for the NAT Gateway
 

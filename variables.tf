@@ -124,6 +124,7 @@ variable "oci_base_operator" {
     operator_enabled          = bool
     operator_image_id         = string
     operator_shape            = map(any)
+    operator_state            = string
     operating_system_version  = string
     operator_upgrade          = bool
     enable_instance_principal = bool
@@ -151,6 +152,7 @@ variable "oci_base_operator" {
       memory           = 4,
       boot_volume_size = 50
     }
+    operator_state            = "RUNNING"
     operating_system_version  = "8"
     operator_upgrade          = true
     enable_instance_principal = false

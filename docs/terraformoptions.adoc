@@ -422,6 +422,11 @@ tags = {
   boot_volume_size=50
 }`
 
+|`operator_state`
+|The state of the operator instance whether `RUNNING` or `STOPPED`. 
+| `RUNNING`/`STOPPED`
+|`RUNNING`
+
 |`operating_system_version`
 |The Oracle Linux version.
 |"8"

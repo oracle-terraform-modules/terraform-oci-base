@@ -8,7 +8,7 @@ All notable changes to this project are documented in this file.
 The format is based on {uri-changelog}[Keep a Changelog].
 
 == 2.3.0 (July 21, 2021)
-* Added support for reserved public IP address for NAT gateway
+* Upgraded module to use VCN module 2.3.0 so we can use reserved public IP address for the NAT Gateway
 
 == 2.2.1 (May 11, 2021)
 * Upgraded bastion module to v2.2.1 so its state and OS version can be parameterized

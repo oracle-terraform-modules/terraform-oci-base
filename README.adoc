@@ -27,7 +27,7 @@
 :uri-oracle: https://www.oracle.com
 :uri-prereqs: {uri-docs}/prerequisites.adoc
 :uri-quickstart: {uri-docs}/quickstart.adoc
-:uri-reuse-module: {uri-rel-tree-base}/examples/db
+:uri-reuse-module: {uri-rel-tree-base}/examples/database
 :uri-terraform: https://www.terraform.io
 :uri-terraform-cidrsubnet-deconstructed: http://blog.itsjustcode.net/blog/2017/11/18/terraform-cidrsubnet-deconstructed/
 :uri-terraform-hashircorp-examples: https://github.com/hashicorp/terraform-guides/tree/master/infrastructure-as-code/terraform-0.12-examples
